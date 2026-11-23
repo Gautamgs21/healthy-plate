@@ -171,7 +171,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
   -webkit-backdrop-filter:blur(16px);
   border-top:1px solid var(--line);
   padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
-  display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:4px;
 }
 .tabs button{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
@@ -551,6 +551,36 @@ body[data-sync="error"] #acctBtn::after{background:var(--danger)}
 .btn-block{width:100%;height:42px}
 .lab-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .lab-list{max-height:320px;overflow:auto;margin-top:6px}
+
+/* ---------- Dashboard ---------- */
+.dash{display:grid;gap:10px}.dash .card{margin-bottom:0}
+.dh{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:10px 2px 0;font-weight:700}
+.dh-note{margin:0;font-size:.78rem}.mute{color:var(--mute)}.bad{color:var(--danger);font-weight:700}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+.ev summary{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;list-style:none;min-height:56px}
+.ev summary::-webkit-details-marker{display:none}
+.ev-ic{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.ev-t{flex:1;min-width:0;display:flex;flex-direction:column;font-size:.9rem}.ev-t small{color:var(--mute);font-size:.76rem;margin-top:2px;overflow-wrap:anywhere}
+.chv{transition:transform .2s;color:var(--mute);flex:none}.ev[open]>summary .chv{transform:rotate(180deg)}
+.ev-b{padding:2px 14px 14px;font-size:.84rem;border-top:1px solid var(--line)}.ev-b p{margin:10px 0 0}
+.ev-b ul,.hc-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.ev-b li,.hc-list li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.82rem}
+.ev-b .btn-ghost{margin-top:12px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 10px}
+.tile{background:var(--surface-2);border-radius:var(--radius-sm);padding:10px 11px}.tile b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}.tile span{font-size:.72rem;color:var(--mute)}
+.rec{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:10px 12px;font-size:.84rem;margin-top:10px;line-height:1.45}.rec.warn{border-color:var(--amber-line);background:var(--amber-soft)}
+.seg{display:inline-flex;padding:2px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line)}.seg button{background:none;border:0;padding:5px 14px;border-radius:7px;font-size:.78rem;font-weight:600;color:var(--mute)}.seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+.chart{width:100%;height:auto;display:block}.chart .gl{stroke:var(--line);stroke-width:1}.chart .ax{fill:var(--mute);font-size:9px}.chart .bd{fill:var(--accent);opacity:.12}.chart .tl{stroke:var(--amber-line);stroke-width:1.2;stroke-dasharray:4 3}.chart .tt{fill:var(--amber)}
+.chart-u{font-size:.72rem;color:var(--mute);text-align:center;margin-top:2px}
+.hc-open{width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit}.hc-open:hover{border-color:var(--line-strong)}
+#hc{position:fixed;inset:0;z-index:70;background:rgba(10,14,12,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:12px}
+.hc-box{background:var(--surface);border:1px solid var(--line);border-radius:18px;width:min(980px,94vw);height:75vh;overflow:auto;padding:16px;box-shadow:var(--shadow-md)}
+.hc-grid{display:grid;gap:12px;grid-template-columns:1fr}@media(min-width:760px){.hc-grid{grid-template-columns:1fr 1fr}}
+.hcc{border:1px solid var(--line);border-radius:var(--radius-md);padding:12px;min-width:0}.hcc h4{margin:0 0 8px;font-size:.88rem}
+.hc-sum{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}.hc-sum div{background:var(--surface-2);border-radius:8px;padding:8px 10px}.hc-sum small{display:block;color:var(--mute);font-size:.7rem}.hc-sum b{font-size:.98rem}
+#ml{position:fixed;inset:0;z-index:65;background:rgba(10,14,12,.52);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center}@media(min-width:640px){#ml{align-items:center;padding:16px}}
+.tbl-wrap{overflow-x:auto}.mt-tbl{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:8px}.mt-tbl th{text-align:left;color:var(--mute);font-weight:600;padding:5px 8px 5px 0;white-space:nowrap}.mt-tbl td{padding:6px 8px 6px 0;border-top:1px solid var(--line);vertical-align:top}
+.tabs{grid-template-columns:repeat(6,1fr)!important}.tabs button span{font-size:.64rem}
 </style>
 </head>
 <body>
@@ -579,6 +609,7 @@ body[data-sync="error"] #acctBtn::after{background:var(--danger)}
 
 <main class="shell">
   <nav class="tabs" role="tablist">
+    <button data-t="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><span>Dashboard</span></button>
     <button data-t="shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span>Groceries</span></button>
     <button data-t="meals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg><span>Meals</span></button>
     <button data-t="cook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg><span>Cook</span></button>
@@ -802,7 +833,7 @@ const SYNC={
   }
 };
 const now=new Date().getDay();
-let day=now,tab="meals",famOpen=false,cookAllOpen=false,stockFilter="";
+let day=now,tab="dash",famOpen=false,cookAllOpen=false,stockFilter="";
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -1189,6 +1220,34 @@ Estimate (not retrieved)~ഏകദേശ കണക്ക് (ലഭിച്ച�
 Retrieved:~ലഭിച്ചത്:
 Not retrieved (estimate only):~ലഭിക്കാത്തത് (ഏകദേശ കണക്ക് മാത്രം):
 Source:~ഉറവിടം:
+Dashboard~ഡാഷ്ബോർഡ്
+Upcoming events~വരാനിരിക്കുന്ന കാര്യങ്ങൾ
+Statistics~കണക്കുകൾ
+Grocery Purchase~പലചരക്ക് വാങ്ങൽ
+Medicine Purchase~മരുന്ന് വാങ്ങൽ
+Meal Preparation~ഭക്ഷണം തയ്യാറാക്കൽ
+Exercises~വ്യായാമങ്ങൾ
+Health Check-ups~ആരോഗ്യ പരിശോധനകൾ
+Calorie Statistics~കലോറി കണക്കുകൾ
+Physical Statistics~ശാരീരിക കണക്കുകൾ
+Health Check Statistics~ആരോഗ്യ പരിശോധന കണക്കുകൾ
+Medicine Statistics~മരുന്ന് കണക്കുകൾ
+Log weight~ഭാരം രേഖപ്പെടുത്തുക
+View complete medication list~മുഴുവൻ മരുന്ന് പട്ടിക കാണുക
+Calories burned today~ഇന്ന് കത്തിച്ച കലോറി
+Calorie intake today~ഇന്നത്തെ കലോറി ഉപഭോഗം
+Remaining allowance~ബാക്കിയുള്ള അനുവദനീയ കലോറി
+Current weight~ഇപ്പോഴത്തെ ഭാരം
+Target weight~ലക്ഷ്യ ഭാരം
+Latest~ഏറ്റവും പുതിയത്
+Previous~മുമ്പത്തേത്
+Edit~തിരുത്തുക
+Update result~ഫലം പുതുക്കുക
+Personal Health Monitoring Checklist~വ്യക്തിഗത ആരോഗ്യ നിരീക്ഷണ പട്ടിക
+Recommended frequency~ശുപാർശ ചെയ്യുന്ന ഇടവേള
+Preferred for~ഉപയോഗം
+Last recorded~അവസാനം രേഖപ്പെടുത്തിയത്
+Target weight (kg)~ലക്ഷ്യ ഭാരം (കിലോ)
 Could not refresh prices. Showing the last saved prices.~വിലകൾ പുതുക്കാനായില്ല. അവസാനം സേവ് ചെയ്ത വിലകൾ കാണിക്കുന്നു.
 for Sunday lunch~ഞായറാഴ്ച ഉച്ചയ്ക്ക്
 bought on Thursday~വ്യാഴാഴ്ച വാങ്ങിയത്
@@ -1584,7 +1643,7 @@ function renderHealth(){
   h+=`<div class="card"><div class="card-hd"><h3>${SVG.pill} Medication today</h3></div>`;
   if(!meds.length)h+=`<p style="color:var(--mute);font-size:.85rem;margin:0 0 8px">No medicines added yet. Add the ones your doctor prescribed below.</p>`;
   ["Morning","Afternoon","Night"].forEach(s=>{
-    const l=meds.filter(m=>m.s===s);if(!l.length)return;
+    const l=meds.filter(m=>m.s===s&&m.st!=="stopped");if(!l.length)return;
     h+=`<div class="slot-lbl">${s}</div>`;
     l.forEach(m=>{h+=`<div class="med-row"><label><input type="checkbox" data-m="${m.id}" ${L.taken[m.id]?"checked":""}><span>${esc(m.n)}${m.d?` <span style="color:var(--mute);font-weight:400">(${esc(m.d)})</span>`:""}</span></label><button class="btn-del" data-del="${m.id}" aria-label="Remove ${esc(m.n)}">×</button></div>`});
   });
@@ -1672,12 +1731,12 @@ function checkPending(){
 
 /* Core Render & Event Wiring */
 function render(){
-  $("#title").textContent=tab==="inv"?"Kitchen stock":tab==="health"?"Exercise & medication":(day===now?"Today, "+D[day]:D[day]);
-  $("#days").style.display=(tab==="inv"||tab==="health")?"none":"";
+  $("#title").textContent=tab==="dash"?"Dashboard":tab==="inv"?"Kitchen stock":tab==="health"?"Exercise & medication":(day===now?"Today, "+D[day]:D[day]);
+  $("#days").style.display=(tab==="inv"||tab==="health"||tab==="dash")?"none":"";
   document.querySelectorAll(".days button").forEach(b=>b.classList.toggle("on",+b.dataset.d===day));
   document.querySelectorAll(".tabs button").forEach(b=>{b.classList.toggle("on",b.dataset.t===tab);b.setAttribute("role","tab")});
-  ({shop:renderShop,meals:renderMeals,cook:renderCook,inv:renderInv,health:renderHealth})[tab]();
-  if(tab!=="health")addFam();
+  ({dash:renderDash,shop:renderShop,meals:renderMeals,cook:renderCook,inv:renderInv,health:renderHealth})[tab]();
+  if(tab!=="health"&&tab!=="dash")addFam();
   trDom();
 }
 function setLang(l){
@@ -1732,6 +1791,7 @@ ${reg?'<label class="fld"><span>Invite code (only if you were given one)</span><
           invite:reg?el.querySelector("#a-inv").value:""
         }});
         SYNC.setSession(r);
+        tab="dash";
         el.remove();
         boot(true);
         SYNC.sync().then(ch=>{if(ch)refreshAll();checkPending()});
@@ -1759,6 +1819,7 @@ ${fl("p-age","Age",p.age,"number","min=1 max=120 inputmode=numeric")}
 <label class="fld"><span>Sex</span><select id="p-sex">${sex}</select></label>
 ${fl("p-h","Height (cm)",p.height,"number","min=50 max=250 step=any")}
 ${fl("p-w","Weight (kg)",p.weight,"number","min=10 max=400 step=any")}
+${fl("p-tw","Target weight (kg)",p.tw,"number","min=10 max=400 step=any")}
 ${fl("p-k","Daily calories (kcal)",p.kcal||1600,"number","min=800 max=4000")}
 ${fl("p-dr","Doctor",p.doctor,"text","maxlength=80")}
 ${fl("p-di","Dietitian",p.dietitian,"text","maxlength=80",1)}
@@ -1775,11 +1836,11 @@ ${fl("p-notes","Other notes (allergies etc.)",p.notes,"text","maxlength=300",1)}
   $("#p-save").onclick=()=>{
     store.set("profile",{
       name:$("#p-name").value.trim(),age:num($("#p-age").value),sex:$("#p-sex").value,
-      height:num($("#p-h").value),weight:num($("#p-w").value),kcal:num($("#p-k").value)||1600,
+      height:num($("#p-h").value),weight:num($("#p-w").value),tw:num($("#p-tw").value),kcal:num($("#p-k").value)||1600,
       doctor:$("#p-dr").value.trim(),dietitian:$("#p-di").value.trim(),
       conditions:$("#p-cond").value.trim(),notes:$("#p-notes").value.trim()
     });
-    applyProfile();close();toast("Saved");
+    logWeight(num($("#p-w").value));applyProfile();close();toast("Saved");
   };
   $("#p-sync").onclick=async()=>{
     SYNC.state("saving");
@@ -1791,7 +1852,50 @@ ${fl("p-notes","Other notes (allergies etc.)",p.notes,"text","maxlength=300",1)}
 }
 
 /* ---------- Health tests (lab results) ---------- */
-const LABS=[["HbA1c","%"],["Fasting glucose","mg/dL"],["Post-meal glucose","mg/dL"],["TSH","mIU/L"],["Free T4","ng/dL"],["Total cholesterol","mg/dL"],["LDL","mg/dL"],["HDL","mg/dL"],["Triglycerides","mg/dL"],["Creatinine","mg/dL"],["Blood pressure","mmHg"],["Weight","kg"],["Other",""]];
+/* ---------- Master investigation list (single source for Health tab + Dashboard) ---------- */
+/* [category, name, unit, recommended frequency, preferred for, due-days (0 = none), type n=number bp=blood pressure r=report g=group, low, high, parent] */
+const INV=[
+["blood","Fasting Blood Sugar (FBS)","mg/dL","Daily / as advised","Diabetes",0,"n",70,99],
+["blood","Post-Prandial Blood Sugar (PPBS)","mg/dL","As advised","Diabetes",0,"n",null,139],
+["blood","HbA1c","%","Every 3 months","Diabetes",90,"n",4,5.6],
+["blood","Lipid Profile","","Every 6–12 months","Cholesterol, Heart",180,"g"],
+["blood","Total Cholesterol","mg/dL","","",0,"n",null,199,"Lipid Profile"],
+["blood","LDL","mg/dL","","",0,"n",null,99,"Lipid Profile"],
+["blood","HDL","mg/dL","","",0,"n",40,null,"Lipid Profile"],
+["blood","Triglycerides","mg/dL","","",0,"n",null,149,"Lipid Profile"],
+["blood","TSH","mIU/L","Every 6–12 months if stable","Thyroid",180,"n",0.4,4],
+["blood","Serum Creatinine","mg/dL","Every 6–12 months","Kidney, Diabetes",180,"n",0.6,1.3],
+["blood","eGFR","mL/min/1.73m²","Every 6–12 months","Kidney, Diabetes",180,"n",90,null],
+["blood","Urine Albumin-Creatinine Ratio (UACR)","mg/g","Annually","Kidney, Diabetes",365,"n",null,29.9],
+["blood","Liver Function Test (LFT)","","Annually","Liver",365,"g"],
+["blood","ALT (SGPT)","U/L","","",0,"n",7,56,"Liver Function Test (LFT)"],
+["blood","AST (SGOT)","U/L","","",0,"n",10,40,"Liver Function Test (LFT)"],
+["blood","ALP","U/L","","",0,"n",44,147,"Liver Function Test (LFT)"],
+["blood","Total Bilirubin","mg/dL","","",0,"n",0.1,1.2,"Liver Function Test (LFT)"],
+["blood","Vitamin D (25-OH)","ng/mL","As indicated / after treatment","Vitamin D deficiency",0,"n",30,100],
+["blood","Vitamin B12","pg/mL","Annually or as indicated","Vitamin B12 deficiency, Metformin use",365,"n",200,900],
+["blood","Complete Blood Count (CBC)","","Annually","General health",365,"g"],
+["blood","Hemoglobin","g/dL","","",0,"n",12,17.5,"Complete Blood Count (CBC)"],
+["blood","WBC Count","×10³/µL","","",0,"n",4,11,"Complete Blood Count (CBC)"],
+["blood","Platelet Count","×10³/µL","","",0,"n",150,450,"Complete Blood Count (CBC)"],
+["blood","Urine Routine Examination","","Annually / as indicated","Kidney, Urinary health",365,"r"],
+["heart","Blood Pressure","mmHg","Weekly / at clinic visits","Heart, Hypertension",7,"bp"],
+["heart","Resting ECG","","As clinically indicated","Heart conditions",0,"r"],
+["heart","2D Echocardiogram","","As clinically indicated","Heart structure and function",0,"r"],
+["heart","Treadmill Test (TMT)","","Only if indicated","Cardiac assessment",0,"r"],
+["eye","Comprehensive Eye Examination","","Annually","General eye health",365,"r"],
+["eye","Diabetic Retinal Examination","","Annually","Diabetes",365,"r"],
+["eye","Intraocular Pressure (IOP)","mmHg","As advised","Glaucoma",0,"n",10,21],
+["eye","Visual Acuity Test","","Annually","Vision",365,"r"],
+["lung","Spirometry / Pulmonary Function Test","","If indicated","Lung function, Asthma, COPD",0,"r"],
+["lung","Chest X-ray","","Only if indicated","Lung conditions",0,"r"],
+["lung","Oxygen Saturation (SpO₂)","%","When symptomatic / as advised","Respiratory health",0,"n",95,100],
+["other","Weight","kg","","",0,"n"],
+["other","Free T4","ng/dL","","",0,"n",0.8,1.8],
+["other","Other","","","",0,"r"]
+];
+const INVCAT={blood:"Routine Blood and Urine Investigations",heart:"Heart and Cardiovascular Monitoring",eye:"Eye Monitoring",lung:"Lung Monitoring",other:"Other measurements"};
+const LABS=INV.filter(x=>x[6]!=="g").map(x=>[x[1],x[2]]);
 function labCard(){
   const L=(store.get("labs").list||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(b.id||"").localeCompare(a.id||""));
   const latest={};L.forEach(x=>{if(!latest[x.test])latest[x.test]=x});
@@ -1833,6 +1937,168 @@ function wirePrices(){
     store.set("prices",{t:s0.t||new Date().toISOString(),p:p});
   });
 }
+
+/* ---------- Dashboard ---------- */
+const ALIAS={"fasting glucose":"Fasting Blood Sugar (FBS)","post-meal glucose":"Post-Prandial Blood Sugar (PPBS)","creatinine":"Serum Creatinine","blood pressure":"Blood Pressure","total cholesterol":"Total Cholesterol"};
+const canon=n=>{const k=String(n||"").trim().toLowerCase();if(ALIAS[k])return ALIAS[k];const r=INV.find(x=>x[1].toLowerCase()===k);return r?r[1]:String(n||"")};
+const allLabs=()=>(store.get("labs").list||[]);
+const recsOf=name=>allLabs().filter(x=>canon(x.test)===name).sort((a,b)=>(a.date||"").localeCompare(b.date||"")||(a.id||"").localeCompare(b.id||""));
+const numOf=v=>{const m=String(v==null?"":v).match(/-?\d+(?:\.\d+)?/);return m?parseFloat(m[0]):NaN};
+const fD=(s,y)=>{const d=new Date(s+"T00:00:00");return isNaN(d)?String(s||""):d.toLocaleDateString(lang==="ml"?"ml-IN":"en-GB",y?{day:"numeric",month:"short",year:"numeric"}:{day:"numeric",month:"short"})};
+const addDays=(s,n)=>{const d=new Date(s+"T00:00:00");d.setDate(d.getDate()+n);return d.toLocaleDateString("en-CA")};
+const dayDiff=(a,b)=>Math.round((new Date(a+"T00:00:00")-new Date(b+"T00:00:00"))/864e5);
+function wtList(){const m={};recsOf("Weight").forEach(x=>{const v=parseFloat(x.value);if(v>0&&x.date)m[x.date]={d:x.date,v:v}});return Object.values(m).sort((a,b)=>a.d.localeCompare(b.d))}
+function curWeight(){const w=wtList();return w.length?w[w.length-1].v:(+store.get("profile").weight||0)}
+function logWeight(w,date){w=parseFloat(w);if(!(w>0))return;date=date||dkey(0);const L=allLabs(),x=L.find(y=>canon(y.test)==="Weight"&&y.date===date);
+  if(x){if(parseFloat(x.value)===w)return;x.value=String(w)}else{const l=wtList();if(l.length&&l[l.length-1].v===w)return;L.push({id:"l"+Date.now(),test:"Weight",value:String(w),unit:"kg",date:date,note:"Logged"})}
+  store.set("labs",{list:L})}
+/* Energy per 100 g/ml (or per piece when the second number is 1), used with the ingredient amounts already stored for each dish */
+const EN={"Raw rice":[345,100],"Rolled oats / oats flour":[380,100],"Wheat atta":[340,100],"Ragi flour":[336,100],"Idiyappam flour":[360,100],"Urad dal":[340,100],"Green gram":[345,100],"Bengal gram":[360,100],"Black channa":[360,100],"Rajma":[340,100],"Mixed dal":[340,100],"Broken wheat":[340,100],"Corn":[86,100],"Fish":[115,100],"Chicken":[120,100],"Mutton":[150,100],"Curd":[60,100],"Buttermilk":[30,100],"Tomato":[18,100],"Beans":[31,100],"Bottle gourd":[14,100],"Ash gourd":[13,100],"Snake gourd":[18,100],"Ladies finger":[33,100],"Cabbage":[25,100],"Capsicum":[20,100],"Pumpkin":[26,100],"Onion":[40,100],"Garlic":[149,100],"Ginger":[80,100],"Green chilli":[40,100],"Cooking oil":[830,100],"Almonds":[580,100],"Walnuts":[650,100],"Unsalted mixed nuts":[600,100],"Papaya":[43,100],"Eggs":[17,1],"Cucumber":[45,1],"Lemon":[20,1],"Drumstick":[40,1],"Guava":[85,1],"Green apple":[90,1],"Whole-wheat bread":[1400,1],"Tea / coffee":[0,100]};
+function mealKcal(w,i){const m=M[w].m[i];let s=0;const add=(n,a)=>{const e=EN[n];if(e)s+=e[0]*a/e[1]};
+  m[2].forEach(k=>(U[k]?U[k].split(","):[]).forEach(x=>{const p=x.split(":");add(p[0],+p[1])}));
+  if(i===4){const fr={Guava:["Guava",1],Apple:["Green apple",1],Papaya:["Papaya",125]}[M[w].f];if(fr)add(fr[0],fr[1])}
+  return s}
+const EXMET={Walking:3.5,Yoga:2.5,Cycling:6,Strength:4,Other:4};
+function calStats(){const k=dkey(0),dn=store.get("done")[k]||{},target=+store.get("profile").kcal||1600,w=curWeight();let intake=0,rest=0,rec=0;
+  M[now].m.forEach((m,i)=>{const c=mealKcal(now,i);if(dn[i]&&dn[i].s===1){intake+=c;rec++}else if(!(dn[i]&&dn[i].s===0))rest+=c});
+  const ex=store.get("log-"+k).ex||[];let burned=null;if(w){burned=0;ex.forEach(e=>{burned+=(EXMET[e.a]||4)*w*e.m/60})}
+  return{intake:Math.round(intake),rest:Math.round(rest),rec:rec,burned:burned==null?null:Math.round(burned),target:target,w:w,ex:ex.length}}
+function calRec(s){const net=s.intake-(s.burned||0),left=s.target-net,mpk=s.w?3.5*s.w/60:0,walk=x=>mpk?" (about "+Math.ceil(x/mpk)+" min of brisk walking)":"";
+  if(!s.rec&&!s.ex)return "No meals or exercise recorded yet today. Mark meals as prepared in the Meals tab and log exercise in the Health tab to see your recommendation.";
+  if(net>s.target){const x=Math.round(net-s.target);return "You are "+x+" kcal over today's target. You need to burn another "+x+" kcal"+walk(x)+" or reduce your calorie intake by "+x+" kcal to remain within your daily calorie target."}
+  const proj=net+s.rest;
+  if(s.rest>0&&proj>s.target){const x=Math.round(proj-s.target);return "You have "+Math.round(left)+" kcal left, but the meals still planned for today add about "+s.rest+" kcal. You need to burn another "+x+" kcal"+walk(x)+" or reduce your planned intake by "+x+" kcal to remain within your daily calorie target."}
+  return "You are within your daily calorie target with "+Math.round(left)+" kcal left"+(s.rest>0?"; the remaining planned meals (about "+s.rest+" kcal) fit within it.":".")}
+
+/* Line chart (inline SVG, no library) */
+function lineChart(o){const W=340,H=200,L=40,R=10,T=12,B=28,S=o.series.filter(s=>s.pts.length);if(!S.length)return"";
+  const xs=[],ys=[];S.forEach(s=>s.pts.forEach(p=>{xs.push(p.t);ys.push(p.y)}));
+  (o.lines||[]).forEach(l=>ys.push(l.y));if(o.band){if(o.band[0]!=null)ys.push(o.band[0]);if(o.band[1]!=null)ys.push(o.band[1])}
+  let x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys);
+  if(x0===x1){x0-=432e5*2;x1+=432e5*2}if(y0===y1){y0-=1;y1+=1}const pad=(y1-y0)*.12;y0-=pad;y1+=pad;
+  const X=t=>L+(t-x0)/(x1-x0)*(W-L-R),Y=y=>T+(1-(y-y0)/(y1-y0))*(H-T-B),f=v=>+(+v).toFixed(Math.abs(v)<10?1:0);
+  let g="";for(let i=0;i<=4;i++){const v=y0+(y1-y0)*i/4,y=Y(v);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" class="gl"/><text x="'+(L-5)+'" y="'+(y+3)+'" text-anchor="end" class="ax">'+f(v)+'</text>'}
+  if(o.band){const a=o.band[0]!=null?o.band[0]:y0,b=o.band[1]!=null?o.band[1]:y1,ya=Y(Math.min(b,y1)),yb=Y(Math.max(a,y0));g+='<rect x="'+L+'" y="'+ya+'" width="'+(W-L-R)+'" height="'+Math.max(0,yb-ya)+'" class="bd"/>'}
+  (o.lines||[]).forEach(l=>{const y=Y(l.y);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" class="tl"/><text x="'+(W-R)+'" y="'+(y-3)+'" text-anchor="end" class="ax tt">'+esc(l.label)+'</text>'});
+  const tk=x0===x1?[x0]:[x0,(x0+x1)/2,x1];tk.forEach((t,i)=>{const d=new Date(t);g+='<text x="'+X(t)+'" y="'+(H-8)+'" text-anchor="'+(i===0?"start":i===2?"end":"middle")+'" class="ax">'+esc(d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"2-digit"}))+'</text>'});
+  S.forEach(s=>{if(s.pts.length>1)g+='<polyline fill="none" stroke="'+s.color+'" stroke-width="2" stroke-linejoin="round" points="'+s.pts.map(p=>X(p.t).toFixed(1)+","+Y(p.y).toFixed(1)).join(" ")+'"/>';
+    s.pts.forEach((p,i)=>{g+='<circle cx="'+X(p.t).toFixed(1)+'" cy="'+Y(p.y).toFixed(1)+'" r="'+(i===s.pts.length-1?4.5:3)+'" fill="'+(p.bad?"var(--danger)":s.color)+'"><title>'+esc(p.lab||"")+'</title></circle>'})});
+  return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(o.label||"Chart")+'">'+g+'</svg>'+(o.unit?'<div class="chart-u">'+esc(o.unit)+'</div>':"")}
+
+/* ----- Upcoming events ----- */
+const ICO={cart:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',pill:'<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/>',meal:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',run:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',test:'<path d="M14 2v6a2 2 0 0 0 .2.9l5.2 9.3A2 2 0 0 1 17.6 21H6.4a2 2 0 0 1-1.8-2.8l5.2-9.3A2 2 0 0 0 10 8V2"/><path d="M8.5 2h7"/>'};
+const ic=k=>'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+ICO[k]+'</svg>';
+const CHV='<svg class="chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+let evOpen={};
+const evCard=(id,k,title,sum,body)=>'<details class="ev" data-ev="'+id+'" '+(evOpen[id]?"open":"")+'><summary><span class="ev-ic">'+ic(k)+'</span><span class="ev-t"><b>'+title+'</b><small>'+sum+'</small></span>'+CHV+'</summary><div class="ev-b">'+body+'</div></details>';
+const li=(a,b)=>'<li><span>'+a+'</span><span class="mute">'+b+'</span></li>';
+function evGrocery(){const t=dkey(0);let d=t,n=0;while(n<8){const w=new Date(d+"T00:00:00").getDay();if(w===1||w===4)break;d=addDays(d,1);n++}
+  const w=new Date(d+"T00:00:00").getDay(),kind=w===1?"Monday main shop":"Thursday replenishment",L=buyData();
+  const sum=fD(d)+" · "+kind+" · "+(L.length?L.length+" items to buy":"stock is enough");
+  let b=L.length?'<ul>'+L.slice(0,10).map(x=>li(ico(x.n)+" "+esc(x.n),qtxt(x.b,x.u))).join("")+'</ul>'+(L.length>10?'<p class="mute">+ '+(L.length-10)+' more</p>':""):'<p class="mute">Nothing to buy. Your stock is enough for now.</p>';
+  return evCard("g","cart","Grocery Purchase",sum,b+'<button class="btn-ghost" data-go="shop">Open Groceries</button>')}
+function medsOf(){return(store.get("meds").list||[])}
+function evMedicine(){const act=medsOf().filter(m=>m.st!=="stopped"),t=dkey(0),rows=[];
+  act.forEach(m=>{if(+m.pk>0&&m.bd){rows.push({m:m,out:addDays(m.bd,Math.floor(+m.pk))})}});rows.sort((a,b)=>a.out.localeCompare(b.out));
+  if(!act.length)return evCard("m","pill","Medicine Purchase","No active medicines","<p class=\"mute\">No medicines added yet. Add them in the Health tab.</p>");
+  if(!rows.length)return evCard("m","pill","Medicine Purchase",act.length+" active medicines · no refill dates","<p class=\"mute\">Set the pack size and purchase date of each medicine in Medicine Statistics below to get refill reminders.</p>");
+  const f=rows[0],dl=dayDiff(f.out,t);
+  return evCard("m","pill","Medicine Purchase",esc(f.m.n)+(dl<0?" ran out "+(-dl)+" days ago":dl===0?" runs out today":" runs out in "+dl+" days"),'<ul>'+rows.map(r=>{const d=dayDiff(r.out,t);return li(esc(r.m.n)+(r.m.d?" ("+esc(r.m.d)+")":""),(d<0?"<b class=\"bad\">overdue</b> ":"")+"buy by "+fD(addDays(r.out,-3)))}).join("")+'</ul>')}
+function evMeals(){const k=dkey(0),dn=store.get("done")[k]||{},nm=new Date().getHours()*60+new Date().getMinutes();
+  const rows=M[now].m.map((m,i)=>({i:i,m:m,s:dn[i]?dn[i].s:null,up:MT[i]>nm})),nx=rows.find(r=>r.up&&r.s==null),pd=rows.filter(r=>!r.up&&r.s==null);
+  let sum;if(nx)sum=nx.m[0]+" · "+esc(nx.m[1]).slice(0,60);else if(pd.length)sum=pd.length+" meal"+(pd.length>1?"s":"")+" waiting for confirmation";else{const t=M[(now+1)%7].m[0];sum="All done today. Tomorrow "+t[0]+": "+esc(t[1])}
+  return evCard("p","meal","Meal Preparation",sum,'<ul>'+rows.map(r=>li('<b>'+r.m[0]+'</b> '+esc(r.m[1]),r.s===1?"prepared":r.s===0?"skipped":r.up?"upcoming":"confirm")).join("")+'</ul><button class="btn-ghost" data-go="meals">Open Meals</button>')}
+function evExercise(){const k=dkey(0),L=store.get("log-"+k),ex=L.ex||[],goal=store.get("goal").m||30,tot=ex.reduce((a,e)=>a+e.m,0),left=Math.max(0,goal-tot);
+  const wk=[];for(let o=0;o<7;o++){const l=store.get("log-"+dkey(o));wk.push((l.ex||[]).reduce((a,e)=>a+e.m,0))}
+  return evCard("x","run","Exercises",left>0?left+" min to reach today's goal of "+goal+" min":"Today's goal of "+goal+" min is done",
+   (ex.length?'<ul>'+ex.map(e=>li(esc(e.a),e.m+" min")).join("")+'</ul>':'<p class="mute">No exercise logged today.</p>')+'<p class="mute">Last 7 days: '+wk.reduce((a,b)=>a+b,0)+' min in total, '+wk.filter(v=>v>=goal).length+' day(s) at goal.</p><button class="btn-ghost" data-go="health">Log exercise</button>')}
+function dueList(){const t=dkey(0),due=[],none=[];
+  INV.filter(x=>!x[9]&&x[5]>0).forEach(x=>{const names=INV.filter(y=>y[9]===x[1]).map(y=>y[1]).concat([x[1]]);
+    let last="";names.forEach(n=>recsOf(n).forEach(r=>{if(r.date>last)last=r.date}));
+    if(last)due.push({n:x[1],last:last,due:addDays(last,x[5]),f:x[3]});else none.push({n:x[1],f:x[3]})});
+  due.sort((a,b)=>a.due.localeCompare(b.due));return{due:due,none:none,t:t}}
+function evHealth(){const D2=dueList(),t=D2.t,od=D2.due.filter(x=>x.due<t),soon=D2.due.filter(x=>x.due>=t&&dayDiff(x.due,t)<=30);
+  if(!D2.due.length&&!D2.none.length)return evCard("h","test","Health Check-ups","Nothing scheduled","<p class=\"mute\">No investigations with a recommended schedule.</p>");
+  const f=D2.due[0];let sum=f?esc(f.n)+(f.due<t?" overdue since "+fD(f.due):" due "+fD(f.due)):D2.none.length+" tests have no record yet";
+  if(od.length>1)sum=od.length+" check-ups overdue · "+sum;
+  const b=(D2.due.length?'<ul>'+D2.due.slice(0,10).map(x=>li(esc(x.n),(x.due<t?'<b class="bad">overdue</b> ':'')+fD(x.due,1))).join("")+'</ul>':"")+(D2.none.length?'<p class="mute" style="margin-top:10px"><b>Not recorded yet:</b> '+D2.none.map(x=>esc(x.n)+" ("+esc(x.f)+")").join("; ")+'</p>':"")+'<button class="btn-ghost" data-go="health">Add a result</button>';
+  return evCard("h","test","Health Check-ups",sum,b)}
+
+/* ----- Statistics ----- */
+let PHM="w";
+function bmiOf(w,h){return w>0&&h>0?w/Math.pow(h/100,2):0}
+function physCard(){const p=store.get("profile"),h=+p.height||0,tw=+p.tw||0,W=wtList(),cw=curWeight(),bmi=bmiOf(cw,h),tb=bmiOf(tw,h);
+  const first=W.length?W[0].v:cw;let prog="";if(cw&&tw&&first!==tw){const pc=Math.max(0,Math.min(100,(first-cw)/(first-tw)*100)),d=first-cw;prog='<div class="prog-track"><div class="prog-fill" style="width:'+pc+'%"></div></div><p class="mute" style="margin:6px 0 0">'+(d>=0?"Lost ":"Gained ")+Math.abs(d).toFixed(1)+" kg of "+Math.abs(first-tw).toFixed(1)+" kg planned · "+Math.round(pc)+"%</p>"}else if(!tw)prog='<p class="mute" style="margin:6px 0 0">Set a target weight in your profile to see progress.</p>';
+  const pts=W.map(x=>({t:new Date(x.d+"T00:00:00").getTime(),y:PHM==="w"?x.v:+bmiOf(x.v,h).toFixed(1),lab:fD(x.d,1)+": "+(PHM==="w"?x.v+" kg":bmiOf(x.v,h).toFixed(1))})).filter(p=>p.y>0);
+  const tl=PHM==="w"?(tw?[{y:tw,label:"Target "+tw}]:[]):(tb?[{y:+tb.toFixed(1),label:"Target "+tb.toFixed(1)}]:[]);
+  const ch=pts.length?lineChart({series:[{pts:pts,color:"var(--accent)"}],lines:tl,unit:PHM==="w"?"Weight (kg) by date":"BMI (kg/m²) by date",label:"Weight history"})+(PHM==="b"&&!h?"":""):'<p class="mute">'+(PHM==="b"&&!h?"Add your height in the profile to see BMI.":"No weight records yet. Log your weight below or in the profile.")+'</p>';
+  return '<div class="card"><div class="card-hd"><h3>Physical Statistics</h3></div><div class="stat-grid"><div class="tile"><b>'+(cw?cw+" kg":"–")+'</b><span>Current weight</span></div><div class="tile"><b>'+(bmi?bmi.toFixed(1):"–")+'</b><span>Current BMI'+(!h?" (add height)":"")+'</span></div><div class="tile"><b>'+(tw?tw+" kg":"–")+'</b><span>Target weight</span></div><div class="tile"><b>'+(tb?tb.toFixed(1):"–")+'</b><span>Target BMI</span></div></div>'+prog+
+   '<div class="seg" style="margin:12px 0 4px"><button data-ph="w" class="'+(PHM==="w"?"on":"")+'">Weight</button><button data-ph="b" class="'+(PHM==="b"?"on":"")+'">BMI</button></div>'+ch+
+   '<div class="form-row"><input class="ctrl" id="lw" type="number" inputmode="decimal" step="any" min="10" max="400" placeholder="Today\'s weight (kg)"><button class="btn-primary" id="lwb">Log weight</button></div></div>'}
+function calCard(){const s=calStats(),net=s.intake-(s.burned||0),left=s.target-net,pct=Math.max(0,Math.min(100,net/s.target*100)),over=net>s.target;
+  return '<div class="card"><div class="card-hd"><h3>Calorie Statistics</h3><span class="meta">Target '+s.target+' kcal</span></div><div class="stat-grid"><div class="tile"><b>'+(s.burned==null?"–":s.burned)+'</b><span>Calories burned today'+(s.burned==null?" (add weight)":"")+'</span></div><div class="tile"><b>'+s.intake+'</b><span>Calorie intake today</span></div><div class="tile"><b class="'+(over?"bad":"")+'">'+Math.round(net)+'</b><span>Net calories (intake − burned)</span></div><div class="tile"><b class="'+(left<0?"bad":"")+'">'+Math.round(left)+'</b><span>Remaining allowance</span></div></div><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%;'+(over?"background:var(--danger)":"")+'"></div></div><div class="rec'+(over||(s.rest>0&&net+s.rest>s.target)?" warn":"")+'">'+esc(calRec(s))+'</div><p class="mute" style="margin:8px 0 0;font-size:.74rem">Intake is estimated from the ingredients of the meals you marked as prepared (your chart portion). Burn is estimated from activity type, minutes and your weight.</p></div>'}
+function medCard(){const all=medsOf(),act=all.filter(m=>m.st!=="stopped"),cnt={};act.forEach(m=>{const k=m.n.toLowerCase();cnt[k]=(cnt[k]||0)+1});
+  return '<div class="card"><div class="card-hd"><h3>Medicine Statistics</h3><span class="meta">'+act.length+' active</span></div>'+(act.length?'<div class="tbl-wrap"><table class="mt-tbl"><tr><th>Medicine</th><th>Purpose</th><th>Dosage</th><th>Frequency</th><th>Timing</th><th>Status</th></tr>'+act.slice(0,6).map(m=>'<tr><td>'+esc(m.n)+'</td><td>'+esc(m.pu||"–")+'</td><td>'+esc(m.d||"–")+'</td><td>'+cnt[m.n.toLowerCase()]+'× daily</td><td>'+esc(m.t||m.s)+'</td><td>Active</td></tr>').join("")+'</table></div>':'<p class="mute">No medicines added yet. Add them in the Health tab.</p>')+(act.length>6?'<p class="mute">+ '+(act.length-6)+' more</p>':"")+'<button class="btn-ghost" id="medAll" style="margin-top:10px">View complete medication list</button></div>'}
+function hcCard(){const n=allLabs().length;return '<button class="card hc-open" id="hcOpen"><div class="card-hd"><h3>Health Check Statistics</h3><span class="meta">'+n+' records</span></div><p class="mute" style="margin:0;text-align:left">Tap to open trends for blood and urine tests, heart, eye and lung monitoring.</p></button>'}
+function renderDash(){
+  const st=SYNC.st==="saving"?'<p class="mute dh-note">Syncing your latest data…</p>':SYNC.st==="error"?'<p class="mute dh-note">Offline: showing the data saved on this device.</p>':"";
+  $("#view").innerHTML='<div class="dash">'+st+'<h2 class="dh">Upcoming events</h2>'+evGrocery()+evMedicine()+evMeals()+evExercise()+evHealth()+'<h2 class="dh">Statistics</h2>'+calCard()+physCard()+hcCard()+medCard()+'</div>';
+  document.querySelectorAll("[data-ev]").forEach(d=>d.ontoggle=()=>{evOpen[d.dataset.ev]=d.open});
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{tab=b.dataset.go;render();window.scrollTo(0,0)});
+  document.querySelectorAll("[data-ph]").forEach(b=>b.onclick=()=>{PHM=b.dataset.ph;renderDash();trDom()});
+  $("#lwb").onclick=()=>{const v=parseFloat($("#lw").value);if(!(v>=10&&v<=400)){toast("Enter a valid weight");return}logWeight(v);renderDash();trDom();toast("Weight saved")};
+  $("#hcOpen").onclick=openHC;$("#medAll").onclick=openMeds}
+
+/* ----- Health Check Statistics modal ----- */
+const HC={},HS={};
+function hcBody(cat){const sel=HC[cat],comps=INV.filter(x=>x[9]===sel);let name=sel;if(comps.length)name=HS[sel]||comps[0][1];
+  const r=INV.find(x=>x[1]===name),recs=recsOf(name),u=r[2];
+  if(!recs.length)return '<p class="mute">No records yet for '+esc(name)+'. Add results in the Health tab; nothing is estimated.</p>';
+  const flag=v=>(r[7]!=null&&v<r[7])||(r[8]!=null&&v>r[8]);
+  const refTxt=r[6]==="bp"?"Reference: below 130/80 mmHg (usual target for adults with diabetes; confirm with your doctor)":(r[7]!=null||r[8]!=null)?"Reference: "+(r[7]!=null&&r[8]!=null?r[7]+" – "+r[8]:r[7]!=null?"≥ "+r[7]:"≤ "+r[8])+" "+u:"";
+  const hist=recs.slice().reverse().slice(0,8).map(x=>{const v=numOf(x.value),bad=r[6]==="n"&&!isNaN(v)&&flag(v);return '<li><span>'+fD(x.date,1)+'</span><span class="'+(bad?"bad":"")+'">'+esc(x.value)+" "+esc(x.unit||u)+(bad?" ⚠":"")+(x.note?' <small class="mute">'+esc(x.note)+'</small>':"")+'</span></li>'}).join("");
+  let top="",chart="";const last=recs[recs.length-1],prev=recs.length>1?recs[recs.length-2]:null;
+  top='<div class="hc-sum"><div><small>Latest</small><b>'+esc(last.value)+" "+esc(last.unit||u)+'</b><small>'+fD(last.date,1)+'</small></div><div><small>Previous</small><b>'+(prev?esc(prev.value)+" "+esc(prev.unit||u):"–")+'</b><small>'+(prev?fD(prev.date,1):"")+'</small></div></div>';
+  if(r[6]==="n"){const pts=recs.map(x=>({t:new Date(x.date+"T00:00:00").getTime(),y:numOf(x.value),lab:fD(x.date,1)+": "+x.value+" "+u})).filter(p=>!isNaN(p.y));pts.forEach(p=>{p.bad=flag(p.y)});
+    if(pts.length)chart=lineChart({series:[{pts:pts,color:"var(--accent)"}],band:(r[7]!=null||r[8]!=null)?[r[7],r[8]]:null,unit:name+(u?" ("+u+")":""),label:name+" trend"})}
+  else if(r[6]==="bp"){const a=[],b=[];recs.forEach(x=>{const m=String(x.value).match(/(\d+)\D+(\d+)/);if(m){const t=new Date(x.date+"T00:00:00").getTime();a.push({t:t,y:+m[1],bad:+m[1]>=130,lab:x.value});b.push({t:t,y:+m[2],bad:+m[2]>=80,lab:x.value})}});
+    if(a.length)chart=lineChart({series:[{pts:a,color:"var(--accent)"},{pts:b,color:"var(--info)"}],lines:[{y:130,label:"130"},{y:80,label:"80"}],unit:"Systolic (green) and diastolic (blue), mmHg",label:"Blood pressure trend"})}
+  const timeline=r[6]==="r"||!chart;
+  return top+(chart||"")+(refTxt?'<p class="mute" style="margin:6px 0">'+esc(refTxt)+'</p>':"")+'<p class="mute" style="margin:8px 0 2px"><b>'+(timeline?"Report timeline":"History")+'</b></p><ul class="hc-list">'+hist+'</ul>'}
+function hcBox(cat){const items=INV.filter(x=>x[0]===cat&&!x[9]);HC[cat]=HC[cat]||items[0][1];
+  const comps=INV.filter(x=>x[9]===HC[cat]);
+  return '<div class="hcc"><h4>'+INVCAT[cat]+'</h4><select class="ctrl" data-hc="'+cat+'" aria-label="'+INVCAT[cat]+'">'+items.map(x=>'<option value="'+esc(x[1])+'" '+(x[1]===HC[cat]?"selected":"")+'>'+esc(x[1])+'</option>').join("")+'</select><select class="ctrl" data-hs="'+cat+'" style="margin-top:6px;'+(comps.length?"":"display:none")+'" aria-label="Component">'+comps.map(x=>'<option value="'+esc(x[1])+'" '+(x[1]===(HS[HC[cat]]||comps[0][1])?"selected":"")+'>'+esc(x[1])+'</option>').join("")+'</select><div id="hcb-'+cat+'" style="margin-top:10px">'+hcBody(cat)+'</div></div>'}
+function openHC(){if($("#hc"))return;document.body.insertAdjacentHTML("beforeend",'<div id="hc" role="dialog" aria-modal="true"><div class="hc-box"><div class="card-hd"><h3>Health Check Statistics</h3><button class="btn-ghost" id="hcX">Close</button></div><p class="mute" style="margin:0 0 10px;font-size:.78rem">Reference ranges are general adult guides; your doctor\'s targets may differ. Values outside the range are shown in red.</p><div class="hc-grid">'+["blood","heart","eye","lung"].map(hcBox).join("")+'</div></div></div>');
+  const el=$("#hc"),close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};$("#hcX").onclick=close;
+  el.querySelectorAll("[data-hc]").forEach(s=>s.onchange=()=>{const c=s.dataset.hc;HC[c]=s.value;const box=s.closest(".hcc"),comps=INV.filter(x=>x[9]===s.value),ss=box.querySelector("[data-hs]");
+    ss.style.display=comps.length?"":"none";ss.innerHTML=comps.map(x=>'<option value="'+esc(x[1])+'">'+esc(x[1])+'</option>').join("");$("#hcb-"+c).innerHTML=hcBody(c);trDom()});
+  el.querySelectorAll("[data-hs]").forEach(s=>s.onchange=()=>{const c=s.dataset.hs;HS[HC[c]]=s.value;$("#hcb-"+c).innerHTML=hcBody(c);trDom()});trDom()}
+
+/* ----- Complete medication list (edit purpose, timing, status, refill info) ----- */
+function openMeds(){if($("#ml"))return;const L=medsOf();
+  const row=m=>'<details class="ev" style="margin-bottom:8px"><summary><span class="ev-t"><b>'+esc(m.n)+(m.d?" · "+esc(m.d):"")+'</b><small>'+(m.st==="stopped"?"Discontinued":"Active")+" · "+esc(m.s)+'</small></span>'+CHV+'</summary><div class="ev-b"><div class="fld-grid" style="margin-top:10px"><label class="fld"><span>Purpose</span><input data-f="pu" data-id="'+m.id+'" value="'+esc(m.pu||"")+'"></label><label class="fld"><span>Timing (e.g. after breakfast)</span><input data-f="t" data-id="'+m.id+'" value="'+esc(m.t||"")+'"></label><label class="fld"><span>Pack size (tablets)</span><input data-f="pk" data-id="'+m.id+'" type="number" min="0" value="'+esc(m.pk||"")+'"></label><label class="fld"><span>Bought on</span><input data-f="bd" data-id="'+m.id+'" type="date" value="'+esc(m.bd||"")+'"></label><label class="fld"><span>Status</span><select data-f="st" data-id="'+m.id+'"><option value="active" '+(m.st!=="stopped"?"selected":"")+'>Active</option><option value="stopped" '+(m.st==="stopped"?"selected":"")+'>Discontinued</option></select></label></div></div></details>';
+  document.body.insertAdjacentHTML("beforeend",'<div id="ml"><div class="sheet"><h3>Medication list</h3><p class="sheet-sub">'+L.length+' medicine'+(L.length===1?"":"s")+'. Add new medicines in the Health tab.</p>'+(L.length?L.map(row).join(""):'<p class="mute">No medicines added yet.</p>')+'<div class="form-row" style="margin-top:12px"><button class="btn-primary" id="mlS" style="flex:1">Save</button><button class="btn-ghost" id="mlX" style="flex:1">Close</button></div></div></div>');
+  const el=$("#ml"),close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};$("#mlX").onclick=close;
+  $("#mlS").onclick=()=>{const list=medsOf();el.querySelectorAll("[data-f]").forEach(i=>{const m=list.find(x=>x.id===i.dataset.id);if(m){const v=i.value.trim();if(i.dataset.f==="st")m.st=v==="stopped"?"stopped":"active";else if(v)m[i.dataset.f]=v;else delete m[i.dataset.f]}});store.set("meds",{list:list});close();toast("Saved");render()};trDom()}
+
+/* ----- Health tab: master checklist, optgroup selector, edit support ----- */
+let labEdit=null;
+function labSelect(){return '<select class="ctrl" id="lt">'+["blood","heart","eye","lung","other"].map(c=>'<optgroup label="'+INVCAT[c]+'">'+INV.filter(x=>x[0]===c&&x[6]!=="g").map(x=>'<option value="'+esc(x[1])+'">'+(x[9]?esc(x[9].replace(/ \(.*/,""))+": ":"")+esc(x[1])+'</option>').join("")+'</optgroup>').join("")+'</select>'}
+function checklistCard(){let h='<div class="card health-full"><div class="card-hd"><h3>Personal Health Monitoring Checklist</h3></div>';
+  ["blood","heart","eye","lung"].forEach((c,i)=>{h+='<details class="ev" style="margin-bottom:8px" '+(i===0?"open":"")+'><summary><span class="ev-t"><b>'+INVCAT[c]+'</b></span>'+CHV+'</summary><div class="ev-b tbl-wrap"><table class="mt-tbl"><tr><th>Test</th><th>Recommended frequency</th><th>Preferred for</th><th>Last recorded</th></tr>'+
+    INV.filter(x=>x[0]===c&&!x[9]).map(x=>{let last="";[x[1]].concat(INV.filter(y=>y[9]===x[1]).map(y=>y[1])).forEach(n=>recsOf(n).forEach(r=>{if(r.date>last)last=r.date}));return '<tr><td>'+esc(x[1])+'</td><td>'+esc(x[3])+'</td><td>'+esc(x[4])+'</td><td>'+(last?fD(last,1):"–")+'</td></tr>'}).join("")+'</table></div></details>'});
+  return h+'</div>'}
+{const lc=labCard;labCard=function(){return lc().replace(/<select class="ctrl" id="lt">[\s\S]*?<\/select>/,labSelect()).replace(/<button class="btn-del" data-lab="([^"]*)"/g,function(m,id){return '<button class="btn-ghost" data-labedit="'+id+'" style="padding:3px 8px;margin-right:4px">Edit</button>'+m})+checklistCard()}}
+{const wl=wireLabs;wireLabs=function(done){wl(done);const add=$("#ladd");if(!add)return;
+  const t=$("#lt");t.onchange=()=>{const l=LABS.find(x=>x[0]===t.value);$("#lu").value=l?l[1]:""};t.dispatchEvent(new Event("change"));
+  if(labEdit)add.textContent="Update result";
+  add.onclick=()=>{const v=$("#lv").value.trim();if(!v)return;const list=allLabs(),rec={test:t.value,value:v,unit:$("#lu").value.trim(),date:$("#ld").value||dkey(0),note:$("#ln").value.trim()};
+    if(labEdit){const x=list.find(y=>y.id===labEdit);if(x)Object.assign(x,rec);labEdit=null}
+    else if(list.some(y=>canon(y.test)===rec.test&&y.date===rec.date&&String(y.value)===rec.value)){toast("Already recorded");return}
+    else list.push(Object.assign({id:"l"+Date.now()},rec));
+    store.set("labs",{list:list});done()};
+  document.querySelectorAll("[data-labedit]").forEach(b=>b.onclick=()=>{const x=allLabs().find(y=>y.id===b.dataset.labedit);if(!x)return;labEdit=x.id;
+    t.value=canon(x.test);$("#lv").value=x.value;$("#lu").value=x.unit||"";$("#ld").value=x.date||dkey(0);$("#ln").value=x.note||"";add.textContent="Update result";$("#lv").focus()})}}
 
 /* ---------- Startup ---------- */
 function reloadPrices(){const s0=store.get("prices");if(s0.p)for(const k in s0.p)if(PR[k])PR[k]=[s0.p[k],2]}

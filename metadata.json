@@ -1,0 +1,6 @@
+{
+  "name": "Healthy Plate",
+  "description": "Personal health monitoring system and Kerala diet planner with dashboard, calorie tracking, physical progress, medical investigations, and medication management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

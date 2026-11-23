@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Healthy Plate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f3;
+  --surface:#ffffff;
+  --surface-2:#eef1eb;
+  --surface-3:#e4e9df;
+  --ink:#111914;
+  --ink-2:#4a584e;
+  --mute:#748278;
+  --line:#dfe4db;
+  --line-strong:#cbd3c5;
+  --accent:#0f6243;
+  --accent-hover:#0a4c33;
+  --accent-fg:#ffffff;
+  --accent-soft:#e6f2ec;
+  --amber:#b45309;
+  --amber-soft:#fef3c7;
+  --amber-line:#f59e0b;
+  --danger:#b91c1c;
+  --danger-soft:#fee2e2;
+  --info:#1d4ed8;
+  --info-soft:#eff6ff;
+  --shadow-sm:0 1px 2px rgba(17,25,20,.04);
+  --shadow-md:0 8px 24px rgba(17,25,20,.08);
+  --radius-lg:16px;
+  --radius-md:12px;
+  --radius-sm:8px;
+  --glass:rgba(245,246,243,.86);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c100e;
+    --surface:#141a17;
+    --surface-2:#1b231f;
+    --surface-3:#242e28;
+    --ink:#edf2ee;
+    --ink-2:#b0bdb4;
+    --mute:#7e8d83;
+    --line:#252f29;
+    --line-strong:#35433a;
+    --accent:#2bb67d;
+    --accent-hover:#34d399;
+    --accent-fg:#071911;
+    --accent-soft:rgba(43,182,125,.14);
+    --amber:#f59e0b;
+    --amber-soft:rgba(245,158,11,.14);
+    --amber-line:#d97706;
+    --danger:#f87171;
+    --danger-soft:rgba(248,113,113,.14);
+    --info:#60a5fa;
+    --info-soft:rgba(96,165,250,.14);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.25);
+    --shadow-md:0 12px 32px rgba(0,0,0,.45);
+    --glass:rgba(12,16,14,.86);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c100e;
+  --surface:#141a17;
+  --surface-2:#1b231f;
+  --surface-3:#242e28;
+  --ink:#edf2ee;
+  --ink-2:#b0bdb4;
+  --mute:#7e8d83;
+  --line:#252f29;
+  --line-strong:#35433a;
+  --accent:#2bb67d;
+  --accent-hover:#34d399;
+  --accent-fg:#071911;
+  --accent-soft:rgba(43,182,125,.14);
+  --amber:#f59e0b;
+  --amber-soft:rgba(245,158,11,.14);
+  --amber-line:#d97706;
+  --danger:#f87171;
+  --danger-soft:rgba(248,113,113,.14);
+  --info:#60a5fa;
+  --info-soft:rgba(96,165,250,.14);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.25);
+  --shadow-md:0 12px 32px rgba(0,0,0,.45);
+  --glass:rgba(12,16,14,.86);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 14.5px/1.55 "Inter","Noto Sans Malayalam",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-feature-settings:"cv02","cv03","cv04","cv11";
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+button:active{transform:scale(.98)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* App Shell */
+.topbar{
+  position:sticky;top:0;z-index:30;
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.topbar-in{
+  max-width:920px;margin:0 auto;
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--accent);color:var(--accent-fg);
+  display:grid;place-items:center;flex:none;
+}
+.brand-txt{min-width:0}
+.brand-txt h1{
+  margin:0;font-size:1.12rem;font-weight:700;letter-spacing:-.02em;
+  line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.brand-txt p{
+  margin:2px 0 0;font-size:.76rem;color:var(--mute);font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.top-actions{display:flex;align-items:center;gap:6px;flex:none}
+.kcal-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 9px;border-radius:999px;
+  background:var(--surface-2);border:1px solid var(--line);
+  font-size:.73rem;font-weight:600;color:var(--ink-2);
+  font-variant-numeric:tabular-nums;
+}
+.seg-lang{
+  display:inline-flex;padding:2px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--line);
+}
+.seg-lang span{
+  padding:4px 8px;border-radius:7px;font-size:.73rem;font-weight:600;
+  color:var(--mute);transition:all .15s;
+}
+.seg-lang span.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+.icon-btn{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--ink-2);padding:0;
+}
+.icon-btn:hover{background:var(--surface-3);color:var(--ink)}
+
+/* Workspace */
+.shell{max-width:920px;margin:0 auto;padding:16px 16px calc(86px + env(safe-area-inset-bottom,0px))}
+
+/* Navigation Tabs */
+.tabs{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
+  display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+}
+.tabs button{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  background:none;border:0;border-radius:10px;padding:6px 2px;min-height:50px;
+  color:var(--mute);font-size:.69rem;font-weight:600;letter-spacing:.01em;
+}
+.tabs button svg{width:19px;height:19px;stroke-width:1.85}
+.tabs button.on{color:var(--accent);background:var(--accent-soft)}
+@media (min-width:768px){
+  .shell{padding:18px 24px 48px}
+  .tabs{
+    position:static;background:var(--surface);backdrop-filter:none;
+    border:1px solid var(--line);border-radius:12px;padding:4px;
+    margin-bottom:16px;box-shadow:var(--shadow-sm);gap:4px;
+  }
+  .tabs button{
+    flex-direction:row;gap:8px;min-height:38px;padding:0 12px;font-size:.82rem;border-radius:8px;
+  }
+  .tabs button svg{width:16px;height:16px}
+}
+
+/* Weekday Strip */
+.days{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:6px;
+  margin-bottom:14px;
+}
+.days button{
+  position:relative;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:8px 4px;font-size:.78rem;font-weight:600;color:var(--ink-2);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  box-shadow:var(--shadow-sm);
+}
+.days button:hover{border-color:var(--line-strong);color:var(--ink)}
+.days button.on{
+  background:var(--accent);border-color:var(--accent);color:var(--accent-fg);
+}
+.days button.today::after{
+  content:"";width:5px;height:5px;border-radius:99px;background:var(--amber-line);
+}
+.days button.on.today::after{background:var(--accent-fg)}
+
+/* Cards & Surfaces */
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius-lg);padding:16px;margin-bottom:14px;
+  box-shadow:var(--shadow-sm);
+}
+.card-hd{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-bottom:12px;
+}
+.card-hd h2,.card h3{
+  margin:0;font-size:.96rem;font-weight:700;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:8px;color:var(--ink);
+}
+.card-hd .meta{font-size:.76rem;font-weight:600;color:var(--mute);font-variant-numeric:tabular-nums}
+
+.banner{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:var(--radius-md);padding:11px 13px;margin-bottom:14px;
+  font-size:.84rem;color:var(--ink-2);
+}
+.banner svg{flex:none;margin-top:2px;color:var(--accent)}
+.banner.amber{background:var(--amber-soft);border-color:rgba(217,119,6,.28);color:var(--ink)}
+.banner.amber svg{color:var(--amber)}
+
+/* Household / Family Panel */
+.fam-card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius-md);margin-bottom:14px;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.fam-card summary{
+  list-style:none;cursor:pointer;padding:11px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.84rem;font-weight:600;color:var(--ink);
+}
+.fam-card summary::-webkit-details-marker{display:none}
+.fam-sum-l{display:flex;align-items:center;gap:8px;min-width:0}
+.fam-sum-l svg{color:var(--accent);flex:none}
+.fam-chev{color:var(--mute);transition:transform .2s;flex:none}
+.fam-card[open] .fam-chev{transform:rotate(180deg)}
+.fam-body{padding:4px 14px 14px;border-top:1px solid var(--line)}
+.fam-grid{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:680px){.fam-grid{grid-template-columns:1fr 1fr;gap:0 24px}}
+
+/* Stepper & Inventory Rows */
+.row-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 0;border-top:1px solid var(--line);
+}
+.row-item:first-child{border-top:0}
+.row-info{flex:1;min-width:0}
+.row-title{font-weight:600;font-size:.88rem;color:var(--ink);display:flex;align-items:center;gap:7px}
+.row-sub{font-size:.76rem;color:var(--mute);margin-top:2px}
+.stp{display:flex;align-items:center;gap:4px;flex:none}
+.stp button{
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  font-weight:600;font-size:1rem;display:grid;place-items:center;padding:0;
+}
+.stp button:hover{background:var(--surface-3);border-color:var(--line-strong)}
+.stp input{
+  width:56px;height:32px;border-radius:8px;border:1px solid var(--line);
+  background:var(--bg);text-align:center;font-size:.86rem;font-weight:600;
+  font-variant-numeric:tabular-nums;padding:0 4px;
+}
+.unit-btn{
+  min-width:34px;height:32px;padding:0 7px;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--accent);
+  font-size:.75rem;font-weight:700;
+}
+.unit-btn:disabled{opacity:0;pointer-events:none;border-color:transparent}
+
+.dot{width:7px;height:7px;border-radius:99px;flex:none;background:var(--line-strong)}
+.dot.ok{background:var(--accent)}
+.dot.low{background:var(--amber-line)}
+.dot.zero{background:var(--danger)}
+
+/* Grocery Checklists */
+.shop-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:720px){.shop-grid{grid-template-columns:repeat(2,1fr);align-items:start}}
+.shop-grid .card{margin-bottom:0}
+label.chk-row{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 6px;margin:0 -6px;border-radius:8px;
+  border-top:1px solid var(--line);cursor:pointer;
+  transition:background-color .12s;
+}
+label.chk-row:first-of-type{border-top:0}
+label.chk-row:hover{background:var(--surface-2)}
+label.chk-row input{
+  appearance:none;-webkit-appearance:none;
+  width:18px;height:18px;border-radius:5px;flex:none;
+  border:1.5px solid var(--line-strong);background:var(--surface);
+  display:grid;place-items:center;cursor:pointer;transition:all .15s;
+}
+label.chk-row input:checked{background:var(--accent);border-color:var(--accent)}
+label.chk-row input:checked::after{
+  content:"";width:5px;height:9px;border:solid var(--accent-fg);border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-1px,-1px);
+}
+label.chk-row input:checked + .chk-lbl{text-decoration:line-through;color:var(--mute)}
+.chk-lbl{flex:1;min-width:0;font-size:.88rem;font-weight:500}
+.chk-qty{
+  font-size:.76rem;font-weight:600;color:var(--ink-2);
+  background:var(--surface-2);padding:2px 8px;border-radius:6px;
+  white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+
+/* Buy Card & Price Comparison */
+.buy-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px}
+.buy-total{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.buy-status{
+  font-size:.78rem;color:var(--ink-2);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:8px;padding:7px 10px;margin-bottom:10px;
+}
+details.buy-item{border-top:1px solid var(--line)}
+details.buy-item:first-of-type{border-top:0}
+details.buy-item summary{
+  list-style:none;cursor:pointer;padding:10px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.87rem;font-weight:600;
+}
+details.buy-item summary::-webkit-details-marker{display:none}
+.buy-r{display:flex;align-items:center;gap:8px;flex:none;font-variant-numeric:tabular-nums}
+.buy-q{color:var(--ink-2);font-weight:500;font-size:.8rem}
+.buy-p{
+  background:var(--accent-soft);color:var(--accent);
+  padding:2px 8px;border-radius:6px;font-weight:700;font-size:.8rem;
+}
+.buy-detail{padding:0 0 12px;font-size:.8rem;color:var(--ink-2)}
+.slot-lbl{
+  font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--mute);margin:10px 0 4px;
+}
+.mt{
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--line);border-radius:9px;padding:7px 10px;margin:4px 0;
+  background:var(--surface);font-size:.8rem;
+}
+.mt.on{border-color:var(--accent);background:var(--accent-soft)}
+.mtb{flex:1;text-align:left;background:none;border:0;padding:0;line-height:1.35}
+.mt a{
+  color:var(--mute);text-decoration:none;padding:4px 6px;border-radius:6px;
+  display:grid;place-items:center;
+}
+.mt a:hover{background:var(--surface-2);color:var(--ink)}
+.src-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;border-radius:999px;font-size:.74rem;font-weight:600;
+  background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line);
+  font-variant-numeric:tabular-nums;
+}
+
+/* Meals Timeline */
+.timeline{display:flex;flex-direction:column}
+.meal-row{
+  display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);
+}
+.meal-row:first-child{border-top:0;padding-top:4px}
+.meal-row:last-child{padding-bottom:4px}
+.meal-time-col{flex:0 0 74px;display:flex;flex-direction:column;gap:2px}
+.meal-clock{font-weight:700;font-size:.84rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.meal-slot-name{font-size:.7rem;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.03em}
+.meal-body{flex:1;min-width:0}
+.meal-desc{font-size:.92rem;font-weight:500;color:var(--ink);line-height:1.45}
+.prep-btn{
+  margin-top:8px;display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px;border-radius:8px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink-2);font-size:.77rem;font-weight:600;
+}
+.prep-btn:hover{border-color:var(--line-strong);color:var(--ink)}
+.prep-btn.ok{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.prep-btn.skip{background:var(--surface);border-style:dashed;color:var(--mute)}
+
+/* Serving Guide Table */
+.guide-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.guide-table th{
+  text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--mute);padding:0 6px 8px 0;border-bottom:1px solid var(--line);
+}
+.guide-table td{padding:8px 6px 8px 0;border-bottom:1px solid var(--line);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.guide-table tr:last-child td{border-bottom:0}
+.guide-table td:first-child{font-weight:600;color:var(--ink)}
+
+/* Cook Recipes */
+.cook-bar{display:flex;justify-content:flex-end;margin-bottom:10px}
+.btn-ghost{
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;font-size:.78rem;font-weight:600;color:var(--ink-2);
+}
+.btn-ghost:hover{background:var(--surface-2);color:var(--ink)}
+details.rec-item{border-top:1px solid var(--line)}
+details.rec-item:first-of-type{border-top:0}
+details.rec-item summary{
+  list-style:none;cursor:pointer;padding:11px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-weight:600;font-size:.91rem;color:var(--ink);
+}
+details.rec-item summary::-webkit-details-marker{display:none}
+details.rec-item[open] summary .rec-chev{transform:rotate(180deg)}
+.rec-chev{color:var(--mute);transition:transform .18s;flex:none}
+.rec-body{padding:0 0 14px}
+.rec-meta{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;
+}
+.rec-ing{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;font-size:.84rem;margin-bottom:10px;color:var(--ink-2);
+}
+.rec-ing b{color:var(--ink)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:step}
+.steps li{
+  counter-increment:step;display:flex;gap:10px;margin-bottom:8px;
+  font-size:.86rem;color:var(--ink-2);line-height:1.5;
+}
+.steps li::before{
+  content:counter(step);flex:none;width:20px;height:20px;border-radius:99px;
+  background:var(--accent-soft);color:var(--accent);
+  font-size:.72rem;font-weight:700;display:grid;place-items:center;margin-top:2px;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Stock Tools */
+.stock-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.search-wrap{position:relative;flex:1 1 200px}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
+.search-in{
+  width:100%;height:38px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);padding:0 12px 0 34px;font-size:.86rem;
+}
+.btn-danger-outline{
+  height:38px;padding:0 14px;border-radius:10px;
+  border:1px solid var(--danger);background:transparent;color:var(--danger);
+  font-size:.8rem;font-weight:600;
+}
+.btn-danger-outline.arm{background:var(--danger);color:#fff}
+
+/* Health Dashboard */
+.health-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:740px){.health-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.health-grid .card{margin-bottom:0}
+.health-full{grid-column:1 / -1}
+.metric-big{font-size:1.65rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.metric-sub{font-size:.84rem;color:var(--mute);font-weight:500}
+.prog-track{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin:10px 0 12px}
+.prog-fill{height:100%;border-radius:99px;background:var(--accent);transition:width .3s ease}
+.form-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ctrl{
+  height:36px;border:1px solid var(--line);border-radius:9px;
+  background:var(--bg);padding:0 10px;font-size:.84rem;flex:1 1 110px;min-width:0;
+}
+.btn-primary{
+  height:36px;padding:0 14px;border-radius:9px;border:0;
+  background:var(--accent);color:var(--accent-fg);font-size:.82rem;font-weight:600;
+}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-del{
+  background:none;border:0;color:var(--mute);width:30px;height:30px;border-radius:7px;
+  display:grid;place-items:center;font-size:1.1rem;padding:0;
+}
+.btn-del:hover{background:var(--danger-soft);color:var(--danger)}
+.med-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 0;border-top:1px solid var(--line);
+}
+.med-row label{display:flex;align-items:center;gap:10px;flex:1;cursor:pointer;font-size:.87rem;font-weight:500}
+.med-row input[type="checkbox"]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.med-row input:checked + span{text-decoration:line-through;color:var(--mute)}
+.wk-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px}
+.wk-col{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+  padding:8px 4px;text-align:center;font-size:.72rem;color:var(--mute);
+  display:flex;flex-direction:column;align-items:center;gap:4px;font-variant-numeric:tabular-nums;
+}
+.wk-col strong{color:var(--ink);font-size:.82rem}
+.wk-mini-bar{width:100%;height:4px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.wk-mini-bar i{display:block;height:100%;background:var(--accent)}
+
+/* Modal / Sheet */
+#ov{
+  position:fixed;inset:0;z-index:60;
+  background:rgba(10,14,12,.52);
+  backdrop-filter:blur(4px);
+  display:flex;align-items:flex-end;justify-content:center;
+}
+@media (min-width:640px){#ov{align-items:center;padding:16px}}
+.sheet{
+  background:var(--surface);width:100%;max-width:540px;max-height:86vh;overflow:auto;
+  border-radius:18px 18px 0 0;border:1px solid var(--line);
+  padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));
+  box-shadow:var(--shadow-md);
+}
+@media (min-width:640px){.sheet{border-radius:16px}}
+.sheet h3{margin:0 0 4px;font-size:1.05rem}
+.sheet-sub{margin:0 0 12px;font-size:.83rem;color:var(--mute)}
+.sheet label.chk-row input:checked + .chk-lbl{text-decoration:none;color:var(--ink)}
+
+/* Toast & Footer */
+.toast{
+  position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:70;
+  background:var(--ink);color:var(--bg);
+  padding:9px 16px;border-radius:999px;font-size:.82rem;font-weight:600;
+  box-shadow:var(--shadow-md);white-space:nowrap;animation:pop .2s ease-out;
+}
+@media (min-width:768px){.toast{bottom:24px}}
+@keyframes pop{from{transform:translateX(-50%) translateY(8px);opacity:0}}
+.foot{
+  max-width:920px;margin:20px auto 0;padding:12px 0 0;
+  border-top:1px solid var(--line);font-size:.76rem;color:var(--mute);line-height:1.5;
+}
+
+/* Account, sync, health tests, login */
+#acct{position:fixed;inset:0;z-index:60;background:rgba(10,14,12,.52);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:640px){#acct{align-items:center;padding:16px}}
+#acctBtn{position:relative}
+#acctBtn::after{content:"";position:absolute;right:3px;top:3px;width:6px;height:6px;border-radius:99px;background:var(--mute);border:2px solid var(--surface-2);box-sizing:content-box}
+body[data-sync="ok"] #acctBtn::after{background:var(--accent)}
+body[data-sync="saving"] #acctBtn::after{background:var(--amber-line)}
+body[data-sync="error"] #acctBtn::after{background:var(--danger)}
+#auth{position:fixed;inset:0;z-index:90;background:var(--bg);display:grid;place-items:center;padding:16px;overflow:auto}
+.auth-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow-md)}
+.auth-card h2{margin:12px 0 2px;font-size:1.25rem;letter-spacing:-.02em}
+.auth-card p.sub{margin:0 0 14px;color:var(--mute);font-size:.85rem}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
+.auth-tabs button{border:0;background:none;border-radius:8px;padding:7px;font-weight:600;font-size:.84rem;color:var(--mute)}
+.auth-tabs button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+.fld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:.78rem;font-weight:600;color:var(--ink-2)}
+.fld input,.fld select{height:38px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 10px;font-size:.88rem;font-weight:400;width:100%}
+.fld-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.fld-grid .wide{grid-column:1/-1}
+.auth-err{min-height:1.2em;margin:0 0 8px;color:var(--danger);font-size:.82rem}
+.btn-block{width:100%;height:42px}
+.lab-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lab-list{max-height:320px;overflow:auto;margin-top:6px}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      </div>
+      <div class="brand-txt">
+        <h1 id="title">Today</h1>
+        <p id="sub">Healthy Plate: Kerala diet planner</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="kcal-pill" id="kcal">1600 kcal</span>
+      <button class="seg-lang" id="lang" aria-label="Language" style="border:0;background:none;padding:0">
+        <span class="seg-lang"><span data-l="en">EN</span><span data-l="ml">മല</span></span>
+      </button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme"></button>
+      <button class="icon-btn" id="acctBtn" aria-label="Profile and account"></button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <nav class="tabs" role="tablist">
+    <button data-t="shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span>Groceries</span></button>
+    <button data-t="meals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg><span>Meals</span></button>
+    <button data-t="cook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg><span>Cook</span></button>
+    <button data-t="inv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg><span>Stock</span></button>
+    <button data-t="health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></button>
+  </nav>
+
+  <div class="days" id="days"></div>
+  <div id="view"></div>
+
+  <p class="foot">Based on your dietitian’s chart. Oats replace the dosa/puttu/chapati portion, never add to it. Check glucose as advised and confirm portions with your dietitian.</p>
+</main>
+
+<script>
+const D=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const SVG={
+  chev:'<svg class="fam-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+  rchev:'<svg class="rec-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+  users:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  info:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+  fruit:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>',
+  check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  search:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  ext:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+  sun:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>',
+  moon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+  run:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  pill:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>',
+  chart:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+  bag:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>'
+};
+
+const R={
+tea:["Tea / coffee (no sugar)","150 ml water, tea or coffee, milk optional (small splash)","Boil water with tea/coffee|Strain and drink without sugar, honey or jaggery"],
+idli:["Idli + sambar","Serves 1, 20 min. About 100 g fermented idli batter, a few drops of oil, 1 cup sambar","Take the batter out of the fridge 30 minutes before and stir gently with a spoon. Do not whisk; it keeps the air in.|Boil 2 cups of water in the idli steamer.|Grease 2 idli moulds with a few drops of oil and fill each about 3/4 full.|Steam on medium-high for 10 to 12 minutes. A toothpick pushed in should come out clean.|Rest 2 minutes, then lift out with a wet spoon.|Serve hot with 1 cup of sambar. Skip coconut chutney."],
+sambar:["Sambar","Makes about 3 cups, enough for the day. 1/4 cup mixed dal (about 40 g), 1/2 tsp turmeric, 1/4 cup each pumpkin and drumstick pieces, 1/2 onion, 1 tomato, 1.5 tsp sambar powder, gooseberry-size tamarind, 1/2 tsp mustard, 1 dry red chilli, 6 curry leaves, 1 tsp oil, salt","Wash the dal and pressure-cook with 1 cup water and the turmeric for 3 whistles. Mash lightly.|Soak the tamarind in 1/2 cup warm water for 10 minutes, then squeeze out the pulp and discard the fibre.|Boil pumpkin, drumstick, chopped onion and tomato in 1.5 cups water with salt for 8 to 10 minutes until tender.|Add the tamarind water and sambar powder and boil 5 minutes until the raw smell goes.|Stir in the mashed dal, add hot water if too thick, and simmer 5 minutes.|Heat the oil, crackle the mustard, then add chilli and curry leaves and pour over the sambar. Finish with chopped coriander."],
+salad:["Vegetable salad","Serves 1, 5 min. 1/2 cucumber, 1/2 tomato, 1 small carrot, 2 tbsp onion, juice of 1/4 lemon, salt and pepper","Wash all the vegetables well.|Slice the cucumber and tomato thin, grate the carrot and chop the onion finely.|Mix in a bowl, add lemon juice, a pinch of salt and pepper.|Eat fresh within 15 minutes. No oil, mayonnaise or dressing."],
+egg:["Egg whites (2)","Serves 1, 12 min. 2 eggs, pinch of pepper and salt","Place the whole eggs in a pot, cover with water and bring to a boil.|Reduce heat and simmer 10 minutes for fully set eggs.|Move to cold water for 3 minutes, then peel.|Cut in half, remove and discard the yolks (or keep them for someone else).|Sprinkle the whites with pepper and salt. For a change, chop and stir-fry with 3 drops of oil and some onion."],
+corn:["Steamed corn","Serves 1, 15 min. 1/2 cup corn kernels (or 1 small cob), salt, pepper, a squeeze of lemon","If using a cob, remove husk and silk and cut into 3 pieces; kernels need no prep.|Steam for 10 to 12 minutes until the kernels are tender but not mushy.|Measure out 1/2 cup of kernels.|Toss with a pinch of salt, pepper and lemon. No butter."],
+rice:["Rice (1 cup)","Serves 1, 25 min. About 70 g raw rice (cooks to about 1 cup, 200 ml), 1 cup water, pinch of salt","Rinse the rice 3 times until the water runs mostly clear.|Soak for 15 minutes, then drain.|Bring 1 cup of water to a rolling boil, add rice and salt.|Cover and cook on the lowest heat for 12 to 15 minutes until the water is absorbed.|Switch off, rest 5 minutes without opening, then fluff with a fork.|Measure 1 cup (200 ml) onto the plate. Do not take second helpings."],
+rasam:["Rasam","Serves 2, 20 min. 1 large tomato, 1/2 tsp rasam powder, 3 garlic cloves, 1/2 tsp pepper, 1/2 tsp cumin, 1/4 cup cooked dal water, 1/2 tsp mustard, 5 curry leaves, 1 tsp oil, coriander leaves, salt","Crush the garlic, pepper and cumin together roughly.|Boil the chopped tomato in 1.5 cups water with salt and rasam powder for 6 minutes until soft; mash with the back of a spoon.|Add the crushed mix and the dal water and bring to a froth. Do not boil hard.|Heat the oil, crackle mustard, add curry leaves and pour in.|Finish with coriander. Serve 1/2 cup."],
+bean:["Beans thoran","Serves 1, 15 min. 1 cup finely chopped beans, 1 tbsp grated coconut, 2 tbsp onion, 1 green chilli, 1/2 tsp mustard, 5 curry leaves, 1/4 tsp turmeric, 1 tsp oil, salt","Chop the beans into 3 mm pieces; this lets them cook quickly without water.|Heat the oil, crackle the mustard, add curry leaves, chilli and onion and fry 1 minute.|Add the beans, turmeric and salt and mix well.|Cover and cook on low heat 6 to 8 minutes, stirring once or twice. Sprinkle a spoon of water only if it sticks.|Stir in the coconut, cook 1 minute, and switch off."],
+fish:["Fish (75 g)","Serves 1, 20 min plus 15 min marinating. 75 g fish, 1/4 tsp turmeric, 1/2 tsp chilli powder, 1/2 tsp lemon juice, 1/2 tsp ginger-garlic paste, salt, 1/2 tsp oil","Clean and wash the fish, pat dry with a paper towel.|Mix turmeric, chilli powder, lemon juice, ginger-garlic paste and salt into a paste and rub over the fish.|Marinate 15 minutes.|Heat a non-stick pan with 1/2 tsp oil on medium. Cook 3 to 4 minutes per side until opaque and flaky.|Do not deep fry. Serve with lemon."],
+fishc:["Fish curry (75 g fish)","Serves 1, 25 min. 75 g fish, 1/4 onion, 1 small tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp chilli powder, 1 tsp coriander powder, 1/4 tsp turmeric, 1 kokum or 1 tsp tamarind, 5 curry leaves, 1 tsp oil, salt","Wash the fish and cut into 2 or 3 pieces.|Heat the oil, add curry leaves, onion and ginger-garlic paste and sauté 3 minutes until soft.|Add tomato and the powders with 2 tbsp water, cook 4 minutes until oil separates.|Add 3/4 cup water, kokum or tamarind and salt and bring to a boil.|Slide in the fish, cover and simmer on low 8 to 10 minutes. Shake the pan rather than stirring so the pieces stay whole.|Rest 10 minutes for better flavour. The curry should be thin with minimal coconut."],
+curd:["Curd (1 cup)","Plain unsweetened curd","Serve plain, or whisk with a pinch of salt and cumin"],
+butter:["Buttermilk (1/2 cup)","Curd, water, salt, ginger, curry leaves","Whisk 1 part curd with 2 parts water|Add salt, grated ginger, crushed curry leaves"],
+nuts:["Handful of nuts","Almonds, walnuts, unsalted mixed nuts","Take one handful only, unsalted and unroasted-in-oil"],
+odosa:["Oats dosa (2)","Serves 1, 25 min. 1/3 cup oats flour (grind plain rolled oats fine), 2 tbsp dosa batter, 1/2 cup water, 1/4 tsp cumin, 1 tbsp chopped onion, salt, a few drops of oil","Grind plain rolled oats in a dry mixer to a fine flour.|Whisk the flour, dosa batter, cumin, onion and salt with water to a thin pouring batter. Rest 10 minutes.|Heat a non-stick tawa on medium and wipe with a drop of oil.|Pour a ladle from the edge inwards (oats batter is lacy, so fill the gaps). Cover 1 minute.|Add a few drops of oil around the edges, flip once, cook 1 minute.|Make 2 dosas and serve with soya curry or channa curry."],
+soya:["Soya curry (1 cup)","Serves 1, 25 min. 25 g soya chunks, 1/2 onion, 1 tomato, 1 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp chilli powder, 1/4 tsp turmeric, 1/4 tsp garam masala, 1 tsp oil, coriander leaves, salt","Soak the soya chunks in hot water for 10 minutes. Squeeze out the water 2 or 3 times, which removes the beany smell. Cut large pieces in half.|Heat the oil and fry onion until golden, about 4 minutes. Add ginger-garlic paste for 1 minute.|Add the tomato and powders, cook 4 minutes until soft and oily.|Add the soya, salt and 1/2 cup water, cover and simmer 8 to 10 minutes.|Stir in garam masala and coriander and serve about 1 cup."],
+chick:["Chicken curry (75 g)","Serves 1, 30 min. 75 g skinless chicken, 1/4 onion, 1 small tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp pepper, 1/4 tsp turmeric, 5 curry leaves, 1 tsp oil, salt","Wash the chicken and remove all visible fat and skin.|Heat the oil, add curry leaves and onion and cook 3 minutes. Add ginger-garlic paste, 1 minute.|Add tomato, coriander powder, turmeric and pepper and cook 4 minutes into a thick masala.|Add the chicken and salt and coat well, cook 2 minutes.|Add 1/2 cup water, cover and simmer on low 15 to 18 minutes until cooked through with no pink inside.|Reduce to a semi-thick gravy and finish with coriander."],
+wdosa:["Wheat dosa (2)","Serves 1, 20 min. 1/2 cup wheat atta, 3/4 cup water, 1/4 tsp cumin, 1 tbsp chopped onion, salt, a few drops of oil","Whisk the atta with water into a smooth, thin batter with no lumps.|Add salt, cumin and onion and rest 10 minutes.|Heat a non-stick tawa on medium.|Pour a ladle and spread by tilting the tawa or with the ladle base. Add a few drops of oil on the edges.|Cook 1 to 2 minutes until the edges lift, flip, cook 30 seconds.|Make 2 dosas."],
+gg:["Boiled green gram (1/2 cup)","Serves 1, 30 min plus soaking. 1/4 cup dry green gram (about 50 g), salt, pepper, lemon","Wash and soak the green gram in water for 6 to 8 hours or overnight.|Drain and pressure-cook with 1 cup water for 2 whistles. Without a cooker, boil 20 to 25 minutes.|Drain well; the grams should be soft but whole.|Measure 1/2 cup and season with salt, pepper and a few drops of lemon."],
+spin:["Spinach thoran","Serves 1, 15 min. 1 big bunch or about 150 g spinach or cheera, 2 garlic cloves, 2 tbsp onion, 1 tbsp coconut, 1/2 tsp mustard, 1 dry red chilli, 1 tsp oil, salt","Wash the greens well in 2 changes of water and chop finely, stems included.|Heat the oil, crackle the mustard, then add chilli, crushed garlic and onion for 1 minute.|Add the greens and salt. Do not add water; the leaves release their own.|Cover and cook on low 5 to 6 minutes until wilted and tender.|Mix in the coconut, cook uncovered for 1 minute to dry any liquid."],
+bg:["Bengal gram (1/2 cup)","Serves 1, 40 min plus soaking. 1/4 cup dry Bengal gram (about 50 g), 1/4 tsp turmeric, salt","Wash and soak the Bengal gram overnight (8 hours).|Drain, then pressure-cook with 1 cup water, turmeric and salt for 4 to 5 whistles until soft but whole.|Let the pressure release naturally.|Drain and measure 1/2 cup for the plate."],
+vcurry:["Vegetable curry (1 cup)","Serves 1, 25 min. 1 cup mixed vegetables (carrot, beans, cauliflower), 1/4 onion, 1 tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp turmeric, 1/4 tsp chilli powder, 1 tsp oil, salt","Cut the vegetables into small, even pieces so they cook together.|Heat the oil and fry onion 3 minutes, then ginger-garlic paste 1 minute.|Add tomato and the powders and cook 4 minutes until soft.|Add the vegetables, salt and 1/2 cup water. Cover and cook 10 to 12 minutes.|Mash a few pieces to thicken lightly. Aim for a medium gravy with at most a tablespoon of coconut milk or none."],
+chap:["Chapati (2)","Serves 1, 25 min. 1/2 cup wheat atta (about 50 g), 1/4 cup water, pinch of salt, dry flour for rolling","Mix atta and salt, add water a little at a time, and knead 5 minutes into a soft dough.|Cover and rest 15 minutes.|Divide into 2 balls, dust and roll into 15 cm rounds, thin and even.|Heat a tawa on medium-high. Cook 30 seconds, flip, cook 30 seconds more.|Press the edges with a cloth until it puffs. No ghee or oil on top."],
+chan:["Channa curry (1 cup)","Serves 1, 40 min plus soaking. 1/4 cup black channa (about 50 g dry), 1/2 onion, 1 tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp chilli powder, 1/4 tsp garam masala, 1/4 tsp turmeric, 1 tsp oil, coriander leaves, salt","Soak the channa overnight (8 hours).|Pressure-cook with salt and 1.5 cups water for 5 to 6 whistles until soft.|Heat the oil, fry onion until golden (4 minutes), add ginger-garlic paste for 1 minute.|Add tomato and the powders and cook 4 minutes.|Add the channa with its cooking water, mash a few to thicken, and simmer 10 minutes.|Add garam masala and coriander. Serve 1 cup."],
+cab:["Cabbage thoran","Serves 1, 12 min. 1 cup finely shredded cabbage, 1 tbsp coconut, 1/2 tsp mustard, 5 curry leaves, 1 green chilli, 1/4 tsp turmeric, 1 tsp oil, salt","Shred the cabbage very fine and keep dry.|Heat the oil, crackle the mustard, add curry leaves and chilli.|Add the cabbage, turmeric and salt and toss on medium heat.|Cover and cook 4 to 5 minutes. It should stay slightly crunchy.|Mix in the coconut and switch off."],
+spr:["Sprouted green gram (1/2 cup)","Serves 1, 10 min after sprouting. 1/4 cup dry green gram, salt, pepper, lemon, 1 tbsp chopped onion","Soak the green gram 8 hours, drain, and tie in a damp cloth or leave in a colander covered.|Keep 12 to 24 hours in a warm spot, rinsing once or twice, until tails about 5 mm show.|Steam the sprouts for 5 minutes (or eat raw if you are comfortable with it; steaming is safer).|Toss with salt, pepper, lemon and onion."],
+puttu:["Oats puttu (one serving)","Serves 1, 20 min. 1/3 cup oats flour (plain oats ground fine), 3 to 4 tbsp salted water, 1 tbsp coconut","Dry-roast the oats flour in a pan on low heat for 2 minutes, then cool.|Sprinkle the salted water a spoon at a time, mixing, until the flour is crumbly and holds a lightly pressed fist but falls apart again.|In the puttu maker add a layer of coconut, then the flour, then coconut again, until filled.|Steam 6 to 8 minutes until steam comes out from the top.|Push the cylinder out gently and serve with kadala curry."],
+kad:["Kadala curry (1 cup)","Serves 1, 40 min plus soaking. 1/4 cup black channa (about 50 g dry), 1/2 onion, 1 tomato, 1 tbsp coconut, 1 tsp coriander powder, 1/4 tsp pepper, 1/4 tsp turmeric, 1/2 tsp mustard, 5 curry leaves, 1 tsp oil, salt","Soak the channa overnight and pressure-cook with salt for 5 to 6 whistles.|Dry-roast the coriander powder and pepper 30 seconds, then grind with the coconut and a splash of water.|Heat the oil, crackle the mustard, add curry leaves and onion for 3 minutes, then tomato for 3 minutes.|Add turmeric, the channa with some of its water and the ground paste.|Simmer 10 minutes until it thickens. Serve 1 cup."],
+idiy:["Idiyappam (2)","Serves 1, 20 min. 1/2 cup idiyappam flour (rice flour, about 50 g), about 1/3 cup hot water, pinch of salt","Boil the water, add salt and pour over the flour, mixing with a spoon until it forms a soft, non-sticky dough.|Cool 3 minutes until you can handle it, then knead briefly.|Fill the dough in a sev maker. Press 2 spirals onto greased idli plates or banana leaf squares.|Steam 8 to 10 minutes.|Serve with vegetable curry. No coconut milk or sugar."],
+mixt:["Mixed vegetable thoran","Serves 1, 15 min. 1 cup finely chopped carrot, beans and cabbage, 1 tbsp coconut, 1/2 tsp mustard, 5 curry leaves, 1/4 tsp turmeric, 1 tsp oil, salt","Chop all vegetables very fine, about 3 mm.|Heat the oil, crackle the mustard, add curry leaves.|Add the vegetables, turmeric and salt and mix.|Cover and cook on low heat 6 to 8 minutes, stirring once. No water needed.|Mix in the coconut and cook uncovered 1 minute."],
+ragi:["Ragi dosa (2)","Serves 1, 25 min. 1/3 cup ragi flour, 2 tbsp dosa batter, 1/2 cup water, 1/4 tsp cumin, salt, a few drops of oil","Whisk the ragi flour, batter, cumin and salt with the water to a thin batter, with no lumps.|Rest 10 minutes; it thickens, so thin with a splash of water.|Heat a non-stick tawa on medium and wipe lightly with oil.|Pour a ladle in a spiral from the edge in. Cover for 1 minute.|Add a few drops of oil on the edges, flip once and cook 1 minute.|Make 2 dosas."],
+veg:["Vegetable thoran","Serves 1, 15 min. 1 cup mixed finely chopped vegetables, 1 tbsp coconut, 1/2 tsp mustard, 5 curry leaves, 1 green chilli, 1/4 tsp turmeric, 1 tsp oil, salt","Chop the vegetables very fine.|Heat the oil, crackle the mustard, add curry leaves and chilli.|Add the vegetables, turmeric and salt.|Cover and cook on low 6 to 8 minutes, stirring once.|Mix in the coconut and switch off."],
+rajma:["Rajma (about 50 g dry)","Serves 1, 50 min plus soaking. 1/4 cup dry rajma (about 50 g), 1/2 onion, 1 tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp chilli powder, 1 tsp oil, salt","Soak the rajma overnight (8 hours) and discard the water.|Pressure-cook with salt and 2 cups fresh water for 6 to 7 whistles until it mashes easily.|Heat the oil, fry onion 4 minutes, add ginger-garlic paste 1 minute, then tomato and powders for 4 minutes.|Add the rajma with its water and simmer 10 minutes.|Mash a few beans to thicken. Serve about 1/2 cup."],
+bread:["Whole-grain bread (2 slices)","Whole-grain bread","Toast lightly on a dry tawa. No butter"],
+dosa:["Dosa (2)","Serves 1, 15 min. About 120 g dosa batter, a few drops of oil","Let the batter come to room temperature and stir gently.|Heat a non-stick tawa on medium. Sprinkle a few drops of water; they should sizzle and vanish.|Pour a ladle in the centre and spread in a circle with the back of the ladle.|Drizzle a few drops of oil around the edge and cook 1 to 2 minutes until golden and crisp.|Fold and serve. Make 2 medium dosas."],
+upma:["Broken wheat upma (1/2 cup)","Serves 1, 25 min. 1/4 cup broken wheat, 1 tbsp each chopped carrot, beans and onion, 1/2 tsp mustard, 1 green chilli, 5 curry leaves, 1 tsp oil, salt","Dry-roast the broken wheat on low heat 3 minutes until it smells nutty, then set aside.|Heat the oil, crackle the mustard, add chilli, curry leaves and onion and fry 2 minutes.|Add the carrot and beans with 2 tbsp water and cook 2 minutes.|Add 3/4 cup water and salt and bring to a boil.|Stir in the wheat, cover and cook on the lowest heat 8 to 10 minutes. Rest 5 minutes and fluff."]
+};
+
+const F={Guava:"Guava, 100–150 g",Apple:"Green apple, 100–150 g",Papaya:"Papaya, 100–150 g"};
+const M={
+1:{f:"Guava",m:[["6:00 AM","Tea/coffee without sugar, 150 ml",["tea"]],["8:00 AM","2 idlis + sambar (1 cup) + vegetable salad + 2 egg whites",["idli","sambar","salad","egg"]],["11:00 AM","Steamed corn, 1/2 cup",["corn"]],["1:00 PM","Rice 1 cup + sambar 1/2 cup + beans thoran 1 cup + fish 75 g + curd 1 cup",["rice","sambar","bean","fish","curd"]],["5:00 PM","Tea/coffee without sugar + a handful of nuts",["tea","nuts"]],["8:00 PM","2 oats dosas + soya curry 1 cup + chicken curry 75 g",["odosa","soya","chick"]]]},
+2:{f:"Apple",m:[["6:00 AM","Black coffee/tea without sugar, 150 ml",["tea"]],["8:00 AM","2 wheat dosas + sambar + vegetable salad + 2 egg whites",["wdosa","sambar","salad","egg"]],["11:00 AM","Boiled green gram, 1/2 cup",["gg"]],["1:00 PM","Rice 1 cup + rasam 1/2 cup + spinach thoran + Bengal gram 1/2 cup + buttermilk 1/2 cup",["rice","rasam","spin","bg","butter"]],["5:00 PM","Tea/coffee without sugar + a handful of nuts",["tea","nuts"]],["8:00 PM","2 wheat chapatis + vegetable curry 1 cup + fish curry 75 g",["chap","vcurry","fishc"]]]},
+3:{f:"Papaya",m:[["6:00 AM","Tea/coffee without sugar, 150 ml",["tea"]],["8:00 AM","2 chapatis + channa curry 1 cup + salad + 2 egg whites",["chap","chan","salad","egg"]],["11:00 AM","Steamed corn, 1/2 cup",["corn"]],["1:00 PM","Rice 1 cup + sambar 1/2 cup + cabbage thoran 1 cup + fish 75 g + curd 1 cup",["rice","sambar","cab","fish","curd"]],["5:00 PM","Sprouted green gram 1/2 cup + unsweetened tea/coffee",["spr","tea"]],["8:00 PM","Oats puttu (one measured serving) + kadala curry 1 cup",["puttu","kad"]]]},
+4:{f:"Guava",m:[["6:00 AM","Coffee/tea without sugar, 150 ml",["tea"]],["8:00 AM","2 idiyappams + vegetable curry 1 cup + 2 egg whites",["idiy","vcurry","egg"]],["11:00 AM","Cooked Bengal gram, 1/2 cup",["bg"]],["1:00 PM","Rice 1 cup + rasam 1/2 cup + mixed vegetable thoran 1 cup + green gram about 50 g + buttermilk 1/2 cup",["rice","rasam","mixt","gg","butter"]],["5:00 PM","Tea/coffee without sugar + a handful of nuts",["tea","nuts"]],["8:00 PM","2 ragi dosas + vegetable curry 1 cup + chicken curry 75 g",["ragi","vcurry","chick"]]]},
+5:{f:"Apple",m:[["6:00 AM","Black coffee/tea without sugar, 150 ml",["tea"]],["8:00 AM","2 whole-grain bread slices + soya curry 1 cup + salad + 2 egg whites",["bread","soya","salad","egg"]],["11:00 AM","Steamed corn, 1/2 cup",["corn"]],["1:00 PM","Rice 1 cup + sambar 1/2 cup + vegetable thoran 1 cup + rajma about 50 g + curd 1 cup",["rice","sambar","veg","rajma","curd"]],["5:00 PM","Tea/coffee without sugar + a handful of nuts",["tea","nuts"]],["8:00 PM","2 oats dosas + channa curry 1 cup",["odosa","chan"]]]},
+6:{f:"Papaya",m:[["6:00 AM","Tea/coffee without sugar, 150 ml",["tea"]],["8:00 AM","2 dosas + sambar + vegetable salad + 2 egg whites",["dosa","sambar","salad","egg"]],["11:00 AM","Sprouted green gram, 1/2 cup",["spr"]],["1:00 PM","Rice 1 cup + rasam 1/2 cup + spinach thoran 1 cup + fish 75 g + buttermilk 1/2 cup",["rice","rasam","spin","fish","butter"]],["5:00 PM","Broken wheat upma 1/2 cup + unsweetened tea/coffee",["upma","tea"]],["8:00 PM","2 ragi dosas + channa curry 1 cup + fish curry 75 g",["ragi","chan","fishc"]]]},
+0:{f:"Guava",m:[["6:00 AM","Coffee/tea without sugar, 150 ml",["tea"]],["8:00 AM","2 idlis + sambar + vegetable salad + 2 egg whites",["idli","sambar","salad","egg"]],["11:00 AM","Boiled green gram, 1/2 cup",["gg"]],["1:00 PM","Rice 1 cup + sambar 1/2 cup + mixed vegetable thoran 1 cup + Bengal gram about 50 g + curd 1 cup",["rice","sambar","mixt","bg","curd"]],["5:00 PM","Tea/coffee without sugar + a handful of nuts",["tea","nuts"]],["8:00 PM","2 wheat dosas + soya curry 1 cup + fish curry 75 g",["wdosa","soya","fishc"]]]}
+};
+
+const SHOP={
+mon:["Monday main shop: all weekly pantry items plus the first half of fresh items",[
+["Fresh (first half)",[["Fish","250 g"],["Chicken","150 g"],["Curd","750 ml"],["Buttermilk","250 ml"],["Tomato","250 g"],["Beans","125 g"],["Cabbage","125 g"],["Carrot","125 g"],["Cucumber","1"],["Spinach / cheera","1 bunch"],["Ladies finger","125 g"],["Cauliflower","1 small (buy once)"],["Papaya","150 g"],["Guava","1"],["Green apple","1"],["Musambi","1"],["Robusta banana","1 small"]]],
+["Grains and cereals",[["Raw rice","500 g"],["Rolled oats / oats flour","500 g"],["Wheat atta","500 g"],["Ragi flour","250 g"],["Idli/dosa batter","500 g"],["Idiyappam flour","250 g"],["Whole-wheat bread","1 small loaf"],["Broken wheat","250 g"],["Corn","500 g"]]],
+["Pulses and legumes",[["Green gram","250 g"],["Bengal gram","250 g"],["Black channa","200 g"],["Rajma","100 g"],["Soya chunks","200 g"],["Mixed dal","250 g"]]],
+["Eggs and nuts",[["Eggs","14"],["Almonds","100 g"],["Walnuts","50 g"],["Unsalted mixed nuts","50 g"]]],
+["Vegetables and aromatics",[["Onion","500 g"],["Green chilli","100 g"],["Pumpkin","250 g"],["Drumstick","2"],["Ginger","100 g"],["Garlic","100 g"],["Lemon","4"]]],
+["Cooking essentials",[["Cooking oil","250 ml"],["Mustard seeds","50 g"],["Cumin seeds","50 g"],["Black pepper","25 g"],["Turmeric powder","50 g"],["Chilli powder","50 g"],["Coriander powder","100 g"],["Sambar powder","100 g"],["Rasam powder","50 g"],["Salt","as required"],["Tea / coffee","100 g"]]]]],
+thu:["Thursday replenishment: second half of fresh items",[["Fresh (second half)",[["Fish","250 g (freeze if not cooking soon)"],["Chicken","150 g (freeze if not cooking soon)"],["Curd","750 ml"],["Buttermilk","250 ml"],["Tomato","250 g"],["Beans","125 g"],["Cabbage","125 g"],["Carrot","125 g"],["Cucumber","1"],["Spinach / cheera","1 bunch"],["Ladies finger","125 g"],["Papaya","150 g"],["Guava","1"],["Green apple","1"],["Musambi","1"],["Robusta banana","1 small"]]]]]
+};
+
+const TOP={
+2:[["Top up only if short",[["Spinach / cheera","1 bunch (for thoran)"],["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g, from Monday stock"],["Green apple","1"],["Wheat atta, dosa batter, eggs (2)","for the day"],["Green gram, Bengal gram, buttermilk, nuts","per meal plan"]]]],
+3:[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g"],["Papaya","100–150 g"],["Cabbage, curd, black channa","per meal plan"],["Wheat atta, oats flour, corn, sprouted green gram, eggs (2)","for the day"]]]],
+5:[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Green apple","1"],["Whole-wheat bread, soya chunks, rajma, black channa","per meal plan"],["Oats flour, corn, curd, nuts, eggs (2)","for the day"]]]],
+6:[["Top up only if short",[["Spinach / cheera","1 bunch (buy fresh today)"],["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g lunch + 75 g dinner"],["Papaya","100–150 g"],["Broken wheat, ragi flour, dosa batter, black channa","per meal plan"],["Buttermilk, sprouted green gram, eggs (2)","for the day"]]]],
+0:[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g, thaw from freezer if needed"],["Guava","1"],["Soya chunks, wheat atta, Bengal gram, green gram","per meal plan"],["Curd, nuts, vegetables for thoran, eggs (2)","for the day"]]]]
+};
+
+/* Local storage + cloud sync (every store.set is also saved to MongoDB through /api/sync) */
+const LS=window.localStorage;
+const raw={get(k){try{return LS.getItem(k)}catch(e){return null}},set(k,v){try{LS.setItem(k,v)}catch(e){}},del(k){try{LS.removeItem(k)}catch(e){}}};
+const jparse=(t,d)=>{try{const v=JSON.parse(t);return v==null?d:v}catch(e){return d}};
+const store={get(k){return jparse(raw.get(k),{})},set(k,v){raw.set(k,JSON.stringify(v));SYNC.touch(k)}};
+const KEY_OK=/^[A-Za-z0-9_-]{1,60}$/;
+
+async function api(path,opts){
+  opts=opts||{};
+  const body=opts.body?JSON.stringify(opts.body):undefined;
+  let r;
+  try{
+    r=await fetch("/api"+path,{
+      method:opts.method||"GET",
+      headers:Object.assign({"Content-Type":"application/json"},SYNC.token?{Authorization:"Bearer "+SYNC.token}:{}),
+      body:body,
+      keepalive:!!body&&body.length<60000
+    });
+  }catch(e){throw new Error("Cannot reach the server. Check your internet connection.")}
+  let j={};try{j=await r.json()}catch(e){}
+  if(r.status===401&&SYNC.token&&path!=="/auth"){SYNC.logout(true)}
+  if(!r.ok)throw new Error(j.error||("Server error ("+r.status+")"));
+  return j;
+}
+
+const SYNC={
+  token:raw.get("hp_token")||"",
+  user:jparse(raw.get("hp_user"),null),
+  ts:jparse(raw.get("hp_ts"),{}),
+  dirty:jparse(raw.get("hp_dirty"),[]),
+  timer:null,busy:false,applying:false,st:"idle",
+  meta(){raw.set("hp_ts",JSON.stringify(this.ts));raw.set("hp_dirty",JSON.stringify(this.dirty))},
+  state(x){
+    this.st=x;
+    if(document.body)document.body.dataset.sync=x;
+    const e=document.getElementById("syncTxt");
+    if(e)e.textContent=({ok:"All changes are saved to the cloud.",saving:"Saving…",error:"Cannot reach the server. Your changes are kept on this device and will upload automatically."})[x]||"";
+  },
+  touch(k){
+    if(this.applying||!KEY_OK.test(k))return;
+    this.ts[k]=Date.now();
+    if(!this.dirty.includes(k))this.dirty.push(k);
+    this.meta();
+    if(!this.token)return;
+    clearTimeout(this.timer);
+    this.timer=setTimeout(()=>this.flush(),1200);
+  },
+  async flush(){
+    if(!this.token||this.busy)return true;
+    this.dirty=this.dirty.filter(k=>raw.get(k)!=null);
+    if(!this.dirty.length)return true;
+    this.busy=true;this.state("saving");
+    try{
+      const queue=this.dirty.slice();
+      while(queue.length){
+        const items=[],sent={};let size=0;
+        while(queue.length&&items.length<40){
+          const k=queue[0],t=raw.get(k)||"{}";
+          if(items.length&&size+t.length>900000)break;
+          queue.shift();size+=t.length;
+          sent[k]=this.ts[k]||Date.now();
+          items.push({key:k,value:jparse(t,{}),t:sent[k]});
+        }
+        await api("/sync",{method:"POST",body:{items:items}});
+        this.dirty=this.dirty.filter(k=>!(k in sent)||(this.ts[k]||0)>sent[k]);
+        this.meta();
+      }
+      this.state("ok");
+    }catch(e){
+      this.state("error");this.busy=false;return false;
+    }
+    this.busy=false;
+    if(this.dirty.length){clearTimeout(this.timer);this.timer=setTimeout(()=>this.flush(),1200)}
+    return true;
+  },
+  async pull(){
+    if(!this.token)return false;
+    const j=await api("/sync");
+    let changed=false;const seen=new Set();
+    this.applying=true;
+    try{
+      (j.items||[]).forEach(it=>{
+        if(!KEY_OK.test(it.key))return;
+        seen.add(it.key);
+        const st=+it.updatedAt||0,lt=this.ts[it.key]||0,has=raw.get(it.key)!=null;
+        if(has&&this.dirty.includes(it.key)&&lt>=st)return;
+        if(!has||st>lt){
+          raw.set(it.key,JSON.stringify(it.value));
+          this.ts[it.key]=st;
+          this.dirty=this.dirty.filter(x=>x!==it.key);
+          changed=true;
+        }
+      });
+    }finally{this.applying=false}
+    for(let i=0;i<LS.length;i++){
+      const k=LS.key(i);
+      if(k&&!k.startsWith("hp_")&&KEY_OK.test(k)&&!seen.has(k)&&!this.dirty.includes(k)){
+        this.dirty.push(k);this.ts[k]=this.ts[k]||Date.now();
+      }
+    }
+    this.meta();
+    return changed;
+  },
+  async sync(){
+    try{const ch=await this.pull();await this.flush();return ch}
+    catch(e){this.state("error");return false}
+  },
+  setSession(r){
+    const prev=raw.get("hp_uid");
+    if(prev&&prev!==r.user.id){LS.clear();this.ts={};this.dirty=[]}
+    this.token=r.token;this.user=r.user;
+    raw.set("hp_token",r.token);raw.set("hp_user",JSON.stringify(r.user));raw.set("hp_uid",r.user.id);
+    this.meta();
+  },
+  async logout(forced){
+    if(forced){this.token="";raw.del("hp_token");showAuth("Please log in again.");return}
+    await this.flush();
+    if(this.dirty.length&&!confirm("Some changes are not uploaded yet and will be lost if you log out. Log out anyway?"))return;
+    LS.clear();location.reload();
+  }
+};
+const now=new Date().getDay();
+let day=now,tab="meals",famOpen=false,cookAllOpen=false,stockFilter="";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Dietary Rules & Menu Updates */
+const SW=s=>s.replace(/[Ss]pinach( \/ cheera| or cheera)?|[Cc]heera/g,m=>/[SC]/.test(m[0])?"Snake gourd":"snake gourd").replace(/\b[Cc]abbage\b/g,m=>m[0]==="C"?"Bottle gourd":"bottle gourd").replace(/\b[Cc]auliflower\b/g,m=>m[0]==="C"?"Capsicum":"capsicum").replace(/\b[Cc]arrots?\b/g,m=>m[0]==="C"?"Ash gourd":"ash gourd").replace(/[Ss]oya chunks/g,"Green gram").replace(/[Ss]oya curry/g,m=>m[0]==="S"?"Green gram curry":"green gram curry").replace(/1\/2 onion|1\/4 onion|2 tbsp onion|1 tbsp chopped onion/g,m=>({"1/2 onion":"1/4 onion","1/4 onion":"1 tbsp onion","2 tbsp onion":"1 tbsp onion","1 tbsp chopped onion":"1 tsp chopped onion"})[m]);
+for(const k in R)R[k]=R[k].map(SW);
+Object.assign(R,{
+salad:["Vegetable salad","Serves 1, 5 min. 1/2 cucumber, 1/2 tomato, 1 tsp finely chopped onion, juice of 1/4 lemon, salt and pepper","Wash the vegetables well.|Slice the cucumber and tomato thin and chop the onion very fine, just a little for flavour.|Mix in a bowl with lemon juice, a pinch of salt and pepper.|Eat fresh within 15 minutes. No oil or dressing."],
+spin:["Snake gourd thoran","Serves 1, 20 min. 1 cup (about 120 g) finely chopped snake gourd, 1 tbsp coconut, 2 garlic cloves, 1/2 tsp mustard, 1 dry red chilli, 5 curry leaves, 1/4 tsp turmeric, 1 tsp oil, salt","Wash the snake gourd, scrape off tough skin, remove mature seeds and chop into small pieces.|Heat the oil, crackle the mustard, then add chilli, crushed garlic and curry leaves.|Add the snake gourd, turmeric and salt with 2 tbsp water.|Cover and cook on low heat 8 to 10 minutes until soft, stirring once.|Mix in the coconut and cook uncovered 1 minute to dry."],
+cab:["Bottle gourd thoran","Serves 1, 20 min. 1 cup (about 120 g) chopped bottle gourd (churakka), 1 tbsp coconut, 1/2 tsp mustard, 5 curry leaves, 1 green chilli, 1/4 tsp turmeric, 1 tsp oil, salt","Peel the bottle gourd, scoop out the seeds and chop into small cubes.|Heat the oil, crackle the mustard, add curry leaves and chilli.|Add the gourd, turmeric and salt. No extra water is needed; it releases its own.|Cover and cook on low heat 8 to 10 minutes until soft but not mushy.|Stir in the coconut and switch off."],
+soya:["Green gram curry (1 cup)","Serves 1, 30 min plus soaking. 1/4 cup dry green gram (about 50 g), 1 tomato, 1 tbsp onion, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp turmeric, 1/4 tsp chilli powder, 5 curry leaves, 1 tsp oil, coriander leaves, salt","Soak the green gram 6 to 8 hours and pressure-cook with salt for 2 to 3 whistles until soft but whole.|Heat the oil, add curry leaves and onion for 2 minutes, then ginger-garlic paste for 30 seconds.|Add the tomato and the powders and cook 4 minutes until soft.|Add the green gram with 1/2 cup of its cooking water and simmer 8 minutes. Mash a few to thicken.|Finish with coriander and serve 1 cup."]
+});
+for(const w in M)M[w].m.forEach(m=>{m[1]=SW(m[1])});
+const IM={"Spinach / cheera":["Snake gourd","250 g"],"Cabbage":["Bottle gourd","250 g"],"Carrot":["Ash gourd","200 g"],"Cauliflower":["Capsicum","2 (buy once)"],"Onion":["Onion","250 g"],"Garlic":["Garlic","50 g"],"Ginger":["Ginger","50 g"]};
+const fixG=gs=>gs.map(g=>[g[0],g[1].filter(it=>it[0]!=="Soya chunks").map(it=>IM[it[0]]||[SW(it[0]),it[1]])]);
+SHOP.mon[1]=fixG(SHOP.mon[1]);SHOP.thu[1]=fixG(SHOP.thu[1]);for(const d in TOP)TOP[d]=fixG(TOP[d]);
+
+M[2].m[3]=["1:00 PM","Rice 1 cup + rasam 1/2 cup + snake gourd thoran 1 cup + fish curry 75 g + buttermilk 1/2 cup",["rice","rasam","spin","fishc","butter"]];
+M[2].m[5]=["8:00 PM","2 wheat chapatis + vegetable curry 1 cup + channa curry 1 cup",["chap","vcurry","chan"]];
+M[3].m[5]=["8:00 PM","Oats puttu (one measured serving) + kadala curry 1 cup + chicken curry 75 g",["puttu","kad","chick"]];
+M[4].m[5]=["8:00 PM","2 ragi dosas + vegetable curry 1 cup + rajma about 50 g",["ragi","vcurry","rajma"]];
+M[5].m[3]=["1:00 PM","Rice 1 cup + sambar 1/2 cup + vegetable thoran 1 cup + fish curry 75 g + curd 1 cup",["rice","sambar","veg","fishc","curd"]];
+M[5].m[5]=["8:00 PM","2 oats dosas + channa curry 1 cup + chicken curry 75 g",["odosa","chan","chick"]];
+M[6].m[5]=["8:00 PM","2 ragi dosas + kadala curry 1 cup + vegetable salad",["ragi","kad","salad"]];
+M[0].m[5]=["8:00 PM","2 wheat dosas + green gram curry 1 cup + chicken curry 75 g",["wdosa","soya","chick"]];
+const FISH_SUN=["1:00 PM","Rice 1 cup + sambar 1/2 cup + mixed vegetable thoran 1 cup + fish curry 75 g + curd 1 cup",["rice","sambar","mixt","fishc","curd"]];
+const MUT_SUN=["1:00 PM","Rice 1 cup + sambar 1/2 cup + mixed vegetable thoran 1 cup + mutton curry 75 g + curd 1 cup",["rice","sambar","mixt","mutton","curd"]];
+M[0].m[3]=FISH_SUN;
+
+R.mutton=["Mutton curry (75 g)","Serves 1, 60 min. 75 g lean boneless mutton, 1 tbsp onion, 1 small tomato, 1/2 tsp ginger-garlic paste, 1/2 tsp coriander powder, 1/4 tsp chilli powder, 1/4 tsp turmeric, 1/4 tsp pepper, 5 curry leaves, 1 tsp oil, salt","Choose lean boneless pieces, trim all visible fat, wash well and cut into small cubes.|Pressure-cook the mutton with turmeric, salt, ginger-garlic paste and 1/2 cup water for 4 to 5 whistles (about 25 minutes) until tender.|Heat the oil, add curry leaves and onion for 2 minutes, then tomato, coriander powder, chilli powder and pepper for 4 minutes.|Add the cooked mutton with its stock and simmer 10 minutes until the gravy thickens. No coconut cream or ghee.|Skim any fat floating on top before serving, and serve only 75 g of mutton."];
+R.batter=["Homemade idli/dosa batter","Serves 1, 30 min plus soaking, fermenting. 1 cup raw rice (about 150 g), 1/3 cup urad dal (about 50 g), salt, water","Wash the rice and urad dal separately and soak each for 5 to 6 hours.|Grind the urad dal with cold water into a light, fluffy batter. Grind the rice a little coarser.|Mix both with salt by hand for a minute; this helps fermentation.|Keep covered in a warm place for 8 to 10 hours until the batter rises and smells slightly sour.|Store in the fridge for up to 3 days. Stir gently, never whisk, before using for idli or dosa."];
+
+SHOP.mon[1].push(["Occasional",[["Mutton","100 g"]]]);
+SHOP.mon[1].forEach(g=>{if(g[0]==="Grains and cereals")g[1]=g[1].filter(it=>it[0]!=="Idli/dosa batter").map(it=>it[0]==="Raw rice"?["Raw rice","700 g"]:it);if(g[0]==="Pulses and legumes")g[1].push(["Urad dal","100 g"])});
+TOP[2]=[["Top up only if short",[["Snake gourd","250 g (buy fresh)"],["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g, from Monday stock"],["Green apple","1"],["Wheat atta, dosa batter, eggs (2)","for the day"],["Black channa, buttermilk, nuts","per meal plan"]]]];
+TOP[3]=[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g"],["Chicken","75 g (dinner)"],["Papaya","100–150 g"],["Bottle gourd, curd, black channa","per meal plan"],["Wheat atta, oats flour, corn, sprouted green gram, eggs (2)","for the day"]]]];
+TOP[5]=[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g, from Thursday stock"],["Chicken","75 g (dinner)"],["Green apple","1"],["Whole-wheat bread, green gram, black channa","per meal plan"],["Oats flour, corn, curd, nuts, eggs (2)","for the day"]]]];
+TOP[6]=[["Top up only if short",[["Snake gourd","250 g (buy fresh)"],["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g"],["Papaya","100–150 g"],["Broken wheat, ragi flour, dosa batter, black channa","per meal plan"],["Buttermilk, sprouted green gram, eggs (2)","for the day"]]]];
+TOP[0]=[["Top up only if short",[["Curry leaves, coriander","small bunch"]]],["Use from stock today",[["Fish","75 g, from Thursday stock"],["Chicken","75 g (dinner)"],["Guava","1"],["Green gram, wheat atta","per meal plan"],["Curd, nuts, vegetables for thoran, eggs (2)","for the day"]]]];
+for(const d in TOP)TOP[d].forEach(g=>g[1].forEach(it=>{it[0]=it[0].replace(", dosa batter","")}));
+for(const w in M)M[w].m.forEach(x=>{if(x[2].some(k=>["idli","odosa","ragi","dosa"].includes(k)))x[2]=x[2].concat("batter")});
+
+/* Stock Consumption Map */
+const MT=[360,480,660,780,1020,1200];
+const U={tea:"Tea / coffee:2",idli:"Raw rice:40,Urad dal:12",sambar:"Mixed dal:20,Pumpkin:30,Drumstick:0.25,Onion:13,Tomato:40,Cooking oil:1",salad:"Cucumber:0.5,Tomato:40,Onion:5,Lemon:0.25",egg:"Eggs:2",corn:"Corn:60",rice:"Raw rice:70",rasam:"Tomato:50,Garlic:2,Cooking oil:1",bean:"Beans:100,Onion:10,Green chilli:3,Cooking oil:4",fish:"Fish:75,Cooking oil:2",fishc:"Fish:75,Onion:13,Tomato:40,Ginger:2,Garlic:2,Cooking oil:4",curd:"Curd:240",butter:"Buttermilk:120",nuts:"Almonds:10,Walnuts:5,Unsalted mixed nuts:5",odosa:"Rolled oats / oats flour:35,Raw rice:8,Urad dal:3,Onion:5,Cooking oil:1",soya:"Green gram:30,Onion:10,Tomato:50,Ginger:2,Garlic:2,Cooking oil:5",chick:"Chicken:75,Onion:13,Tomato:40,Ginger:2,Garlic:2,Cooking oil:5",wdosa:"Wheat atta:50,Onion:5,Cooking oil:1",gg:"Green gram:50",spin:"Snake gourd:100,Garlic:2,Onion:5,Cooking oil:4",bg:"Bengal gram:50",vcurry:"Ash gourd:40,Beans:40,Capsicum:30,Onion:15,Tomato:60,Cooking oil:5",chap:"Wheat atta:50",chan:"Black channa:50,Onion:20,Tomato:50,Cooking oil:5",cab:"Bottle gourd:100,Green chilli:3,Cooking oil:4",spr:"Green gram:50",puttu:"Rolled oats / oats flour:40",kad:"Black channa:50,Onion:15,Tomato:40,Cooking oil:4",idiy:"Idiyappam flour:50",mixt:"Ash gourd:40,Beans:40,Snake gourd:40,Cooking oil:4",ragi:"Ragi flour:40,Raw rice:8,Urad dal:3,Cooking oil:1",veg:"Bottle gourd:40,Ash gourd:40,Ladies finger:40,Cooking oil:4",rajma:"Rajma:50,Onion:15,Tomato:50,Cooking oil:5",bread:"Whole-wheat bread:0.1",dosa:"Raw rice:50,Urad dal:15,Cooking oil:1",upma:"Broken wheat:30,Ash gourd:15,Beans:15,Onion:10,Cooking oil:4",mutton:"Mutton:75,Onion:10,Tomato:40,Ginger:2,Garlic:2,Cooking oil:4"};
+
+const BASE={sambar:2,rasam:2};
+const YP={rice:"1 cup (200 ml) cooked",sambar:"1 cup at breakfast, 1/2 cup at lunch",rasam:"1/2 cup",fish:"75 g",fishc:"75 g fish",chick:"75 g chicken",mutton:"75 g mutton",curd:"1 cup",butter:"1/2 cup",bean:"1 cup",cab:"1 cup",spin:"1 cup",mixt:"1 cup",veg:"1 cup",vcurry:"1 cup",soya:"1 cup",chan:"1 cup",kad:"1 cup",idli:"2 idlis",odosa:"2 dosas",wdosa:"2 dosas",ragi:"2 dosas",dosa:"2 dosas",chap:"2 chapatis",idiy:"2 idiyappams",puttu:"one measured serving",gg:"1/2 cup",bg:"1/2 cup",spr:"1/2 cup",corn:"1/2 cup",rajma:"about 50 g dry measure",upma:"1/2 cup",egg:"2 egg whites"};
+const METH={bean:"th",cab:"th",spin:"th",mixt:"th",veg:"th",odosa:"ds",wdosa:"ds",ragi:"ds",dosa:"ds",soya:"cu",chick:"cu",vcurry:"cu",chan:"cu",kad:"cu",rajma:"cu",fishc:"cu",gg:"pl",bg:"pl",spr:"sp",idli:"st",idiy:"st",puttu:"st",corn:"co",chap:"ch",upma:"up",rice:"ri",sambar:"sa",rasam:"ra",fish:"fi",egg:"eg",salad:"sl",tea:"te",curd:"cd",butter:"bm",nuts:"nu",bread:"br",mutton:"mu",batter:"ba"};
+const MS={
+th:["പച്ചക്കറി വൃത്തിയാക്കി ചെറുതായി അരിയുക.","1 ടീസ്പൂൺ എണ്ണയിൽ കടുക് പൊട്ടിച്ച് കറിവേപ്പിലയും പച്ചമുളകും ചേർക്കുക.","പച്ചക്കറിയും മഞ്ഞൾപ്പൊടിയും ഉപ്പും ചേർത്ത് ഇളക്കുക.","അടച്ചുവെച്ച് ചെറുതീയിൽ 8–10 മിനിറ്റ് വേവിക്കുക; ഇടയ്ക്ക് ഇളക്കുക.","ഒരു സ്പൂൺ തേങ്ങ ചേർത്ത് അടുപ്പിൽ നിന്ന് മാറ്റുക."],
+ds:["മാവ് വെള്ളം ചേർത്ത് കട്ടയില്ലാതെ നേർത്തതായി കലക്കുക; ഉപ്പ് ചേർക്കുക.","10 മിനിറ്റ് വയ്ക്കുക.","നോൺ-സ്റ്റിക്ക് തവ ചൂടാക്കി ഏതാണ്ട് തുള്ളി എണ്ണ തടവുക.","ഒരു തവി മാവ് ഒഴിച്ച് പരത്തുക; 1–2 മിനിറ്റ് വേവിച്ച് മറിച്ചിട്ട് ഒരു മിനിറ്റ് കൂടി വേവിക്കുക."],
+cu:["പയർ/കടല/രാജ്മ ആണെങ്കിൽ കുതിർത്ത് കുക്കറിൽ വേവിച്ചുവെക്കുക.","1 ടീസ്പൂൺ എണ്ണയിൽ കറിവേപ്പില, അല്പം സവാള, ഇഞ്ചി-വെളുത്തുള്ളി വഴറ്റുക.","തക്കാളിയും പൊടികളും ചേർത്ത് 4 മിനിറ്റ് വഴറ്റി കുഴമ്പ് പോലെയാക്കുക.","പ്രധാന ചേരുവയും വെള്ളവും ഉപ്പും ചേർത്ത് അടച്ച് ചെറുതീയിൽ വേവിക്കുക (ചിക്കൻ 15–18 മിനിറ്റ്, മീൻ 8–10 മിനിറ്റ്, പയർ/കടല 10 മിനിറ്റ്).","മല്ലിയില ചേർത്ത് വിളമ്പുക."],
+pl:["വൃത്തിയാക്കി 6–8 മണിക്കൂർ (കടല രാത്രി മുഴുവൻ) കുതിർക്കുക.","വെള്ളവും ഉപ്പും ചേർത്ത് കുക്കറിൽ 2–5 വിസിൽ വരെ വേവിക്കുക.","വെള്ളം ഊറ്റി നിർദ്ദേശിച്ച അളവ് മാത്രം എടുക്കുക."],
+sp:["ചെറുപയർ 8 മണിക്കൂർ കുതിർത്ത് വെള്ളം ഊറ്റുക.","നനഞ്ഞ തുണിയിൽ കെട്ടി 12–24 മണിക്കൂർ വച്ച് മുള വരുത്തുക.","5 മിനിറ്റ് ആവിയിൽ വേവിക്കുക.","ഉപ്പ്, കുരുമളക്, നാരങ്ങാനീര് ചേർക്കുക."],
+st:["മാവ്/പൊടി തയ്യാറാക്കുക (ഇഡ്ഡലി മാവ് ഇളക്കി, ഇടിയപ്പം/പുട്ട് പൊടി ഈർപ്പം ചേർത്ത്).","പാത്രത്തിൽ ഏതാണ്ട് തുള്ളി എണ്ണ തടവി മാവ്/പൊടി നിറയ്ക്കുക.","ആവിയിൽ 8–12 മിനിറ്റ് വേവിക്കുക; ഈർക്കില്ലി കുത്തിനോക്ക്മ്പോൾ ഒട്ടരുത്.","ചൂടോടെ കറിയോടൊപ്പം വിളമ്പുക."],
+co:["ചോളം 10–12 മിനിറ്റ് ആവിയിൽ വേവിക്കുക.","ഉപ്പ്, കുരുമളക്, നാരങ്ങാനീര് ചേർക്കുക; വെണ്ണ വേണ്ട."],
+ch:["ഗോതമ്പ് പൊടി ഉപ്പും വെള്ളവും ചേർത്ത് മൃദുവായി കുഴയ്ക്കുക; 15 മിനിറ്റ് വയ്ക്കുക.","ഉരുളകളാക്കി നേർത്തതായി പരത്തുക.","ചൂടായ തവയിൽ ഇരുവശവും 30 സെക്കൻഡ് വീതം ചുട്ടെടുക്കുക; എണ്ണ/നെയ്യ് തടവരുത്."],
+up:["ഗോതമ്പ് നുറുക്ക് 3 മിനിറ്റ് വറുത്ത് മാറ്റുക.","1 ടീസ്പൂൺ എണ്ണയിൽ കടുക്, കറിവേപ്പില, പച്ചമുളക്, അല്പം സവാള വഴറ്റുക.","പച്ചക്കറിയും 3/4 കപ്പ് വെള്ളവും ഉപ്പും ചേർത്ത് തിളപ്പിക്കുക.","ഗോതമ്പ് നുറുക്ക് ചേർത്ത് അടച്ച് ചെറുതീയിൽ 8–10 മിനിറ്റ് വേവിക്കുക."],
+ri:["അരി 3 തവണ കഴുകി 15 മിനിറ്റ് കുതിർക്കുക.","1:2 അനുപാതത്തിൽ വെള്ളത്തിൽ ഉപ്പ് ചേർത്ത് വേവിക്കുക.","അടച്ച് ചെറുതീയിൽ 12–15 മിനിറ്റ്; 5 മിനിറ്റ് വച്ചശേഷം ഇളക്കുക. അളന്ന അളവ് മാത്രം കഴിക്കുക."],
+sa:["പരിപ്പ് മഞ്ഞൾ ചേർത്ത് കുക്കറിൽ 3 വിസിൽ വേവിക്കുക.","പച്ചക്കറികൾ ഉപ്പ് ചേർത്ത് വേവിക്കുക.","പുളിവെള്ളവും സാമ്പാർ പൊടിയും ചേർത്ത് 5 മിനിറ്റ് തിളപ്പിക്കുക.","പരിപ്പ് ചേർത്ത് 5 മിനിറ്റ് കൂടി തിളപ്പിക്കുക.","കടുക്, ഉണക്കമുളക്, കറിവേപ്പില താളിച്ച് ചേർക്കുക."],
+ra:["തക്കാളി രസം പൊടിയും ഉപ്പും ചേർത്ത് 6 മിനിറ്റ് വേവിച്ച് ഉടയ്ക്കുക.","ചതച്ച വെളുത്തുള്ളി, കുരുമളക്, ജീരകം, പരിപ്പ് വെള്ളം ചേർത്ത് പതഞ്ഞുവരുമ്പോൾ ഇറക്കുക.","കടുക്, കറിവേപ്പില താളിച്ച് മല്ലിയില ചേർക്കുക."],
+fi:["മീൻ കഴുകി മഞ്ഞൾ, മുളകുപൊടി, നാരങ്ങാനീര്, ഉപ്പ് പുരട്ടി 15 മിനിറ്റ് വയ്ക്കുക.","നോൺ-സ്റ്റിക്ക് പാനിൽ അര ടീസ്പൂൺ എണ്ണയിൽ ഇരുവശവും 3–4 മിനിറ്റ് വീതം വേവിക്കുക.","വറുക്കരുത്; നാരങ്ങയോടൊപ്പം വിളമ്പുക."],
+eg:["മുട്ട 10 മിനിറ്റ് പുഴുങ്ങുക.","തണുത്ത വെള്ളത്തിൽ ഇട്ട് തൊലി കളയുക.","മഞ്ഞക്കരു മാറ്റി വെള്ള മാത്രം കുരുമളകും ഉപ്പും ചേർത്ത് കഴിക്കുക."],
+sl:["പച്ചക്കറികൾ കഴുകി നേർത്തതായി അരിയുക.","നാരങ്ങാനീരും ഉപ്പും കുരുമളകും ചേർത്ത് ഇളക്കുക.","എണ്ണയോ ഡ്രസ്സിംഗോ ചേർക്കരുത്; ഉടൻ കഴിക്കുക."],
+te:["വെള്ളം തിളപ്പിച്ച് ചായപ്പൊടി/കാപ്പിപ്പൊടി ചേർത്ത് അരിച്ചെടുക്കുക.","പഞ്ചസാര, തേൻ, ശർക്കര ഒന്നും ചേർക്കരുത്."],
+cd:["പ്ലെയിൻ തൈര് അളന്ന് വിളമ്പുക."],
+bm:["തൈര് വെള്ളം ചേർത്തടിക്കുക.","ഉപ്പ്, ഇഞ്ചി, കറിവേപ്പില ചേർക്കുക."],
+nu:["ഒരു പിടി മാത്രം എടുക്കുക; ഉപ്പില്ലാത്തത്."],
+br:["ഡ്രൈ തവയിൽ ചെറുതായി ടോസ്റ്റ് ചെയ്യുക; വെണ്ണ വേണ്ട."],
+mu:["എല്ലില്ലാത്ത കൊഴുപ്പ് കുറഞ്ഞ കഷണങ്ങൾ എടുത്ത് കാണുന്ന കൊഴുപ്പ് മുഴുവൻ നീക്കി കഴുകി ചെറുതായി മുറിക്കുക.","മഞ്ഞൾ, ഉപ്പ്, ഇഞ്ചി-വെളുത്തുള്ളി, അല്പം വെള്ളം എന്നിവ ചേർത്ത് കുക്കറിൽ 4–5 വിസിൽ (ഏകദേശം 25 മിനിറ്റ്) വേവിക്കുക.","1 ടീസ്പൂൺ എണ്ണയിൽ കറിവേപ്പില, അല്പം സവാള, തക്കാളി, മല്ലിപ്പൊടി, മുളകുപൊടി, കുരുമുളക് എന്നിവ വഴറ്റുക.","വേവിച്ച ഇറച്ചി അതിന്റെ സ്റ്റോക്കോടെ ചേർത്ത് 10 മിനിറ്റ് തിളപ്പിച്ച് കുറുക്കുക; തേങ്ങാപ്പാലോ നെയ്യോ ചേർക്കരുത്.","മുകളിലെ കൊഴുപ്പ് നീക്കി 75 ഗ്രാം മാത്രം വിളമ്പുക."],
+ba:["അരിയും ഉഴുന്നും വെവ്വേറെ 5–6 മണിക്കൂർ കുതിർക്കുക.","ഉഴുന്ന് തണുത്ത വെള്ളം ചേർത്ത് പതപോലെ അരയ്ക്കുക; അരി അല്പം തരിയോടെ അരയ്ക്കുക.","ഉപ്പ് ചേർത്ത് കൈകൊണ്ട് നന്നായി യോജിപ്പിക്കുക.","ചൂടുള്ള സ്ഥലത്ത് 8–10 മണിക്കൂർ പുളിക്കാൻ വയ്ക്കുക; മാവ് പൊങ്ങിവരും.","ഫ്രിഡ്ജിൽ 3 ദിവസം വരെ സൂക്ഷിക്കാം; ഇളക്കുമ്പോൾ പതുക്കെ മാത്രം ഇളക്കുക."]
+};
+
+/* Translation Dictionary */
+let lang=store.get("lang").v||"en";
+const TD=`Groceries~പലചരക്ക്
+Meals~ഭക്ഷണം
+Cook~പാചകം
+Stock~സ്റ്റോക്ക്
+Health~ആരോഗ്യം
+Healthy Plate: Kerala diet planner~ഹെൽത്തി പ്ലേറ്റ്: കേരള ഡയറ്റ് പ്ലാനർ
+Today~ഇന്ന്
+Yesterday~ഇന്നലെ
+Sunday~ഞായർ
+Monday~തിങ്കൾ
+Tuesday~ചൊവ്വ
+Wednesday~ബുധൻ
+Thursday~വ്യാഴം
+Friday~വെള്ളി
+Saturday~ശനി
+Sun~ഞായർ
+Mon~തിങ്കൾ
+Tue~ചൊവ്വ
+Wed~ബുധൻ
+Thu~വ്യാഴം
+Fri~വെള്ളി
+Sat~ശനി
+Early Morning~രാവിലെ 6
+Breakfast~പ്രഭാതഭക്ഷണം
+Mid-Morning~ഇടവേള
+Lunch~ഉച്ചഭക്ഷണം
+Evening~വൈകുന്നേരം
+Dinner~അത്താഴം
+Kitchen stock~അടുക്കള സ്റ്റോക്ക്
+Exercise & medication~വ്യായാമവും മരുന്നും
+Stock goes down automatically when you confirm a meal as prepared. Tap the unit button to switch between g and kg, or ml and litres.~ഭക്ഷണം തയ്യാറാക്കിയെന്ന് സ്ഥിരീകരിക്കുമ്പോൾ സ്റ്റോക്ക് സ്വയം കുറയും. g/kg, ml/ലിറ്റർ മാറ്റാൻ യൂണിറ്റ് ബട്ടൺ അമർത്തുക.
+Search pantry items...~സാധനങ്ങൾ തിരയുക...
+Expand all~എല്ലാം തുറക്കുക
+Collapse all~എല്ലാം അടയ്ക്കുക
+Clear~മായ്ക്കുക
+Set all to zero~എല്ലാം പൂജ്യമാക്കുക
+Tap again to confirm: set all to zero~സ്ഥിരീകരിക്കാൻ വീണ്ടും അമർത്തുക: എല്ലാം പൂജ്യം
+Weekly:~ആഴ്ചയിൽ:
+Household:~കുടുംബം:
+Family:~കുടുംബം:
+adults~മുതിർന്നവർ
+adult~മുതിർന്നയാള്
+children~കുട്ടികൾ
+child~കുട്ടി
+on diet~ഡയറ്റിൽ
+including you~നിങ്ങളെ ഉൾപ്പെടെ
+Adults~മുതിർന്നവർ
+Children~കുട്ടികൾ
+On the diet~ഡയറ്റിലുള്ളവർ
+get the chart portion~ചാർട്ട് അളവ് കഴിക്കുന്നവർ
+Normal adult portion~മുതിർന്നവരുടെ സാധാരണ അളവ്
+times the chart portion~ചാർട്ട് അളവിന്റെ മടങ്ങ്
+Child portion~കുട്ടികളുടെ അളവ്
+Total to cook:~ആകെ പാകം ചെയ്യേണ്ടത്:
+× the chart portion.~× ചാർട്ട് അളവ്.
+Monday main shop: all weekly pantry items plus the first half of fresh items~തിങ്കൾ പ്രധാന ഷോപ്പിംഗ്: ആഴ്ചത്തേക്കുള്ള എല്ലാ സാധനങ്ങളും ഫ്രഷ് സാധനങ്ങളുടെ ആദ്യ പകുതിയും
+Thursday replenishment: second half of fresh items~വ്യാഴം: ഫ്രഷ് സാധനങ്ങളുടെ രണ്ടാം പകുതി
+. Also cook from stock.~. സ്റ്റോക്കിലുള്ളതും ഉപയോഗിക്കുക.
+No routine shopping today. Only small fresh top-ups if needed, then cook from stock.~ഇന്ന് പതിവ് ഷോപ്പിംഗ് ഇല്ല. ആവശ്യമെങ്കിൽ ചെറിയ ഫ്രഷ് സാധനങ്ങൾ മാത്രം വാങ്ങി സ്റ്റോക്കിൽ നിന്ന് പാകം ചെയ്യുക.
+Mark as prepared~തയ്യാറാക്കി എന്ന് അടയാളപ്പെടുത്തുക
+Prepared~തയ്യാറാക്കി
+Skipped · Tap if prepared~ഒഴിവാക്കി · തയ്യാറാക്കിയെങ്കിൽ അമർത്തുക
+Fruit before 6 PM:~ഫലം (വൈകിട്ട് 6 മണിക്ക് മുമ്പ്):
+Serving guide~വിളമ്പൽ അളവ്
+Diet members get the chart portion. Other adults get~ഡയറ്റിലുള്ളവർക്ക് ചാർട്ട് അളവ്. മറ്റ് മുതിർന്നവർക്ക്
+and children~കുട്ടികൾക്ക്
+Item~വിഭവം
+Diet~ഡയറ്റ്
+Adult~മുതിർന്നവർ
+Child~കുട്ടി
+Curry / thoran~കറി / തോരൻ
+Fish or chicken~മീൻ അല്ലെങ്കിൽ ചിക്കൻ
+Dosa / chapati / idli~ദോശ / ചപ്പാത്തി / ഇഡ്ഡലി
+Food rules applied: root vegetables are reduced (no carrot, half the onion, only a little garlic and ginger) and thyroid-affecting vegetables are left out (cabbage, cauliflower, spinach/cheera, soya). Gourds, beans, ladies finger, capsicum and tomato take their place.~ഭക്ഷണ നിയമങ്ങൾ: വേര് പച്ചക്കറികൾ കുറച്ചു (ക്യാരറ്റ് ഇല്ല, സവാള പകുതി, ഇഞ്ചി-വെളുത്തുള്ളി അല്പം മാത്രം); തൈറോയിഡിനെ ബാധിക്കുന്ന പച്ചക്കറികൾ ഒഴിവാക്കി (കബ്ബേജ്, കായിഫ്ലവർ, ചീര, സോയ). പടവലം, ചുരക്ക, കുമ്പളം, ബീൻസ്, വെണ്ടക്ക, ക്യാപ്സികം, തക്കാളി എന്നിവ അവയുടെ സ്ഥാനത്ത്.
+Cooking tips: use minimal oil, steam, boil or grill where you can, and measure oats and rice portions.~പാചക നുറുങ്ങ്: കുറഞ്ഞ എണ്ണ ഉപയോഗിക്കുക, ആവിയിൽ വേവിക്കുക, പുഴുങ്ങുക അല്ലെങ്കിൽ ഗ്രിൽ ചെയ്യുക; ഓട്സും ചോറും അളന്ന് എടുക്കുക.
+Cooking for~പാചകം:
+You need:~വേണ്ട ചേരുവകൾ:
+Your plate (chart):~നിങ്ങളുടെ പ്ലേറ്റ് (ചാർട്ട്):
+Serve yours first, then the family.~ആദ്യം നിങ്ങളുടേത് വിളമ്പുക, പിന്നെ കുടുംബത്തിന്.
+Bigger batch: use a larger pot, cook dosa, chapati and idli in batches, and allow a few extra minutes.~വലിയ അളവാണെങ്കിൽ വലിയ പാത്രം ഉപയോഗിക്കുക; ദോശ, ചപ്പാത്തി, ഇഡ്ഡലി എന്നിവ ഘട്ടം ഘട്ടമായി ഉണ്ടാക്കുക; കുറച്ച് അധിക സമയം വേണ്ടിവരാം.
+Exercise today~ഇന്നത്തെ വ്യായാമം
+Medication today~ഇന്നത്തെ മരുന്നുകൾ
+Last 7 days~കഴിഞ്ഞ 7 ദിവസം
+Walking~നടത്തം
+Yoga~യോഗ
+Cycling~സൈക്ലിംഗ്
+Strength~ശക്തി വ്യായാമം
+Other~മറ്റുള്ളവ
+Minutes~മിനിറ്റ്
+Add~ചേർക്കുക
+Set goal~ലക്ഷ്യം നൽകുക
+Daily goal (min)~ദിവസ ലക്ഷ്യം (മിനിറ്റ്)
+No medicines added yet. Add the ones your doctor prescribed below.~മരുന്നുകൾ ഒന്നും ചേർത്തിട്ടില്ല. ഡോക്ടർ നിർദ്ദേശിച്ചവ താഴെ ചേർക്കുക.
+Morning~രാവിലെ
+Afternoon~ഉച്ചയ്ക്ക്
+Night~രാത്രി
+Medicine name~മരുന്നിന്റെ പേര്
+Dose, e.g. 500 mg~ഡോസ്, ഉദാ: 500 mg
+Add medicine~മരുന്ന് ചേർക്കുക
+Minutes of exercise, and medicines taken out of those added.~വ്യായാമ മിനിറ്റുകളും, ചേർത്തവയിൽ കഴിച്ച മരുന്നുകളും.
+Were these meals prepared?~ഈ ഭക്ഷണങ്ങൾ തയ്യാറാക്കിയോ?
+Tick what you cooked. Stock is reduced for ticked meals. Untick any you skipped.~തയ്യാറാക്കിയവ ടിക്ക് ചെയ്യുക. ടിക്ക് ചെയ്തവയ്ക്ക് സ്റ്റോക്ക് കുറയും. ഒഴിവാക്കിയവ ടിക്ക് മാറ്റുക.
+Save~സേവ് ചെയ്യുക
+Ask me later~പിന്നീട് ചോദിക്കുക
+Prepared! Stock updated~തയ്യാറായി! സ്റ്റോക്ക് പുതുക്കി
+Undone, stock restored~തിരിച്ചാക്കി, സ്റ്റോക്ക് പുനഃസ്ഥാപിച്ചു
+Based on your dietitian’s chart. Oats replace the dosa/puttu/chapati portion, never add to it. Check glucose as advised and confirm portions with your dietitian.~ഡൈറ്റീഷ്യന്റെ ചാർട്ടിന് അനുസരിച്ചുള്ളത്. ഓട്സ് ദോശ/പുട്ട്/ചപ്പാത്തി അളവിന് പകരമാണ്, അതിന് പുറമെ കൂട്ടരുത്. നിർദ്ദേശിച്ചപ്പോലെ ഗ്ലൂക്കോസ് പരിശോധിക്കുക; അളവുകൾ ഡൈറ്റീഷ്യനോട് ഉറപ്പിക്കുക.
+Fresh (first half)~ഫ്രഷ് (ആദ്യ പകുതി)
+Fresh (second half)~ഫ്രഷ് (രണ്ടാം പകുതി)
+Fresh~ഫ്രഷ്
+Grains and cereals~ധാന്യങ്ങൾ
+Pulses and legumes~പയർവർഗ്ഗങ്ങൾ
+Eggs and nuts~മുട്ടയും നട്സും
+Vegetables and aromatics~പച്ചക്കറികളും സുഗന്ധവ്യഞ്ജനങ്ങളും
+Cooking essentials~പാചക സാധനങ്ങൾ
+Top up only if short~കുറവുണ്ടെങ്കിൽ മാത്രം വാങ്ങുക
+Use from stock today~ഇന്ന് സ്റ്റോക്കിൽ നിന്ന് ഉപയോഗിക്കുക
+Tea/coffee without sugar~പഞ്ചസാര ഇല്ലാത്ത ചായ/കാപ്പി
+Black coffee/tea without sugar~പഞ്ചസാര ഇല്ലാത്ത ബ്ലാക്ക് കോഫി/ചായ
+Coffee/tea without sugar~പഞ്ചസാര ഇല്ലാത്ത കാപ്പി/ചായ
+unsweetened tea/coffee~മധുരമില്ലാത്ത ചായ/കാപ്പി
+Tea / coffee (no sugar)~ചായ / കാപ്പി (പഞ്ചസാര ഇല്ലാതെ)
+Tea / coffee~ചായ / കാപ്പി
+a handful of nuts~ഒരു പിടി നട്സ്
+Handful of nuts~ഒരു പിടി നട്സ്
+idlis~ഇഡ്ഡലി
+idli~ഇഡ്ഡലി
+sambar~സാമ്പാർ
+vegetable salad~വെജിറ്റബിൾ സാലട്
+salad~സാലട്
+egg whites~മുട്ടവെള്ള
+Steamed corn~ആവിയിൽ വേവിച്ച ചോളം
+corn~ചോളം
+Boiled green gram~പുഴുങ്ങിയ ചെറുപയർ
+Sprouted green gram~മുളപ്പിച്ച ചെറുപയർ
+green gram curry~ചെറുപയർ കറി
+green gram~ചെറുപയർ
+Cooked Bengal gram~വേവിച്ച കടല
+Bengal gram~കടല
+rice~ചോറ്
+rasam~രസം
+beans thoran~ബീൻസ് തോരൻ
+thoran~തോരൻ
+fish curry~മീൻ കറി
+fish~മീൻ
+chicken curry~ചിക്കൻ കറി
+chicken~ചിക്കൻ
+curd~തൈര്
+buttermilk~മോര്
+nuts~നട്സ്
+wheat dosas~ഗോതമ്പ് ദോശ
+wheat dosa~ഗോതമ്പ് ദോശ
+oats dosas~ഓട്സ് ദോശ
+oats dosa~ഓട്സ് ദോശ
+ragi dosas~റാഗി ദോശ
+ragi dosa~റാഗി ദോശ
+dosas~ദോശ
+dosa~ദോശ
+oats puttu~ഓട്സ് പുട്ട്
+puttu~പുട്ട്
+oats~ഓട്സ്
+ragi~റാഗി
+chapatis~ചപ്പാത്തി
+chapati~ചപ്പാത്തി
+channa curry~കടലക്കറി
+kadala curry~കടലക്കറി
+vegetable curry~പച്ചക്കറി കറി
+mixed vegetable~മിക്സഡ് പച്ചക്കറി
+vegetable~പച്ചക്കറി
+idiyappams~ഇടിയപ്പം
+idiyappam~ഇടിയപ്പം
+whole-grain bread slices~ഹോൾഗ്രെയിൻ ബ്രെഡ് കഷണം
+Whole-grain bread~ഹോൾഗ്രെയിൻ ബ്രെഡ്
+slices~കഷണം
+Broken wheat upma~ഗോതമ്പ് നുറുക്ക് ഉപ്പുമാവ്
+upma~ഉപ്പുമാവ്
+one measured serving~അളന്ന ഒരു സെർവിംഗ്
+serving~സെർവിംഗ്
+Guava~പേരക്ക
+Green apple~പച്ച ആപ്പിൾ
+Papaya~പപ്പായ
+Snake gourd~പടവലങ്ങ
+Bottle gourd~ചുരക്ക
+Ash gourd~കുമ്പളങ്ങ
+Capsicum~ക്യാപ്സികം
+cups~കപ്പ്
+cup~കപ്പ്
+g~ഗ്രാം
+ml~മി.ലി
+kg~കിലോ
+litres~ലിറ്റർ
+tsp~ടീസ്പൂൺ
+tbsp~ടേബിൾസ്പൂൺ
+about~ഏകദേശം
+plus~കൂടാതെ
+min~മിനിറ്റ്
+soaking~കുതിർക്കൽ
+marinating~പുരട്ടി വയ്ക്കൽ
+pinch~നുള്ള്
+small~ചെറുത്
+bunch~കെട്ട്
+loaf~ലോഫ്
+as required~ആവശ്യത്തിന്
+buy once~ഒരിക്കൽ വാങ്ങുക
+buy fresh~പുതിയത് വാങ്ങുക
+freeze if not cooking soon~ഉടൻ പാചകം ചെയ്യുന്നില്ലെങ്കിൽ ഫ്രീസ് ചെയ്യുക
+from Monday stock~തിങ്കളാഴ്ചത്തെ സ്റ്റോക്കിൽ നിന്ന്
+thaw from freezer if needed~ആവശ്യമെങ്കിൽ ഫ്രീസറിൽ നിന്ന് എടുക്കുക
+per meal plan~മീൽ പ്ലാൻ അനുസരിച്ച്
+for the day~ഇന്നത്തേക്ക്
+for thoran~തോരന്
+lunch~ഉച്ചഭക്ഷണം
+dinner~അത്താഴം
+mixed dal~പരിപ്പ്
+dal~പരിപ്പ്
+pumpkin~മത്തങ്ങ
+drumstick~മുരിങ്ങക്ക
+onion~സവാള
+tomato~തക്കാളി
+ginger-garlic paste~ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്
+garlic~വെളുത്തുള്ളി
+ginger~ഇഞ്ചി
+green chilli~പച്ചമുളക്
+dry red chilli~ഉണക്കമുളക്
+chilli powder~മുളകുപൊടി
+chilli~മുളക്
+coriander powder~മല്ലിപ്പൊടി
+coriander leaves~മല്ലിയില
+coriander~മല്ലി
+turmeric powder~മഞ്ഞൾപ്പൊടി
+turmeric~മഞ്ഞൾ
+sambar powder~സാമ്പാർ പൊടി
+rasam powder~രസം പൊടി
+garam masala~ഗരം മസാല
+curry leaves~കറിവേപ്പില
+mustard seeds~കടുക്
+mustard~കടുക്
+cumin seeds~ജീരകം
+cumin~ജീരകം
+black pepper~കുരുമളക്
+pepper~കുരുമളക്
+salt~ഉപ്പ്
+cooking oil~പാചക എണ്ണ
+few drops of oil~കുറച്ച് തുള്ളി എണ്ണ
+oil~എണ്ണ
+hot water~ചൂടുവെള്ളം
+salted water~ഉപ്പുവെള്ളം
+water~വെള്ളം
+lemon~നാരങ്ങ
+juice of~നീര്
+tamarind~പുളി
+kokum~കുടംപുളി
+gooseberry-size~നെല്ലിക്ക വലുപ്പമുള്ള
+coconut~തേങ്ങ
+cucumber~വെള്ളരി
+beans~ബീൻസ്
+ladies finger~വെണ്ടയ്ക്ക
+Idli/dosa batter~ഇഡ്ഡലി/ദോശ മാവ്
+dosa batter~ദോശ മാവ്
+idli batter~ഇഡ്ഡലി മാവ്
+batter~മാവ്
+Rolled oats / oats flour~ഓട്സ് / ഓട്സ് പൊടി
+oats flour~ഓട്സ് പൊടി
+wheat atta~ഗോതമ്പ് പൊടി
+ragi flour~റാഗി പൊടി
+idiyappam flour~ഇടിയപ്പം പൊടി
+rice flour~അരിപ്പൊടി
+raw rice~പച്ചരി
+broken wheat~ഗോതമ്പ് നുറുക്ക്
+Whole-wheat bread~ഗോതമ്പ് ബ്രെഡ്
+bread~ബ്രെഡ്
+black channa~കറുത്ത കടല
+channa~കടല
+rajma~രാജ്മ
+eggs~മുട്ട
+egg~മുട്ട
+almonds~ബദാം
+walnuts~വാൽനട്ട്
+Unsalted mixed nuts~ഉപ്പില്ലാത്ത മിക്സഡ് നട്സ്
+Robusta banana~റോബസ്റ്റ വാഴപ്പഴം
+Musambi~മുസംബി
+chopped~അരിഞ്ഞ
+finely~ചെറുതായി
+grated~ചിരകിയ
+skinless~തൊലി നീക്കിയ
+plain~പ്ലെയിൻ
+cooks to~വേവിച്ചാൽ
+mutton curry~ആട്ടിറച്ചി കറി
+mutton~ആട്ടിറച്ചി
+lean~കൊഴുപ്പ് കുറഞ്ഞ
+boneless~എല്ലില്ലാത്ത
+Occasional~ഇടയ്ക്കിടെ
+Urad dal~ഉഴുന്ന് പരിപ്പ്
+Homemade idli/dosa batter~വീട്ടിൽ തയ്യാറാക്കുന്ന ഇഡ്ഡലി/ദോശ മാവ്
+fermenting~പുളിപ്പിക്കൽ
+Buy list (empty or low stock)~വാങ്ങേണ്ട സാധനങ്ങൾ (സ്റ്റോക്ക് തീർന്നതോ കുറവുള്ളതോ)
+Nothing to buy. Your stock is enough.~വാങ്ങാനൊന്നുമില്ല. സ്റ്റോക്ക് മതിയാകും.
+Estimated total:~ഏകദേശ ആകെ തുക:
+Stock:~സ്റ്റോക്ക്:
+Updating prices from homedelivery.ramachandran.in…~homedelivery.ramachandran.in-ൽ നിന്ന് വിലകൾ പുതുക്കുന്നു…
+Live prices from homedelivery.ramachandran.in, as of~ലൈവ് വിലകൾ (homedelivery.ramachandran.in), തീയതി
+items live; the rest are my estimates (*).~ഇനങ്ങൾ ലൈവ്; ബാക്കി എന്റെ ഏകദേശ കണക്ക് (*).
+Saved prices from~സേവ് ചെയ്ത വിലകൾ, തീയതി
+Live price refresh is not available here. Showing saved prices.~ഇവിടെ ലൈവ് വില പുതുക്കൽ ലഭ്യമല്ല. സേവ് ചെയ്ത വിലകൾ കാണിക്കുന്നു.
+Connect Parallel Search in Claude to refresh prices.~വിലകൾ പുതുക്കാൻ Claude-ൽ Parallel Search ബന്ധിപ്പിക്കുക.
+Allow Parallel Search for this page to refresh prices.~വിലകൾ പുതുക്കാൻ ഈ പേജിന് Parallel Search അനുവദിക്കുക.
+Estimate (not retrieved)~ഏകദേശ കണക്ക് (ലഭിച്ചതല്ല)
+Retrieved:~ലഭിച്ചത്:
+Not retrieved (estimate only):~ലഭിക്കാത്തത് (ഏകദേശ കണക്ക് മാത്രം):
+Source:~ഉറവിടം:
+Could not refresh prices. Showing the last saved prices.~വിലകൾ പുതുക്കാനായില്ല. അവസാനം സേവ് ചെയ്ത വിലകൾ കാണിക്കുന്നു.
+for Sunday lunch~ഞായറാഴ്ച ഉച്ചയ്ക്ക്
+bought on Thursday~വ്യാഴാഴ്ച വാങ്ങിയത്
+from Thursday stock~വ്യാഴാഴ്ചത്തെ സ്റ്റോക്കിൽ നിന്ന്
+Mutton (once every 3 weeks, Sunday lunch): choose lean boneless pieces, trim visible fat, 75 g cooked as a curry or stew with no coconut cream or ghee. Dinner non-veg is chicken only.~ആട്ടിറച്ചി (3 ആഴ്ചയിലൊരിക്കൽ, ഞായറാഴ്ച ഉച്ചയ്ക്ക്): കൊഴുപ്പ് കുറഞ്ഞ എല്ലില്ലാത്ത കഷണങ്ങൾ എടുക്കുക, കാണുന്ന കൊഴുപ്പ് നീക്കുക, 75 ഗ്രാം കറിയായോ സ്റ്റൂവായോ; തേങ്ങാപ്പാലോ നെയ്യോ ചേർക്കരുത്. അത്താഴത്തിൽ ചിക്കൻ മാത്രം.
+Next mutton lunch:~അടുത്ത ആട്ടിറച്ചി ഉച്ചഭക്ഷണം:
+Non-veg: lunch every day except Thursday; dinner chicken on Mon, Wed, Fri and Sun.~മാംസാഹാരം: വ്യാഴം ഒഴികെ എല്ലാ ദിവസവും ഉച്ചയ്ക്ക്; അത്താഴത്തിന് തിങ്കൾ, ബുധൻ, വെള്ളി, ഞായർ ദിവസങ്ങളിൽ ചിക്കൻ.
+Not found~കണ്ടെത്തിയില്ല
+No price found~വില ലഭ്യമല്ല
+live~ലൈവ്
+cached~സേവ് ചെയ്തത്
+updated~പുതുക്കിയത്
+pack assumed~പായ്ക്ക് അനുമാനം`;
+
+const TM={};TD.split("\n").forEach(l=>{const i=l.indexOf("~");if(i>0)TM[l.slice(0,i).toLowerCase()]=l.slice(i+1)});
+const TR_RE=new RegExp(Object.keys(TM).sort((a,b)=>b.length-a.length).map(k=>(/^\w/.test(k)?"\\b":"")+k.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")+(/\w$/.test(k)?"\\b":"")).join("|"),"gi");
+const TR=s=>s.replace(TR_RE,m=>TM[m.toLowerCase()]||m);
+function trDom(){
+  const ml=lang==="ml",w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),ns=[];
+  while(w.nextNode())ns.push(w.currentNode);
+  ns.forEach(n=>{
+    if(n.parentNode.closest("script,style,svg"))return;
+    if(n.__o==null)n.__o=n.nodeValue;
+    const v=ml?TR(n.__o):n.__o;
+    if(n.nodeValue!==v)n.nodeValue=v;
+  });
+  document.querySelectorAll("[placeholder]").forEach(e=>{
+    if(e.__p==null)e.__p=e.placeholder;
+    e.placeholder=ml?TR(e.__p):e.__p;
+  });
+}
+
+/* Theme Handling */
+function initTheme(){
+  const t=store.get("theme").v||"";
+  if(t)document.documentElement.setAttribute("data-theme",t);
+  updateThemeBtn();
+}
+function isDark(){
+  const t=document.documentElement.getAttribute("data-theme");
+  if(t==="dark")return true;
+  if(t==="light")return false;
+  return window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+}
+function updateThemeBtn(){
+  const b=$("#themeBtn");if(!b)return;
+  b.innerHTML=isDark()?SVG.sun:SVG.moon;
+}
+$("#themeBtn").onclick=()=>{
+  const next=isDark()?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  store.set("theme",{v:next});
+  updateThemeBtn();
+};
+
+/* Helpers: Family, Scaling, Dates, Mutton Rotation */
+const fam=()=>{
+  const f=store.get("fam2");
+  const a=Math.max(1,f.a==null?2:f.a),c=f.c==null?2:f.c;
+  return{a,c,d:Math.max(1,Math.min(f.d==null?1:f.d,a+c)),x:f.x||1.5,y:f.y||0.75};
+};
+const tot=()=>{const f=fam();return f.d+Math.max(0,f.a-f.d)*f.x+Math.max(0,f.c-Math.max(0,f.d-f.a))*f.y};
+function fmt(v,nu){if(nu&&v>=1)v=Math.round(v*2)/2;if(v>=10)return String(Math.round(v));const q=Math.max(0.25,Math.round(v*4)/4),w=Math.floor(q),r=q-w;const fr={0.25:"1/4",0.5:"1/2",0.75:"3/4"}[r]||"";return [w||"",fr].filter(Boolean).join(" ")}
+function sc(s,f,only){return s.replace(/(\d+\s\d\/\d|\d+\/\d+|\d*\.\d+|\d+)(\s*(?:g|ml|cups?|tbsp|tsp)\b)?/g,(m,n,u)=>{if(only&&!u)return m;let v;if(n.includes("/")){const p=n.split(/\s|\//);v=n.includes(" ")?+p[0]+p[1]/p[2]:p[0]/p[1]}else v=+n;return fmt(v*f,!u)+(u||"")})}
+function gq(q,g){const f=tot(),k=/Cooking/.test(g)?1+(f-1)/2:f;return q.replace(/(\d*\.?\d+)\s*(g|ml|litres?)?/,(m,n,u)=>{let v=+n*k;if(u==="g"||u==="ml"){v=v>=100?Math.round(v/50)*50:(Math.round(v/10)*10||10);if(v>=1000)return (v/1000)+(u==="g"?" kg":" litres");return v+" "+u}if(u)return (Math.round(v*2)/2)+" "+u;return String(Math.ceil(v-0.01))})}
+function dkey(o){const d=new Date();d.setDate(d.getDate()-(o||0));return d.toLocaleDateString("en-CA")}
+function muttonSun(d){const n=Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(2026,10,29))/604800000);return((n%3)+3)%3===0}
+function relSun(){const d=new Date(),w=d.getDay();d.setDate(d.getDate()+(w<2?-w:7-w));return d}
+function applyMutton(){M[0].m[3]=muttonSun(relSun())?MUT_SUN:FISH_SUN}
+function toast(t){const e=document.createElement("div");e.className="toast";e.textContent=lang==="ml"?TR(t):t;document.body.appendChild(e);setTimeout(()=>e.remove(),1900)}
+
+/* Price Data & Live Sync */
+const PR={"Raw rice":[52,1],"Rolled oats / oats flour":[204,1],"Wheat atta":[42,1],"Ragi flour":[104,1],"Idiyappam flour":[89,1],"Broken wheat":[88,1],"Green gram":[112,1],"Bengal gram":[115,1],"Black channa":[115,1],"Rajma":[125,1],"Mixed dal":[159,1],"Urad dal":[129,1],"Whole-wheat bread":[50,0],"Corn":[80,0],"Eggs":[7,0],"Almonds":[900,0],"Walnuts":[1100,0],"Unsalted mixed nuts":[850,0],"Onion":[45,0],"Green chilli":[90,0],"Pumpkin":[40,0],"Drumstick":[10,0],"Ginger":[220,0],"Garlic":[300,0],"Lemon":[5,0],"Cooking oil":[180,0],"Mustard seeds":[220,0],"Cumin seeds":[650,0],"Black pepper":[900,0],"Turmeric powder":[300,0],"Chilli powder":[350,0],"Coriander powder":[250,0],"Sambar powder":[300,0],"Rasam powder":[300,0],"Tea / coffee":[500,0],"Fish":[320,0],"Chicken":[250,0],"Mutton":[950,0],"Curd":[60,0],"Buttermilk":[40,0],"Tomato":[45,0],"Beans":[80,0],"Bottle gourd":[50,0],"Ash gourd":[40,0],"Cucumber":[10,0],"Snake gourd":[70,0],"Ladies finger":[70,0],"Capsicum":[25,0],"Papaya":[50,0],"Guava":[15,0],"Green apple":[40,0],"Musambi":[20,0],"Robusta banana":[6,0]};
+const LQ=[
+["Raw rice","raw rice",/raw rice|pachari/,/flour|powder|puffed|noodle|basmati|bran|oil|cake|biryani|mix|idli|pudding/,0],
+["Rolled oats / oats flour","oats",/oats/,/biscuit|cookie|bar|flavo|masala|instant|muesli|cereal|choco|dosa|idli|noodle|chilli|spic/,0],
+["Wheat atta","atta",/atta|whole wheat/,/multigrain|sugr|sugar|maida|mix|noodle|biscuit|rava|ragi|soya|besan/,0],
+["Ragi flour","ragi",/ragi (flour|powder)/,/mix|health|malt/,0],
+["Idiyappam flour","idiyappam",/idiyappam/,/instant|noodle|palappam|ready|vermicelli|sev/,0],
+["Broken wheat","broken wheat",/broken wheat|dalia|daliya|wheat broken/,/ready|mix/,0],
+["Green gram","green gram",/green gram|moong|cherupayar/,/dal|split|flour|sprout|ready|mix|namkeen|snack/,0],
+["Bengal gram","chana",/chana|channa|kadala|chickpea/,/dal|flour|besan|roast|masala|mix|curry|ready|fry|snack|kabuli|white|salt|namkeen|chaat|puffed|sattu/,0],
+["Black channa","chana",/chana|channa|kadala|chickpea/,/dal|flour|besan|roast|masala|mix|curry|ready|fry|snack|kabuli|white|salt|namkeen|chaat|puffed|sattu/,0],
+["Rajma","rajma",/rajma/,/masala|ready|curry|mix|canned/,0],
+["Mixed dal","toor dal",/toor|tuvara|thuvara|arhar/,/ready|mix|roast|masala|flour/,0],
+["Urad dal","urad dal",/urad|uzhunnu/,/flour|papad|appalam|mix|ready|batter|roast|masala|snack/,0],
+["Almonds","almonds",/almond/,/oil|milk|butter|chocolate|biscuit|cookie|coated|flavo|mix|powder|drink|candy|cake|bar|cream|soap/,0],
+["Walnuts","walnut",/walnut/,/oil|chocolate|cookie|cake|brownie|butter|flavo|mix|bar|cream/,0],
+["Onion","onion",/onion/,/powder|paste|fried|flake|sauce|ring|pickle|spring|chip|masala|dehydrat|snack|noodle|namkeen|spic|dip|rava|bhaji|pakoda|seed|biscuit/,0],
+["Green chilli","green chilli",/green chilli|green chilly|pachamulaku/,/sauce|pickle|powder|paste|chip|snack|dried|flavo|masala|namkeen/,0],
+["Pumpkin","pumpkin",/pumpkin|mathan/,/seed|puree|soup|pie|powder|mix|chips/,0],
+["Ginger","ginger",/ginger/,/paste|powder|tea|ale|candy|pickle|biscuit|garlic|chip|sugar|drink|dry|dried|beer|oil|bread|cookie|juice|chutney|soda/,0],
+["Garlic","garlic",/garlic/,/paste|powder|pickle|bread|sauce|chip|ginger|flavo|fried|masala|mayo|dip|oil|noodle|rice|snack|cheese|chutney/,0],
+["Tomato","tomato",/^tomato/,/sauce|ketchup|chip|puree|paste|powder|soup|pickle/,0],
+["Beans","beans",/^(french |long |green )?beans/,/baked|canned|tin|sauce|chip|soup|rajma|mix/,0],
+["Bottle gourd","bottle gourd",/bottle gourd|churakka|lauki/,/juice|powder/,0],
+["Ash gourd","ash gourd",/ash gourd|kumbalanga|white pumpkin/,/juice|powder/,0],
+["Snake gourd","snake gourd",/snake gourd|padavalanga/,/juice|powder/,0],
+["Ladies finger","ladies finger",/ladies? ?finger|okra|vendakka|bhindi/,/frozen|chip|fry|snack|pickle/,0],
+["Papaya","papaya",/^papaya/,/jam|juice|powder|candy|tutti|seed|shake|squash/,0],
+["Curd","curd",/curd/,/pickle|rice|dosa|mango|chilli|lime|probiotic|greek|cheese|paneer|flavo|lassi/,400],
+["Buttermilk","buttermilk",/butter ?milk|moru|sambaram/,/biscuit|cookie|pancake|mix|powder|cake|chicken/,0],
+["Cooking oil","coconut oil",/coconut oil/,/hair|body|skin|massage|virgin|cold|soap|shampoo|cream|lotion|baby|extra|capsule|spray|biscuit|face|bath|pet/,450],
+["Mustard seeds","mustard",/mustard/,/oil|sauce|powder|paste|kasundi|dressing|mayo|dip/,0],
+["Cumin seeds","jeerakam",/jeera|jeerakam|cumin/,/rice|biscuit|soda|masala|water|tea|ladoo|candy|namkeen|powder/,0],
+["Black pepper","black pepper",/pepper/,/sauce|salt|chicken|mayo|cheese|biscuit|chip|flavo|bell|noodle|snack|mix|sachet|spray|crush/,0],
+["Turmeric powder","turmeric powder",/turmeric|manjal/,/paste|tea|latte|capsule|cream|soap|face|milk|extract|root|pickle|tablet|oil|cooking/,0],
+["Chilli powder","chilli powder",/chilli powder|chilly powder|mulaku|red chilli powder/,/sauce|paste|flake|green|chicken|fry mix|masala mix/,0],
+["Coriander powder","coriander powder",/coriander powder|malli|dhania/,/leaf|leaves|seed/,0],
+["Sambar powder","sambar powder",/sambar (powder|masala)/,/ready|instant|paste|mix/,0],
+["Rasam powder","rasam powder",/rasam (powder|masala)/,/ready|instant|paste|mix/,0],
+["Tea / coffee","tea powder",/tea/,/bag|green|iced|ice|herbal|latte|premix|instant|mix|biscuit|cake|rusk|masala|flavo|cup|mug|strainer|kettle|lemon|jasmine|tulsi|chai|honey|detox|infus|filter|coffee/,0]];
+
+const PS0=store.get("prices");if(PS0.p)for(const k in PS0.p)if(PR[k])PR[k]=[PS0.p[k],2];
+let pStat=PS0.p?"saved":"",pN=0,pDate=PS0.t||"",pBusy=false,pLast=0;
+const CM=store.get("cmp"),PSEL=store.get("psel"),FRESH=new Set(),SRC={R:"Ramachandra",F:"Flipkart",I:"Swiggy Instamart",E:"Estimate (not retrieved)"};
+
+function unitRate(n,p){const m=n.match(/(\d+(?:\.\d+)?)\s*(kg|gm|g|ml|ltr|litre|l)\b/i);if(m){const u=m[2].toLowerCase(),b=parseFloat(m[1])*((u==="kg"||u==="l"||u==="ltr"||u==="litre")?1000:1);return{r:p/b*1000,pack:b}}return{r:p,pack:1000}}
+function parseProducts(t){const out=[],re=/\*\*\[([^\]]+)\]\(([^)]*)\)\*\*\s*(?:Special Price\s*)?₹\s*([\d,]+(?:\.\d+)?)/g;let m;while((m=re.exec(t)))out.push({n:m[1],p:parseFloat(m[3].replace(/,/g,"")),url:m[2]});return out}
+function parseFK(t){const nm={},pr={},out=[],bs=u=>u.split("?")[0];let m;
+ const rn=/\[([^\]\n]{5,}?)\]\((https:\/\/www\.flipkart\.com\/[^\s)]+?\/p\/[^\s)]+)\)/g;
+ while((m=rn.exec(t))){const k=bs(m[2]);if(!/^[₹\d]/.test(m[1])&&!nm[k])nm[k]=m[1].replace(/\s+/g," ")}
+ const rp=/\[₹\s*([\d,]+)[^\]]*\]\((https:\/\/www\.flipkart\.com\/[^\s)]+?\/p\/[^\s)]+)\)/g;
+ while((m=rp.exec(t))){const k=bs(m[2]);if(!pr[k])pr[k]=parseFloat(m[1].replace(/,/g,""))}
+ for(const k in pr)if(nm[k]){const mm=nm[k].match(/(\d+(?:\.\d+)?)\s*(kg|g|ml|l)\b/i);let pk=0;if(mm){const u=mm[2].toLowerCase();pk=parseFloat(mm[1])*(u==="kg"||u==="l"?1000:1)}out.push({n:nm[k],p:pr[k],pack:pk||1000,a:!pk,url:k})}
+ return out}
+function parseIM(t){const ls=t.split("\n"),out=[];for(let i=0;i<ls.length;i++){if(ls[i]!=="8 MINS")continue;const n=ls[i+1];let j=i+2,pk=null;for(;j<i+6&&j<ls.length;j++){const m=ls[j].match(/^(\d+(?:\.\d+)?)\s?(kg|g|ml|l)(?: x (\d+))?$/i);if(m){pk=m;break}}if(!pk||!n)continue;let k=j+1;if(/% OFF$/.test(ls[k]))k++;const p=parseFloat(ls[k]);if(!p)continue;const u=pk[2].toLowerCase();out.push({n,p,pack:parseFloat(pk[1])*(u==="kg"||u==="l"?1000:1)*(pk[3]?+pk[3]:1)})}return out}
+function cands(L,x){return L.filter(o=>{const n=o.n.toLowerCase();return x[2].test(n)&&!x[3].test(n)}).map(o=>{const u=o.pack?{r:o.p/o.pack*1000,pack:o.pack}:unitRate(o.n,o.p);return{n:o.n,r:Math.round(u.r*100)/100,pk:u.pack,p:o.p,url:o.url||"",a:!!o.a}}).filter(o=>o.pk>=x[4]).sort((a,b)=>a.r-b.r).slice(0,5)}
+const med=c=>c[Math.floor((c.length-1)/2)];
+function setCM(n,s,L,aq){const c=CM[n]=CM[n]||{ft:{},aq:{}};c[s]=L;c.ft[s]=Date.now();c.aq[s]=aq||"";FRESH.add(n+s)}
+function fmtD(s){const d=new Date(s);return isNaN(d)?"":d.toLocaleDateString(lang==="ml"?"ml-IN":"en-GB",{day:"numeric",month:"short",year:"numeric"})}
+function fmtT(ms){return new Date(ms).toLocaleString(lang==="ml"?"ml-IN":"en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
+function statText(){const d=fmtD(pDate);if(pStat==="loading")return "Updating prices from homedelivery.ramachandran.in…";if(pStat==="ok")return `Live prices from homedelivery.ramachandran.in, as of ${d}. ${pN} items live; the rest are my estimates (*).`;
+ if(pStat==="off")return "Live price refresh is not available here. Showing saved prices.";
+ if(pStat==="server_not_connected"||pStat==="needs_reauth")return "Connect Parallel Search in Claude to refresh prices.";
+ if(pStat==="approval_required"||pStat==="not_granted"||pStat==="blocked_by_policy")return "Allow Parallel Search for this page to refresh prices.";
+ return pStat==="saved"?"Saved prices from "+d:"Could not refresh prices. Showing the last saved prices."}
+function paintStat(){const c=$("#buyc");if(!c)return;let e=$("#pstat");if(!e){e=document.createElement("div");e.id="pstat";e.className="buy-status";c.insertBefore(e,c.children[1]||null)}e.textContent=statText();trDom()}
+function repaintBuy(){const c=$("#buyc");if(c){c.outerHTML=buyCard();paintStat()}}
+function rateFor(n){const c=CM[n],s0=PSEL[n];if(c){let b=null;if(s0&&c[s0.s]){const f=c[s0.s].find(x=>x.n===s0.n);if(f)b={r:f.r,s:s0.s,m:f}}
+  if(!b)["R","F","I"].forEach(s=>{const L=c[s];if(L&&L.length){const m=med(L);if(!b||m.r<b.r)b={r:m.r,s,m}}});
+  if(b){b.ft=c.ft[b.s];b.live=FRESH.has(n+b.s);return b}}
+ const p=PR[n];return p?{r:p[0],s:"E"}:null}
+
+async function refreshPrices(){
+  if(typeof claude==="undefined"||pBusy)return;
+  pBusy=true;pLast=Date.now();let mcp=null;
+  try{mcp=await claude.use("mcp")}catch(e){}
+  if(!mcp){pBusy=false;pStat="off";paintStat();return}
+  pStat="loading";paintStat();
+  const sid=Math.random().toString(16).slice(2)+Date.now().toString(16)+"0123456789abcdef",
+    call=u=>mcp.callTool("Parallel Search","web_fetch",{urls:u,objective:"List product names with prices and pack sizes",session_id:sid},{cache:{staleTime:600000}}),
+    res=r=>{let p=r&&r.payload;if(typeof p==="string"){try{p=JSON.parse(p)}catch(e){p=null}}return(p&&p.results)||[]},
+    qOf=u=>decodeURIComponent(((u||"").split(/[?&](?:q|query)=/)[1]||"").split("&")[0].replace(/\+/g," ")),
+    qs=[...new Set(LQ.map(x=>x[1]))],got={};
+  let fail=null,stamp="";
+  for(let i=0;i<qs.length&&!fail;i+=10){
+    const b=qs.slice(i,i+10);
+    try{
+      res(await call(b.map(q=>"https://homedelivery.ramachandran.in/default/catalogsearch/result/?q="+encodeURIComponent(q)))).forEach(rs=>{
+        const L=parseProducts((rs.excerpts||[]).join("\n"));
+        if(rs.acquired_at&&rs.acquired_at>stamp)stamp=rs.acquired_at;
+        LQ.filter(x=>x[1]===qOf(rs.url)).forEach(x=>{const c=cands(L,x);if(c.length){setCM(x[0],"R",c,rs.acquired_at);got[x[0]]=med(c).r}});
+      });
+    }catch(e){fail=(e&&e.code)||"error"}
+  }
+  const n=Object.keys(got).length;
+  if(n){const old=store.get("prices").p||{};for(const k in got){PR[k]=[got[k],2];old[k]=got[k]}pDate=stamp||new Date().toISOString();store.set("prices",{t:pDate,p:old});pStat="ok";pN=n}else pStat=fail||"none";
+  repaintBuy();
+  if(!fail){
+    const nd=buyData().map(x=>x["n"]),it2=LQ.filter(x=>nd.includes(x[0])&&!(CM[x[0]]&&CM[x[0]].ft&&CM[x[0]].ft.F&&Date.now()-CM[x[0]].ft.F<216e5)),q2=[...new Set(it2.map(x=>x[1]))];
+    let f2=null;
+    for(let i=0;i<q2.length&&!f2;i+=5){
+      const b=q2.slice(i,i+5),us=[];
+      b.forEach(q=>{us.push("https://www.flipkart.com/search?q="+encodeURIComponent(q));us.push("https://www.swiggy.com/instamart/search?custom_back=true&query="+encodeURIComponent(q))});
+      try{
+        res(await call(us)).forEach(rs=>{
+          const F=(rs.url||"").indexOf("flipkart")>0,t=(rs.excerpts||[]).join("\n"),L=F?parseFK(t):parseIM(t),q=qOf(rs.url);
+          it2.filter(x=>x[1]===q).forEach(x=>{setCM(x[0],F?"F":"I",cands(L,x).map(m=>m.url?m:Object.assign({},m,{url:"https://www.swiggy.com/instamart/search?query="+encodeURIComponent(q)})),rs.acquired_at)});
+        });
+        repaintBuy();
+      }catch(e){f2=(e&&e.code)||"error"}
+    }
+  }
+  store.set("cmp",CM);pBusy=false;repaintBuy();
+}
+
+/* Grocery Data & Buy List */
+function groceryData(){
+  if(day===1)return [SHOP.mon[0],SHOP.mon[1].filter(g=>g[0]!=="Occasional")];
+  if(day===4){
+    const t=new Date();t.setDate(t.getDate()+(4-t.getDay()+7)%7+3);
+    const gs=SHOP.thu[1].map(g=>[g[0],g[1].slice()]);
+    if(muttonSun(t))gs[0][1].push(["Mutton","100 g (for Sunday lunch)"]);
+    return [SHOP.thu[0]+". Also cook from stock.",[...gs,["Use from stock today",[["Rajma","50 g (dinner)"],["Guava","1"],["Ragi flour, eggs (2), vegetables","per meal plan"]]]]];
+  }
+  const mu=day===0&&muttonSun(relSun());
+  return ["No routine shopping today. Only small fresh top-ups if needed, then cook from stock.",TOP[day].map(g=>[g[0],g[1].map(it=>mu&&it[0]==="Fish"?["Mutton (lean, boneless)","75 g, bought on Thursday"]:it)])];
+}
+function needOf(g,it){const m=it[1].match(/^([\d.]+)/);if(!m)return 0;const f=tot(),k=/Cooking/.test(g)?1+(f-1)/2:f;let v=+m[1];if(/^Fresh/.test(g)&&it[0]!=="Capsicum")v*=2;return v*k}
+function qtxt(v,u){if(u==="g")return v>=1000?+(v/1000).toFixed(2)+" kg":Math.round(v)+" g";if(u==="ml")return v>=1000?+(v/1000).toFixed(2)+" L":Math.round(v)+" ml";return String(Math.round(v*100)/100)}
+function buyData(){
+  const inv=store.get("inv"),n=new Date(),sun=new Date(n);
+  sun.setDate(n.getDate()+(7-n.getDay())%7);
+  const mu=muttonSun(sun),out=[];
+  SHOP.mon[1].forEach(g=>g[1].forEach(it=>{
+    if(g[0]==="Occasional"&&!mu)return;
+    const need=needOf(g[0],it),have=inv[it[0]]||0;
+    if(!need||have>=need*0.25)return;
+    const u=(it[1].match(/^[\d.]+\s*(g|ml)\b/)||[])[1]||"";
+    let b=need-have;
+    b=u?(b>=100?Math.ceil(b/50)*50:Math.ceil(b/10)*10):Math.ceil(b-0.01);
+    const p=PR[it[0]],cost=p?(u?b/1000*p[0]:b*p[0]):0;
+    out.push({n:it[0],u,have,b,cost,s:p?p[1]:0});
+  }));
+  return out;
+}
+function buyCard(){
+  const L=buyData();
+  if(!L.length)return `<div class="card" id="buyc"><div class="card-hd"><h3>${SVG.bag} Buy list (empty or low stock)</h3></div><p style="margin:0;color:var(--mute);font-size:.86rem">Nothing to buy. Your stock is enough.</p></div>`;
+  let total=0,got=0;const bySrc={};
+  let rows="";
+  L.forEach((x,i)=>{
+    const rt=rateFor(x.n),cost=rt?(x.u?x.b/1000*rt.r:x.b*rt.r):0,un=x.u==="g"?"kg":x.u==="ml"?"L":"",fr=r=>"₹"+r+(un?"/"+un:" each");
+    if(rt){total+=cost;bySrc[rt.s]=(bySrc[rt.s]||0)+cost;if(rt.s!=="E")got++}
+    rows+=`<details class="buy-item"><summary><span>${i+1}. ${esc(x.n)}</span><span class="buy-r"><span class="buy-q">${qtxt(x.b,x.u)}</span><span class="buy-p">${rt?"₹"+Math.round(cost)+(rt.s==="E"?"*":""):"–"}</span></span></summary><div class="buy-detail"><div>Stock: ${qtxt(x.have,x.u)}</div>`;
+    rows+=rt?`<div>${fr(rt.r)} × ${qtxt(x.b,x.u)} = <b>₹${Math.round(cost)}</b></div><div>Source: ${SRC[rt.s]}${rt.s==="E"?"":rt.live?" · live":" · cached"}${rt.ft?" · updated "+fmtT(rt.ft):""}</div>`:"<div>No price found</div>";
+    const c=CM[x.n];
+    if(c){
+      let lo=1e9;["R","F","I"].forEach(s=>{if(c[s]&&c[s].length)lo=Math.min(lo,med(c[s]).r)});
+      ["R","F","I"].forEach(s=>{
+        const l=c[s];if(!l)return;
+        rows+=`<div class="slot-lbl">${SRC[s]}${l.length&&med(l).r===lo?" ★":""}</div>`;
+        if(!l.length){rows+=`<small style="color:var(--mute)">Not found</small>`;return}
+        l.forEach((m,k)=>{
+          rows+=`<div class="mt${rt&&rt.s===s&&rt.m&&rt.m.n===m.n?" on":""}"><button class="mtb" data-i="${esc(x.n)}" data-s="${s}" data-x="${k}">${esc(m.n)}<br><b>${fr(m.r)}</b>${m.a?" (pack assumed)":""}</button><a href="${m.url||"#"}" target="_blank" rel="noopener" aria-label="Open">${SVG.ext}</a></div>`;
+        });
+      });
+    }
+    rows+=`</div></details>`;
+  });
+  const chips=Object.keys(bySrc).map(s=>`<span class="chip">${SRC[s]}: ₹${Math.round(bySrc[s])}</span>`).join("");
+  return `<div class="card" id="buyc"><div class="buy-head"><h3>${SVG.bag} Buy list (empty or low stock)</h3><div class="buy-total">₹${Math.round(total)}</div></div>${rows}<div class="src-chips">${chips}<span class="chip">Retrieved: ${got}</span><span class="chip">Not retrieved (estimate only): ${L.length-got}</span></div><p style="margin:8px 0 0;font-size:.74rem;color:var(--mute)">* Estimate. Instamart prices depend on delivery location. Flipkart listings may assume a 1 kg pack when none is stated.</p></div>`;
+}
+
+/* Views */
+function renderShop(){
+  const [intro,groups]=groceryData();
+  const key="chk-"+day,chk=store.get(key);
+  let h=buyCard();
+  h+=`<div class="banner">${SVG.info}<div>${esc(intro)}</div></div>`;
+  h+=`<div class="shop-grid">`;
+  groups.forEach((g,idx)=>{
+    const doneCnt=g[1].filter((_,i)=>chk[idx+"-"+i]).length;
+    h+=`<div class="card"><div class="card-hd"><h2>${esc(g[0])}</h2><span class="meta" data-cnt="${idx}">${doneCnt}/${g[1].length}</span></div>`;
+    g[1].forEach((it,i)=>{
+      const id=idx+"-"+i;
+      h+=`<label class="chk-row"><input type="checkbox" data-id="${id}" data-grp="${idx}" data-tot="${g[1].length}" ${chk[id]?"checked":""}><span class="chk-lbl">${esc(it[0])}</span><span class="chk-qty">${esc(gq(it[1],g[0]))}</span></label>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+  $("#view").innerHTML=h;
+  paintStat();
+  if(!pBusy&&Date.now()-pLast>60000)refreshPrices();
+  document.querySelectorAll("#view input[data-id]").forEach(i=>i.onchange=()=>{
+    chk[i.dataset.id]=i.checked;
+    store.set(key,chk);
+    const grp=i.dataset.grp,totItems=+i.dataset.tot;
+    const cnt=document.querySelectorAll(`#view input[data-grp="${grp}"]:checked`).length;
+    const m=$(`[data-cnt="${grp}"]`);if(m)m.textContent=`${cnt}/${totItems}`;
+  });
+}
+
+const SLOT_LABELS=["Early Morning","Breakfast","Mid-Morning","Lunch","Evening","Dinner"];
+function guide(){
+  const f=fam();
+  let d=new Date();for(let i=0;i<30;i++){d=new Date();d.setDate(d.getDate()+i);if(d.getDay()===0&&muttonSun(d)&&(i>0||new Date().getHours()<14))break}
+  const s=d.toLocaleDateString(lang==="ml"?"ml-IN":"en-GB",{day:"numeric",month:"short"});
+  const rows=[["Rice","1 cup (200 ml)"],["Curry / thoran","1 cup"],["Fish or chicken","75 g"],["Curd","1 cup"],["Dosa / chapati / idli","2"]]
+    .map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${sc(r[1],f.x)}</td><td>${sc(r[1],f.y)}</td></tr>`).join("");
+  return `<div class="card"><div class="card-hd"><h3>Serving guide</h3></div><p style="margin:0 0 10px;font-size:.82rem;color:var(--mute)">Diet members get the chart portion. Other adults get ${f.x}× and children ${f.y}×.</p><table class="guide-table"><thead><tr><th>Item</th><th>Diet</th><th>Adult</th><th>Child</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div class="banner">${SVG.info}<div>Food rules applied: root vegetables are reduced (no carrot, half the onion, only a little garlic and ginger) and thyroid-affecting vegetables are left out (cabbage, cauliflower, spinach/cheera, soya). Gourds, beans, ladies finger, capsicum and tomato take their place.</div></div>
+  <div class="banner">${SVG.info}<div><div>Mutton (once every 3 weeks, Sunday lunch): choose lean boneless pieces, trim visible fat, 75 g cooked as a curry or stew with no coconut cream or ghee. Dinner non-veg is chicken only. Next mutton lunch: <b>${s}</b>.</div><div style="margin-top:6px">Non-veg: lunch every day except Thursday; dinner chicken on Mon, Wed, Fri and Sun.</div></div></div>`;
+}
+
+function renderMeals(){
+  const d=M[day],dk=dkey(0),dn=store.get("done")[dk]||{},live=day===now;
+  let h=`<div class="card"><div class="timeline">`;
+  d.m.forEach((m,i)=>{
+    const s=dn[i]&&dn[i].s;
+    const btnCls=s===1?"prep-btn ok":s===0?"prep-btn skip":"prep-btn";
+    const btnTxt=s===1?`${SVG.check} Prepared`:s===0?"Skipped · Tap if prepared":"Mark as prepared";
+    h+=`<div class="meal-row"><div class="meal-time-col"><span class="meal-clock">${m[0]}</span><span class="meal-slot-name">${SLOT_LABELS[i]}</span></div><div class="meal-body"><div class="meal-desc">${esc(m[1])}</div>${live?`<button class="${btnCls}" data-i="${i}">${btnTxt}</button>`:""}</div></div>`;
+  });
+  h+=`</div></div>`;
+  h+=`<div class="banner amber">${SVG.fruit}<div><b>Fruit before 6 PM:</b> ${F[d.f]}</div></div>`;
+  h+=guide();
+  $("#view").innerHTML=h;
+  document.querySelectorAll(".prep-btn").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i,c=store.get("done")[dk]||{};
+    const on=!(c[i]&&c[i].s===1);
+    setMeal(dk,now,i,on?1:0);
+    render();
+    toast(on?"Prepared! Stock updated":"Undone, stock restored");
+  });
+}
+
+function recHtml(k,r){
+  const f=tot(),s=f/(BASE[k]||1),fa=fam(),ing=r[1],pre=/^(Serves|Makes)/.test(ing),i=ing.indexOf(". "),ok=pre&&i>0,body=ok?ing.slice(i+2):ing,tm=ok?(ing.slice(0,i).match(/\d+ min.*/)||[""])[0]:"";
+  const steps=(lang==="ml"&&MS[METH[k]])||r[2].split("|").filter(x=>!(k==="rice"&&f>1&&x.includes("onto the plate")));
+  return `<div class="rec-body"><div class="rec-meta"><span class="chip">${f===1?"Cooking for 1":"Cooking for "+fa.a+" adult"+(fa.a>1?"s":"")+(fa.c?" and "+fa.c+" child"+(fa.c>1?"ren":""):"")}${tm?", "+esc(tm):""}</span>${YP[k]&&f>1?`<span class="chip">Your plate (chart): ${YP[k]}</span>`:""}</div><div class="rec-ing"><b>You need:</b> ${esc(sc(body,s))}${YP[k]&&f>1?`<div style="margin-top:4px;font-size:.78rem;color:var(--mute)">Serve yours first, then the family.</div>`:""}</div><ol class="steps">${steps.map(x=>`<li><span>${esc(sc(x,s,1))}</span></li>`).join("")}</ol>${f>2?`<p style="color:var(--mute);font-size:.8rem;margin:6px 0 0">Bigger batch: use a larger pot, cook dosa, chapati and idli in batches, and allow a few extra minutes.</p>`:""}</div>`;
+}
+
+function renderCook(){
+  const d=M[day],seen=new Set();
+  let h=`<div class="cook-bar"><button class="btn-ghost" id="toggleAll">${cookAllOpen?"Collapse all":"Expand all"}</button></div>`;
+  d.m.forEach((m,mi)=>{
+    const keys=m[2].filter(k=>!seen.has(k));if(!keys.length)return;
+    h+=`<div class="card"><div class="card-hd"><h3>${m[0]} <span style="color:var(--mute);font-weight:500">· ${SLOT_LABELS[mi]}</span></h3></div>`;
+    keys.forEach(k=>{seen.add(k);const r=R[k];h+=`<details class="rec-item" ${cookAllOpen?"open":""}><summary><span>${esc(r[0])}</span>${SVG.rchev}</summary>${recHtml(k,r)}</details>`});
+    h+=`</div>`;
+  });
+  h+=`<div class="banner">${SVG.info}<div>Cooking tips: use minimal oil, steam, boil or grill where you can, and measure oats and rice portions.</div></div>`;
+  $("#view").innerHTML=h;
+  $("#toggleAll").onclick=()=>{cookAllOpen=!cookAllOpen;render()};
+}
+
+function parseQ(q){const m=q.match(/^([\d.]+)\s*(g|ml|litres?)?/);if(!m)return{u:"",s:1};const u=m[2];if(u==="g"||u==="ml")return{u:u,s:50};if(u)return{u:"l",s:.5};return{u:"",s:1}}
+function renderInv(){
+  const inv=store.get("inv"),iu=store.get("invu");
+  let h=`<div class="banner">${SVG.info}<div>Stock goes down automatically when you confirm a meal as prepared. Tap the unit button to switch between g and kg, or ml and litres.</div></div>`;
+  h+=`<div class="stock-tools"><div class="search-wrap">${SVG.search}<input class="search-in" id="stockSearch" type="search" placeholder="Search pantry items..." value="${esc(stockFilter)}"></div><button class="btn-danger-outline" id="zero">Set all to zero</button></div>`;
+  h+=`<div class="shop-grid">`;
+  SHOP.mon[1].forEach(g=>{
+    const cat=g[0].replace(" (first half)","");
+    h+=`<div class="card inv-card"><div class="card-hd"><h3>${esc(cat)}</h3></div>`;
+    g[1].forEach(it=>{
+      const p=parseQ(it[1]),n=it[0],big=iu[n]===1&&!!p.u,k=big?1000:1,raw=inv[n]||0,v=Math.round(raw/k*100)/100,lab=big?(p.u==="g"?"kg":"L"):p.u,st=big?250:p.s;
+      const need=needOf(g[0],it),dotCls=raw<=0?"dot zero":(need&&raw<need*0.25)?"dot low":"dot ok";
+      h+=`<div class="row-item inv-row" data-name="${esc(n.toLowerCase())}"><div class="row-info"><div class="row-title"><span class="${dotCls}"></span><span>${esc(n)}</span></div><div class="row-sub">Weekly: ${esc(gq(it[1],g[0]))}</div></div><div class="stp"><button data-n="${esc(n)}" data-s="-${st}" aria-label="Decrease ${esc(n)}">−</button><input type="number" inputmode="decimal" min="0" step="any" value="${v}" data-n="${esc(n)}" data-k="${k}" aria-label="${esc(n)} in stock"><button data-n="${esc(n)}" data-s="${st}" aria-label="Increase ${esc(n)}">+</button><button class="unit-btn" data-u="${esc(n)}" ${p.u?"":"disabled"} aria-label="Change unit">${lab}</button></div></div>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+  h+=priceCard();
+  $("#view").innerHTML=h;
+  wirePrices();
+
+  const applyFilter=()=>{
+    const q=stockFilter.trim().toLowerCase();
+    document.querySelectorAll(".inv-card").forEach(card=>{
+      let vis=0;
+      card.querySelectorAll(".inv-row").forEach(r=>{
+        const ok=!q||r.dataset.name.includes(q);
+        r.style.display=ok?"":"none";
+        if(ok)vis++;
+      });
+      card.style.display=vis?"":"none";
+    });
+  };
+  applyFilter();
+  $("#stockSearch").oninput=e=>{stockFilter=e.target.value;applyFilter()};
+
+  document.querySelectorAll(".inv-row .stp button:not(.unit-btn)").forEach(b=>b.onclick=()=>{
+    const n=b.dataset.n,i=b.parentNode.querySelector("input");
+    inv[n]=Math.max(0,Math.round(((inv[n]||0)+ +b.dataset.s)*100)/100);
+    store.set("inv",inv);
+    i.value=Math.round(inv[n]/ +i.dataset.k*100)/100;
+  });
+  document.querySelectorAll(".inv-row .stp input").forEach(i=>i.onchange=()=>{
+    inv[i.dataset.n]=Math.max(0,(+i.value||0)* +i.dataset.k);
+    store.set("inv",inv);
+    i.value=Math.round(inv[i.dataset.n]/ +i.dataset.k*100)/100;
+  });
+  document.querySelectorAll(".unit-btn").forEach(b=>b.onclick=()=>{const n=b.dataset.u;iu[n]=iu[n]===1?0:1;store.set("invu",iu);render()});
+  const z=$("#zero");let armed=false,t;
+  z.onclick=()=>{if(!armed){armed=true;z.classList.add("arm");z.textContent=lang==="ml"?TR("Tap again to confirm: set all to zero"):"Tap again to confirm: set all to zero";t=setTimeout(()=>{armed=false;z.classList.remove("arm");z.textContent=lang==="ml"?TR("Set all to zero"):"Set all to zero"},4000)}else{clearTimeout(t);store.set("inv",{});render()}};
+}
+
+function renderHealth(){
+  const k="log-"+dkey(),L=store.get(k);L.ex=L.ex||[];L.taken=L.taken||{};
+  const meds=store.get("meds").list||[],goal=store.get("goal").m||30;
+  const save=()=>store.set(k,L);
+  const total=L.ex.reduce((a,e)=>a+e.m,0),pct=Math.min(100,Math.round(total/goal*100));
+
+  let h=`<div class="health-grid">`;
+  h+=`<div class="card"><div class="card-hd"><h3>${SVG.run} Exercise today</h3><span class="meta">${pct}%</span></div><div><span class="metric-big">${total}</span> <span class="metric-sub">/ ${goal} min</span></div><div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>`;
+  L.ex.forEach((e,i)=>{h+=`<div class="row-item"><span style="font-size:.87rem;font-weight:500">${esc(e.a)} · ${e.m} min</span><button class="btn-del" data-ex="${i}" aria-label="Remove">×</button></div>`});
+  h+=`<div class="form-row"><select class="ctrl" id="ea"><option value="Walking">Walking</option><option value="Yoga">Yoga</option><option value="Cycling">Cycling</option><option value="Strength">Strength</option><option value="Other">Other</option></select><input class="ctrl" id="em" type="number" inputmode="numeric" min="1" placeholder="Minutes" style="max-width:100px"><button class="btn-primary" id="eadd">Add</button></div>`;
+  h+=`<div class="form-row" style="padding-top:10px;border-top:1px solid var(--line)"><input class="ctrl" id="eg" type="number" inputmode="numeric" min="1" value="${goal}" aria-label="Daily goal (min)" style="max-width:110px"><button class="btn-ghost" id="egs">Set goal</button></div></div>`;
+
+  h+=`<div class="card"><div class="card-hd"><h3>${SVG.pill} Medication today</h3></div>`;
+  if(!meds.length)h+=`<p style="color:var(--mute);font-size:.85rem;margin:0 0 8px">No medicines added yet. Add the ones your doctor prescribed below.</p>`;
+  ["Morning","Afternoon","Night"].forEach(s=>{
+    const l=meds.filter(m=>m.s===s);if(!l.length)return;
+    h+=`<div class="slot-lbl">${s}</div>`;
+    l.forEach(m=>{h+=`<div class="med-row"><label><input type="checkbox" data-m="${m.id}" ${L.taken[m.id]?"checked":""}><span>${esc(m.n)}${m.d?` <span style="color:var(--mute);font-weight:400">(${esc(m.d)})</span>`:""}</span></label><button class="btn-del" data-del="${m.id}" aria-label="Remove ${esc(m.n)}">×</button></div>`});
+  });
+  h+=`<div class="form-row"><input class="ctrl" id="mn" placeholder="Medicine name"><input class="ctrl" id="md" placeholder="Dose, e.g. 500 mg"><select class="ctrl" id="ms"><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Night">Night</option></select><button class="btn-primary" id="madd">Add medicine</button></div></div>`;
+
+  h+=`<div class="card health-full"><div class="card-hd"><h3>${SVG.chart} Last 7 days</h3></div><div class="wk-grid">`;
+  for(let o=6;o>=0;o--){
+    const d=new Date();d.setDate(d.getDate()-o);
+    const l=store.get("log-"+dkey(o));
+    const mins=(l.ex||[]).reduce((a,e)=>a+e.m,0);
+    const tk=meds.filter(m=>(l.taken||{})[m.id]).length;
+    const barPct=Math.min(100,Math.round(mins/goal*100));
+    h+=`<div class="wk-col"><span>${D[d.getDay()].slice(0,3)}</span><strong>${mins}m</strong><div class="wk-mini-bar"><i style="width:${barPct}%"></i></div><span>${meds.length?tk+"/"+meds.length:"–"}</span></div>`;
+  }
+  h+=`</div><p style="font-size:.77rem;color:var(--mute);margin:10px 0 0">Minutes of exercise, and medicines taken out of those added.</p></div>`;
+  h+=labCard();
+  h+=`</div>`;
+
+  $("#view").innerHTML=h;
+  $("#eadd").onclick=()=>{const m=Math.round(+$("#em").value);if(m>0){L.ex.push({a:$("#ea").value,m:m});save();renderHealth()}};
+  $("#egs").onclick=()=>{const m=Math.round(+$("#eg").value);if(m>0){store.set("goal",{m:m});renderHealth()}};
+  document.querySelectorAll("[data-ex]").forEach(b=>b.onclick=()=>{L.ex.splice(+b.dataset.ex,1);save();renderHealth()});
+  $("#madd").onclick=()=>{const n=$("#mn").value.trim();if(!n)return;meds.push({id:"m"+Date.now(),n:n,d:$("#md").value.trim(),s:$("#ms").value});store.set("meds",{list:meds});renderHealth()};
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{store.set("meds",{list:meds.filter(m=>m.id!==b.dataset.del)});renderHealth()});
+  document.querySelectorAll("[data-m]").forEach(c=>c.onchange=()=>{L.taken[c.dataset.m]=c.checked;save();renderHealth()});
+  wireLabs(renderHealth);
+}
+
+function addFam(){
+  const f=fam(),first=!store.get("fam2").a,T=+tot().toFixed(2);
+  const row=(l,sub,k,v,st)=>`<div class="row-item"><div class="row-info"><div class="row-title">${l}</div>${sub?`<div class="row-sub">${sub}</div>`:""}</div><div class="stp"><button data-f="${k}" data-s="-${st}" aria-label="Decrease ${l}">−</button><input readonly value="${v}" aria-label="${l}"><button data-f="${k}" data-s="${st}" aria-label="Increase ${l}">+</button></div></div>`;
+  $("#view").insertAdjacentHTML("afterbegin",`<details class="fam-card" id="fam" ${(famOpen||first)?"open":""}><summary><span class="fam-sum-l">${SVG.users}<span>Family: ${f.a} adult${f.a>1?"s":""}, ${f.c} child${f.c===1?"":"ren"}, ${f.d} on diet · <span class="num">${T}×</span></span></span>${SVG.chev}</summary><div class="fam-body"><div class="fam-grid">${row("Adults","including you","a",f.a,1)}${row("Children","","c",f.c,1)}${row("On the diet","get the chart portion","d",f.d,1)}${row("Normal adult portion","times the chart portion","x",f.x,0.25)}${row("Child portion","times the chart portion","y",f.y,0.25)}</div><div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:.8rem;color:var(--mute)">Total to cook: <b style="color:var(--ink)">${T}× the chart portion.</b></div></div></details>`);
+  const d=$("#fam");d.ontoggle=()=>{famOpen=d.open};
+  d.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    const c=fam(),k=b.dataset.f,s=+b.dataset.s;
+    if(k==="a")c.a=Math.max(1,Math.min(10,c.a+s));
+    else if(k==="c")c.c=Math.max(0,Math.min(10,c.c+s));
+    else if(k==="d")c.d+=s;
+    else c[k]=Math.max(0.25,Math.min(3,Math.round((c[k]+s)*100)/100));
+    c.d=Math.max(1,Math.min(c.d,c.a+c.c));
+    store.set("fam2",c);famOpen=true;render();
+  });
+}
+
+/* Stock Meal Deduction & Pending Confirmation */
+function useOf(w,i){
+  const m=M[w].m[i],T=tot(),o={};
+  const add=(n,a)=>{o[n]=(o[n]||0)+a*T};
+  m[2].forEach(k=>(U[k]?U[k].split(","):[]).forEach(x=>{const p=x.split(":");add(p[0],+p[1])}));
+  if(i===4){const fr={Guava:["Guava",1],Apple:["Green apple",1],Papaya:["Papaya",125]}[M[w].f];add(fr[0],fr[1])}
+  return o;
+}
+function setMeal(k,w,i,val){
+  const all=store.get("done"),dn=all[k]=all[k]||{},prev=dn[i],inv=store.get("inv");
+  if(prev&&prev.s===1&&prev.d){for(const n in prev.d)inv[n]=Math.round(((inv[n]||0)+prev.d[n])*100)/100}
+  let d=null;
+  if(val===1){d=useOf(w,i);for(const n in d){const a=Math.min(inv[n]||0,d[n]);inv[n]=Math.round(((inv[n]||0)-a)*100)/100;d[n]=a}}
+  dn[i]={s:val,d:d};store.set("inv",inv);store.set("done",all);
+}
+function pending(){
+  applyMutton();
+  const out=[],nm=new Date().getHours()*60+new Date().getMinutes(),dn=store.get("done");
+  for(let o=1;o>=0;o--){
+    const d=new Date();d.setDate(d.getDate()-o);
+    const k=d.toLocaleDateString("en-CA"),w=d.getDay();
+    M[w].m.forEach((m,i)=>{if((o>0||nm>=MT[i]+60)&&!(dn[k]&&dn[k][i]))out.push({k,w,i,o})});
+  }
+  return out;
+}
+function checkPending(){
+  if($("#ov"))return;
+  const p=pending();if(!p.length)return;
+  let h=`<div id="ov"><div class="sheet"><h3>Were these meals prepared?</h3><p class="sheet-sub">Tick what you cooked. Stock is reduced for ticked meals. Untick any you skipped.</p>`,last=-1;
+  p.forEach((x,j)=>{
+    if(x.o!==last){h+=`<div class="slot-lbl">${x.o?"Yesterday":"Today"}, ${D[x.w]}</div>`;last=x.o}
+    const m=M[x.w].m[x.i];
+    h+=`<label class="chk-row"><input type="checkbox" data-j="${j}" checked><span class="chk-lbl"><b>${m[0]}</b> · ${esc(m[1])}</span></label>`;
+  });
+  h+=`<div class="form-row" style="margin-top:16px"><button class="btn-primary" id="ovs" style="flex:1">Save</button><button class="btn-ghost" id="ovl" style="flex:1">Ask me later</button></div></div></div>`;
+  document.body.insertAdjacentHTML("beforeend",h);
+  $("#ovs").onclick=()=>{document.querySelectorAll("#ov input").forEach(c=>{const x=p[+c.dataset.j];setMeal(x.k,x.w,x.i,c.checked?1:0)});$("#ov").remove();render()};
+  $("#ovl").onclick=()=>$("#ov").remove();
+  trDom();
+}
+
+/* Core Render & Event Wiring */
+function render(){
+  $("#title").textContent=tab==="inv"?"Kitchen stock":tab==="health"?"Exercise & medication":(day===now?"Today, "+D[day]:D[day]);
+  $("#days").style.display=(tab==="inv"||tab==="health")?"none":"";
+  document.querySelectorAll(".days button").forEach(b=>b.classList.toggle("on",+b.dataset.d===day));
+  document.querySelectorAll(".tabs button").forEach(b=>{b.classList.toggle("on",b.dataset.t===tab);b.setAttribute("role","tab")});
+  ({shop:renderShop,meals:renderMeals,cook:renderCook,inv:renderInv,health:renderHealth})[tab]();
+  if(tab!=="health")addFam();
+  trDom();
+}
+function setLang(l){
+  lang=l;if(store.get("lang").v!==l)store.set("lang",{v:l});
+  document.documentElement.lang=l;
+  document.querySelectorAll(".seg-lang span[data-l]").forEach(s=>s.classList.toggle("on",s.dataset.l===l));
+  render();
+}
+
+$("#view").addEventListener("click",e=>{
+  const b=e.target.closest(".mtb");if(!b)return;
+  const m=(CM[b.dataset.i]||{})[b.dataset.s];if(!m||!m[+b.dataset.x])return;
+  PSEL[b.dataset.i]={s:b.dataset.s,n:m[+b.dataset.x].n};
+  store.set("psel",PSEL);repaintBuy();
+});
+
+const order=[1,2,3,4,5,6,0];
+$("#days").innerHTML=order.map(d=>`<button data-d="${d}" class="${d===now?"today":""}">${D[d].slice(0,3)}</button>`).join("");
+document.querySelectorAll(".days button").forEach(b=>b.onclick=()=>{day=+b.dataset.d;render()});
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;render()});
+$("#lang").onclick=()=>setLang(lang==="ml"?"en":"ml");
+
+/* ---------- Login screen ---------- */
+const LEAF='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>';
+function showAuth(msg){
+  const old=$("#auth");if(old)old.remove();
+  let mode="login";
+  const el=document.createElement("div");el.id="auth";document.body.appendChild(el);
+  const paint=()=>{
+    const reg=mode==="register";
+    el.innerHTML=`<div class="auth-card"><div class="brand-mark">${LEAF}</div><h2>Healthy Plate</h2><p class="sub">Kerala diet planner. Log in to keep your data safe in the cloud and use it on any device.</p>
+<div class="auth-tabs"><button type="button" data-m="login" class="${reg?"":"on"}">Log in</button><button type="button" data-m="register" class="${reg?"on":""}">Create account</button></div>
+<form id="authf">
+${reg?'<label class="fld"><span>Your name</span><input id="a-name" autocomplete="name" maxlength="60"></label>':""}
+<label class="fld"><span>Username</span><input id="a-user" autocomplete="username" autocapitalize="none" required maxlength="40"></label>
+<label class="fld"><span>Password${reg?" (at least 8 characters)":""}</span><input id="a-pass" type="password" autocomplete="${reg?"new-password":"current-password"}" required></label>
+${reg?'<label class="fld"><span>Invite code (only if you were given one)</span><input id="a-inv" autocomplete="off"></label>':""}
+<p class="auth-err" id="a-err">${esc(msg||"")}</p>
+<button class="btn-primary btn-block" id="a-go" type="submit">${reg?"Create account":"Log in"}</button></form></div>`;
+    el.querySelectorAll(".auth-tabs button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;msg="";paint()});
+    el.querySelector("#a-user").focus();
+    el.querySelector("#authf").onsubmit=async ev=>{
+      ev.preventDefault();
+      const go=el.querySelector("#a-go"),err=el.querySelector("#a-err");
+      go.disabled=true;err.textContent="";
+      try{
+        const r=await api("/auth",{method:"POST",body:{
+          action:mode,
+          username:el.querySelector("#a-user").value,
+          password:el.querySelector("#a-pass").value,
+          name:reg?el.querySelector("#a-name").value:"",
+          invite:reg?el.querySelector("#a-inv").value:""
+        }});
+        SYNC.setSession(r);
+        el.remove();
+        boot(true);
+        SYNC.sync().then(ch=>{if(ch)refreshAll();checkPending()});
+      }catch(e){err.textContent=e.message||"Something went wrong.";go.disabled=false}
+    };
+  };
+  paint();
+}
+
+/* ---------- Profile / account sheet ---------- */
+function applyProfile(){
+  const e=$("#kcal");if(!e)return;
+  const k=+(store.get("profile").kcal)||1600;
+  e.textContent=k+" kcal";
+}
+function openAcct(){
+  if($("#acct"))return;
+  const p=store.get("profile"),u=SYNC.user||{};
+  const fl=(id,l,v,t,extra,wide)=>`<label class="fld${wide?" wide":""}"><span>${l}</span><input id="${id}" type="${t||"text"}" value="${esc(v==null?"":v)}" ${extra||""}></label>`;
+  const sex=["","Female","Male","Other"].map(x=>`<option value="${x}" ${p.sex===x?"selected":""}>${x||"–"}</option>`).join("");
+  document.body.insertAdjacentHTML("beforeend",`<div id="acct"><div class="sheet"><h3>Your profile</h3><p class="sheet-sub">Logged in as <b>${esc(u.username||"")}</b>. <span id="syncTxt"></span></p>
+<div class="fld-grid">
+${fl("p-name","Name",p.name||u.name,"text","maxlength=60",1)}
+${fl("p-age","Age",p.age,"number","min=1 max=120 inputmode=numeric")}
+<label class="fld"><span>Sex</span><select id="p-sex">${sex}</select></label>
+${fl("p-h","Height (cm)",p.height,"number","min=50 max=250 step=any")}
+${fl("p-w","Weight (kg)",p.weight,"number","min=10 max=400 step=any")}
+${fl("p-k","Daily calories (kcal)",p.kcal||1600,"number","min=800 max=4000")}
+${fl("p-dr","Doctor",p.doctor,"text","maxlength=80")}
+${fl("p-di","Dietitian",p.dietitian,"text","maxlength=80",1)}
+${fl("p-cond","Health conditions",p.conditions,"text","maxlength=200",1)}
+${fl("p-notes","Other notes (allergies etc.)",p.notes,"text","maxlength=300",1)}
+</div>
+<div class="form-row" style="margin-top:6px"><button class="btn-primary" id="p-save" style="flex:1">Save</button><button class="btn-ghost" id="p-sync" style="flex:1">Sync now</button></div>
+<div class="form-row"><button class="btn-danger-outline" id="p-out" style="flex:1">Log out</button><button class="btn-ghost" id="p-close" style="flex:1">Close</button></div></div></div>`);
+  SYNC.state(SYNC.st||"idle");
+  const el=$("#acct"),num=v=>{const x=parseFloat(v);return isNaN(x)?"":x};
+  const close=()=>el.remove();
+  el.onclick=e=>{if(e.target===el)close()};
+  $("#p-close").onclick=close;
+  $("#p-save").onclick=()=>{
+    store.set("profile",{
+      name:$("#p-name").value.trim(),age:num($("#p-age").value),sex:$("#p-sex").value,
+      height:num($("#p-h").value),weight:num($("#p-w").value),kcal:num($("#p-k").value)||1600,
+      doctor:$("#p-dr").value.trim(),dietitian:$("#p-di").value.trim(),
+      conditions:$("#p-cond").value.trim(),notes:$("#p-notes").value.trim()
+    });
+    applyProfile();close();toast("Saved");
+  };
+  $("#p-sync").onclick=async()=>{
+    SYNC.state("saving");
+    const ch=await SYNC.sync();
+    close();if(ch)refreshAll();toast("Synced");
+  };
+  $("#p-out").onclick=()=>{if(confirm("Log out of this device?"))SYNC.logout(false)};
+  trDom();
+}
+
+/* ---------- Health tests (lab results) ---------- */
+const LABS=[["HbA1c","%"],["Fasting glucose","mg/dL"],["Post-meal glucose","mg/dL"],["TSH","mIU/L"],["Free T4","ng/dL"],["Total cholesterol","mg/dL"],["LDL","mg/dL"],["HDL","mg/dL"],["Triglycerides","mg/dL"],["Creatinine","mg/dL"],["Blood pressure","mmHg"],["Weight","kg"],["Other",""]];
+function labCard(){
+  const L=(store.get("labs").list||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(b.id||"").localeCompare(a.id||""));
+  const latest={};L.forEach(x=>{if(!latest[x.test])latest[x.test]=x});
+  const chips=Object.keys(latest).map(t=>`<span class="chip">${esc(t)}: <b>${esc(latest[t].value)}</b> ${esc(latest[t].unit||"")}</span>`).join("");
+  let h=`<div class="card health-full"><div class="card-hd"><h3>${SVG.chart} Health tests</h3><span class="meta">${L.length}</span></div>`;
+  h+=chips?`<div class="lab-chips">${chips}</div>`:`<p style="color:var(--mute);font-size:.85rem;margin:0 0 8px">No test results yet. Add your lab reports below.</p>`;
+  h+=`<div class="lab-list">`;
+  L.forEach(x=>{h+=`<div class="row-item"><div class="row-info"><div class="row-title">${esc(x.test)}: ${esc(x.value)} ${esc(x.unit||"")}</div><div class="row-sub">${esc(x.date||"")}${x.note?" · "+esc(x.note):""}</div></div><button class="btn-del" data-lab="${esc(x.id)}" aria-label="Remove">×</button></div>`});
+  h+=`</div><div class="form-row"><select class="ctrl" id="lt">${LABS.map(l=>`<option value="${l[0]}">${l[0]}</option>`).join("")}</select><input class="ctrl" id="lv" placeholder="Value, e.g. 6.8 or 120/80" style="flex:2 1 150px"><input class="ctrl" id="lu" placeholder="Unit" value="${LABS[0][1]}" style="max-width:90px"><input class="ctrl" id="ld" type="date" value="${dkey(0)}"><input class="ctrl" id="ln" placeholder="Note (optional)" style="flex:2 1 150px"><button class="btn-primary" id="ladd">Add result</button></div></div>`;
+  return h;
+}
+function wireLabs(done){
+  const t=$("#lt");if(!t)return;
+  t.onchange=()=>{const l=LABS.find(x=>x[0]===t.value);$("#lu").value=l?l[1]:""};
+  $("#ladd").onclick=()=>{
+    const v=$("#lv").value.trim();if(!v)return;
+    const list=store.get("labs").list||[];
+    list.push({id:"l"+Date.now(),test:t.value,value:v,unit:$("#lu").value.trim(),date:$("#ld").value||dkey(0),note:$("#ln").value.trim()});
+    store.set("labs",{list:list});done();
+  };
+  document.querySelectorAll("[data-lab]").forEach(b=>b.onclick=()=>{
+    store.set("labs",{list:(store.get("labs").list||[]).filter(x=>x.id!==b.dataset.lab)});done();
+  });
+}
+
+/* ---------- Price list editor (Stock tab) ---------- */
+function priceCard(){
+  const pu={};SHOP.mon[1].forEach(g=>g[1].forEach(it=>{pu[it[0]]=parseQ(it[1]).u}));
+  let h=`<details class="fam-card" style="margin-top:14px"><summary><span class="fam-sum-l">${SVG.bag}<span>Price list (₹)</span></span>${SVG.chev}</summary><div class="fam-body"><p class="sheet-sub" style="margin:10px 0 4px">Used to estimate your buy list. Weighed items are priced per kg or litre, the rest per piece.</p><div class="fam-grid">`;
+  Object.keys(pu).filter(n=>PR[n]).forEach(n=>{
+    h+=`<div class="row-item"><div class="row-info"><div class="row-title">${esc(n)}</div><div class="row-sub">${pu[n]?"₹ per "+(pu[n]==="g"?"kg":"litre"):"₹ each"}</div></div><div class="stp"><input type="number" inputmode="decimal" min="0" step="any" value="${PR[n][0]}" data-pn="${esc(n)}" aria-label="Price of ${esc(n)}"></div></div>`;
+  });
+  return h+`</div></div></details>`;
+}
+function wirePrices(){
+  document.querySelectorAll("[data-pn]").forEach(i=>i.onchange=()=>{
+    const v=Math.max(0,+i.value||0),n=i.dataset.pn,s0=store.get("prices"),p=s0.p||{};
+    p[n]=v;PR[n]=[v,2];
+    store.set("prices",{t:s0.t||new Date().toISOString(),p:p});
+  });
+}
+
+/* ---------- Startup ---------- */
+function reloadPrices(){const s0=store.get("prices");if(s0.p)for(const k in s0.p)if(PR[k])PR[k]=[s0.p[k],2]}
+function boot(skipPending){
+  lang=store.get("lang").v||"en";
+  reloadPrices();initTheme();applyMutton();applyProfile();
+  document.body.dataset.sync=SYNC.token?"idle":"";
+  setLang(lang);
+  if(!skipPending)checkPending();
+}
+function refreshAll(){
+  const a=document.activeElement;
+  if(a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName))return;
+  if($("#acct")||$("#ov"))return;
+  lang=store.get("lang").v||"en";
+  reloadPrices();initTheme();applyProfile();setLang(lang);
+}
+const syncNow=()=>SYNC.sync().then(ch=>{if(ch)refreshAll();checkPending()});
+
+$("#acctBtn").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+$("#acctBtn").onclick=()=>{if(SYNC.token)openAcct();else showAuth()};
+
+if(SYNC.token){boot(true);syncNow()}else showAuth();
+document.addEventListener("visibilitychange",()=>{
+  if(!SYNC.token)return;
+  if(document.hidden)SYNC.flush();else syncNow();
+});
+window.addEventListener("online",()=>{if(SYNC.token)SYNC.sync()});
+setInterval(()=>{if(!document.hidden&&SYNC.token)checkPending()},300000);
+</script>
+</body>
+</html>

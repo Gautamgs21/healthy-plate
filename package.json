@@ -1,0 +1,9 @@
+{
+  "name": "healthy-plate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Healthy Plate: Kerala diet planner with cloud sync (Vercel + MongoDB)",
+  "dependencies": {
+    "mongodb": "^6.10.0"
+  }
+}

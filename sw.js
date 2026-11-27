@@ -4,8 +4,8 @@
  * Safari can switch the subscription off. So the push handler below always calls showNotification,
  * even when the message cannot be read.
  */
-const VERSION = "hp-v3";
-const SHELL = ["/", "/index.html", "/shared/tests.js", "/shared/calc.js", "/js/dash.js", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/apple-touch-icon.png"];
+const VERSION = "hp-v4";
+const SHELL = ["/", "/index.html", "/shared/tests.js", "/shared/calc.js", "/js/dash.js", "/js/notify.js", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(

@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Healthy Plate",
+  "short_name": "Healthy Plate",
+  "description": "Kerala diet planner with health dashboard and reminders",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f6f3",
+  "theme_color": "#0f6243",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

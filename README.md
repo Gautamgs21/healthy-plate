@@ -1,4 +1,37 @@
-# Healthy Plate: setup guide (GitHub + Vercel + MongoDB)
+# Healthy Plate
+
+## Update: Dashboard and complete health checklist (step 1 of 3)
+
+### What is new
+- **Home tab (Dashboard)** is now the first page and the page you land on after logging in.
+  - *Upcoming events*: five expandable cards (Grocery Purchase, Medicine Purchase, Meal Preparation, Exercises, Health Check-ups). Each shows the next activity and expands to the details. They read from your existing groceries, stock, meals, exercise, medicines and test results.
+  - *Calorie Statistics*: calories burned, intake, net, remaining against your daily target, and a recommendation worked out from your real numbers.
+  - *Physical Statistics*: current weight and BMI, target weight and BMI, weight progress, and a line graph of your history with your target line (1M / 3M / 6M / 1Y / All, Weight or BMI).
+  - *Health Check Statistics*: tap the card for a large pop-up with four boxes (blood and urine, heart, eye, lung). Each box has its own dropdown and graph, reference range, out-of-range points in red, and the latest and previous result. Tests such as ECG, echo, X-ray and retinal exam show a dated timeline instead of a graph.
+  - *Medicine Statistics*: active medicines with purpose, dosage, frequency, timing and status, plus a button for the complete list.
+- **Health tab** now holds the full 24-test checklist in four groups (frequency and "preferred for" shown for each). One list is used everywhere (`shared/tests.js`). New results are always added, so your history is never overwritten. You can correct a result, and two results for the same test on the same date are blocked.
+- **Medicines** can now have a purpose, frequency, timing and a "supply lasts until" date. You can stop a medicine (it moves to Discontinued and keeps its history) and resume it later.
+- **Profile** has new Target weight and Target BMI fields. Enter either one and the other is worked out from your height.
+- Older lab entries from the first version are moved into the new checklist automatically. Anything that does not fit a checklist test stays visible under "Older entries".
+
+### Things to know
+- **Calories eaten:** your meal chart has no calorie numbers and none are invented. On the Home tab tap *Set meal calories* and enter the calories for each meal (from your dietitian's chart). Meals you mark as prepared on the Meals tab then count as eaten.
+- **Calories burned:** estimated from the activity, your minutes and your weight using standard MET values (Walking 3.5, Yoga 2.5, Cycling 6, Strength 4, Other 4). If you type the calories for an activity (for example from a watch), your number is used instead. Without a weight or typed calories, the card shows a dash instead of guessing.
+- **BMI graph** shows the standard adult range 18.5 to 24.9. Reference ranges for tests are general adult values for orientation only. Your doctor's targets may differ.
+- On a phone the Health Check pop-up fills about 90% of the screen height so the graphs stay readable. On a laptop it is 75% of the screen.
+- Nothing from this update needs new settings in Vercel.
+
+### How to put this update online
+1. Unzip the file. On GitHub open your `healthy-plate` repository and choose **Add file > Upload files**.
+2. Drag in everything inside the unzipped folder, including the **`js`** and **`shared`** folders. Files with the same name are replaced and your data is not touched.
+3. Click **Commit changes**. Vercel redeploys by itself in about a minute.
+4. Open your app, pull down to refresh (on iPhone close and reopen it), and log in. You land on the Dashboard.
+
+Steps 2 and 3 (push notifications and reminders) come next. The folder already contains some files for them (`api/push.js`, `api/reminders.js`, `api/cron.js`, `sw.js`, icons). They do nothing until those steps are finished and are not part of this update.
+
+---
+
+## Original setup guide (GitHub + Vercel + MongoDB)
 
 You do not need to know anything about backends. Follow the steps in order. Total time: about 20 minutes.
 

@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Healthy Plate</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0f6243">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Healthy Plate">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -679,6 +686,10 @@ small.ref{font-weight:400;color:var(--mute);font-size:.72rem}
 .mrow dl{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin:0;font-size:.78rem}
 .mrow dt{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
 .mrow dd{margin:0}
+.nt-sec{border-top:1px solid var(--line);padding:12px 0 4px;margin-top:10px}
+.nt-sec h4{margin:0 0 6px;font-size:.88rem}
+.nt-steps{margin:8px 0 0;padding-left:18px}
+.nt-steps li{margin:2px 0}
 .tabs{grid-template-columns:repeat(6,1fr)}
 @media (max-width:420px){.tabs button{font-size:.62rem}}
 @media (min-width:768px){.tabs{grid-template-columns:repeat(6,auto);justify-content:start}}
@@ -727,6 +738,7 @@ small.ref{font-weight:400;color:var(--mute);font-size:.72rem}
 <script src="shared/tests.js"></script>
 <script src="shared/calc.js"></script>
 <script src="js/dash.js"></script>
+<script src="js/notify.js"></script>
 <script>
 const D=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const SVG={
@@ -1903,6 +1915,7 @@ ${fl("p-cond","Health conditions",p.conditions,"text","maxlength=200",1)}
 ${fl("p-notes","Other notes (allergies etc.)",p.notes,"text","maxlength=300",1)}
 </div>
 <div class="form-row" style="margin-top:6px"><button class="btn-primary" id="p-save" style="flex:1">Save</button><button class="btn-ghost" id="p-sync" style="flex:1">Sync now</button></div>
+<div class="form-row"><button class="btn-ghost" id="p-notif" style="flex:1">Notifications</button></div>
 <div class="form-row"><button class="btn-danger-outline" id="p-out" style="flex:1">Log out</button><button class="btn-ghost" id="p-close" style="flex:1">Close</button></div></div></div>`);
   SYNC.state(SYNC.st||"idle");
   const el=$("#acct"),num=v=>{const x=parseFloat(v);return isNaN(x)?"":x};
@@ -1924,6 +1937,7 @@ ${fl("p-notes","Other notes (allergies etc.)",p.notes,"text","maxlength=300",1)}
     const ch=await SYNC.sync();
     close();if(ch)refreshAll();toast("Synced");
   };
+  $("#p-notif").onclick=()=>{close();HPN.open()};
   $("#p-out").onclick=()=>{if(confirm("Log out of this device?"))SYNC.logout(false)};
   trDom();
 }
@@ -1993,8 +2007,9 @@ const syncNow=()=>SYNC.sync().then(ch=>{if(ch)refreshAll();checkPending()});
 $("#acctBtn").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 $("#acctBtn").onclick=()=>{if(SYNC.token)openAcct();else showAuth()};
 
-(function(){const g=new URLSearchParams(location.search).get("go");if(g&&["dash","shop","meals","cook","inv","health"].includes(g)){tab=g;try{history.replaceState(null,"",location.pathname)}catch(e){}}})();
+(function(){const q=new URLSearchParams(location.search),g=q.get("go");if(g&&["dash","shop","meals","cook","inv","health"].includes(g)){tab=g;if(q.get("open"))HPD.expand(q.get("open"));try{history.replaceState(null,"",location.pathname)}catch(e){}}})();
 if(SYNC.token){boot(true);syncNow()}else showAuth();
+HPN.init();
 document.addEventListener("visibilitychange",()=>{
   if(!SYNC.token)return;
   if(document.hidden)SYNC.flush();else syncNow();

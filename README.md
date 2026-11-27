@@ -1,5 +1,31 @@
 # Healthy Plate
 
+## Update: iPhone notifications (step 2 of 3)
+
+### What is new
+- The app can now send health alerts to your iPhone even when it is closed: a test result outside the reference range, medicine supply running low (3 days or less), and an overdue health check-up.
+- A **Notifications** button in the profile sheet (person icon) lets you turn alerts on or off for this phone, pick which alerts you want, set your time zone (default Asia/Kolkata), send a test, see your devices and the recent delivery history.
+- Tapping a notification opens the right page in the app.
+- Failed or expired phones are removed automatically.
+
+### Things to know (honest limits)
+- iPhone only allows notifications for apps added to the Home Screen (iOS 16.4 or later). The app shows these steps itself if you open it in Safari.
+- These are best-effort alerts, not alarms. They can be delayed or silenced by Focus modes or Low Power Mode, and they are not the same as the Clock app.
+- Test-result alerts are sent when you save the result. Medicine and check-up alerts are checked once a day, around 9 AM India time (Vercel's free plan allows one scheduled run per day). Scheduled reminders at exact times come in step 3 and need an external scheduler.
+- This was tested with a simulated push service and a browser. I could not test on a real iPhone, so your first test message is the real check.
+
+### Deploy steps
+1. Open `https://YOUR-SITE.vercel.app/setup-keys.html` and tap the button to make the keys.
+2. In Vercel, go to Settings > Environment Variables and add:
+   - `VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` (from the page above)
+   - `VAPID_SUBJECT` = `mailto:you@example.com` (your email)
+   - `CRON_SECRET` = any long random text
+   - `AUTH_SECRET` if you have not added it already
+3. Upload the changed files to GitHub: `index.html`, `sw.js`, `vercel.json`, `package.json`, `js/notify.js`, `js/dash.js`, `api/push.js`, `api/cron.js`, `lib/*`, `shared/*`, `manifest.webmanifest`, `icons/*`.
+4. Redeploy in Vercel, then open `/api/ping` and check that `pushKeysSet` and `cronSecretSet` are true.
+5. On the iPhone: Safari > Share > Add to Home Screen > open Healthy Plate from the new icon > person icon > Notifications > Turn on > Send a test.
+6. If nothing arrives: check Settings > Notifications > Healthy Plate, Focus mode, and Low Power Mode.
+
 ## Update: Dashboard and complete health checklist (step 1 of 3)
 
 ### What is new

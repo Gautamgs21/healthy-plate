@@ -788,6 +788,7 @@
   window.HPD = {
     renderDash: renderDash, testsCard: testsCard, wireTests: wireTests, openLabForm: openLabForm, openHealthModal: openHealthModal,
     medCard: medCard, wireMeds: wireMeds, setWeight: setWeight, currentWeight: currentWeight, migrateLegacy: migrateLegacy, setTab: setTab,
-    bodyList: bodyList, targetWeight: targetWeight, targetBmi: targetBmi
+    bodyList: bodyList, targetWeight: targetWeight, targetBmi: targetBmi, sheet: sheet,
+    expand: function (id) { openEv[id] = true; }
   };
 })();

@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
     if (b.action === 'test') {
       if (!vapidConfigured()) return res.status(503).json({ error: 'Server setup incomplete: VAPID keys are not set.' });
       const r = await notifyUser(db, me.uid, {
-        type: 'test', title: 'Healthy Plate test', body: 'Notifications are working on this device.', url: '/?go=remind', tag: 'test',
+        type: 'test', title: 'Healthy Plate test', body: 'Notifications are working on this device.', url: '/?go=dash', tag: 'test',
       }, { ttl: 300 });
       if (r.noDevices) return res.status(409).json({ error: 'No device is registered yet. Turn notifications on first.' });
       return res.status(200).json({ ok: r.sent > 0, sent: r.sent, failed: r.failed, removed: r.removed, status: r.status });
